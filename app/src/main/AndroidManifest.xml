@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.gautamsolar.creda">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+<!--    <uses-feature android:name="android.hardware.camera"></uses-feature>-->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <application
+        android:name="update.gautamsolar.creda.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/pump"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/pump"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="true">
+
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="creda.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="9" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="update.gautamsolar.creda.Database.CMC_MP_Table,
+            update.gautamsolar.creda.Database.Site_Survey_Table_Rajasthan,
+            update.gautamsolar.creda.Database.Site_Survey_Rajasthan,
+            update.gautamsolar.creda.Database.Site_Survey_Table_MP,
+            update.gautamsolar.creda.Database.Installation_Table_MP,
+            update.gautamsolar.creda.Database.Rmu_Table_Rajasthan,
+            update.gautamsolar.creda.Database.Rmu_Table_MP,
+            update.gautamsolar.creda.Database.Installation_Table_Rajsthan,
+            update.gautamsolar.creda.Database.Installation_Table_MP,
+            update.gautamsolar.creda.Database.Foundation_Table_MP,
+            update.gautamsolar.creda.Database.Foundation_Table_Rajasthan,
+            update.gautamsolar.creda.Database.CreadaDatabase,
+            update.gautamsolar.creda.Database.InstalltionTable,
+            update.gautamsolar.creda.Database.SurveyTable,
+            update.gautamsolar.creda.Database.RMU_Table,
+            update.gautamsolar.creda.Database.PitDatabase,update.gautamsolar.creda.Database.Foundation_M_Database" />
+
+
+        <provider
+            android:name="com.activeandroid.content.ContentProvider"
+            android:authorities="com.gautamsolar.creda"
+            android:enabled="true"
+            android:exported="false" />
+
+        <activity android:name="update.gautamsolar.creda.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name="update.gautamsolar.creda.Creda_MP.CMCButtons"></activity>
+        <activity android:name="update.gautamsolar.creda.Creda_MP.CMCActivity" />
+        <activity android:name="update.gautamsolar.creda.Creda_Rajasthan.Device_list_rajastha" />
+        <activity android:name="update.gautamsolar.creda.Creda_MP.DeviceLIst_MP" />
+        <activity android:name="update.gautamsolar.creda.Creda_MP.Bluetooth_RMU_MP" />
+        <activity android:name="update.gautamsolar.creda.Creda_MP.RMU_MP" />
+        <activity android:name="update.gautamsolar.creda.Creda_Rajasthan.Bluetooth_RMU" />
+        <activity android:name="update.gautamsolar.creda.Creda_Rajasthan.RMU_Rajasthan_Self" />
+        <activity android:name="update.gautamsolar.creda.Creda_MP.Material_Dispatch_MP" />
+        <activity android:name="update.gautamsolar.creda.Creda_Rajasthan.Material_Dispatch_Rajasthan" />
+        <activity android:name="update.gautamsolar.creda.Creda_Rajasthan.Site_Survey_Rajasthan" />
+        <activity android:name="update.gautamsolar.creda.Creda_MP.SiteSurvey_MP" />
+        <activity android:name="update.gautamsolar.creda.Creda_MP.Installation_MP" />
+        <activity android:name="update.gautamsolar.creda.Creda_Rajasthan.Installation_Rajasthan" />
+        <activity android:name="update.gautamsolar.creda.Creda_MP.Foundation_MP" />
+        <activity android:name="update.gautamsolar.creda.Creda_Rajasthan.Foundation_Rajasthan" />
+        <activity android:name="update.gautamsolar.creda.Rmu_Details" />
+        <activity android:name="update.gautamsolar.creda.BluetoothSPP.Device_Update_list" />
+        <activity android:name="update.gautamsolar.creda.RMU_Update" />
+        <activity android:name="update.gautamsolar.creda.BluetoothSPP.Bluetoth_Update_Main" />
+        <activity android:name="update.gautamsolar.creda.BluetoothSPP.DeviceList" />
+        <activity android:name="update.gautamsolar.creda.Activity_Pit" />
+        <activity android:name="update.gautamsolar.creda.Owner_Portion_Activity" />
+        <activity android:name="update.gautamsolar.creda.Misc_Pend_Inatallation" />
+        <activity android:name="update.gautamsolar.creda.Payment_Approve_Activity" />
+        <activity android:name="update.gautamsolar.creda.Foundation_Material" />
+
+
+        <activity android:name="update.gautamsolar.creda.BenificiaryListitem" />
+
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
+
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Found_Rajasthan">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Site_Survey_MP">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_RMU_Rajasthan">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_RMU_MP">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Site_Survey_Rajasthan">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Installation_MP">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkStateCheckerS">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkstateCheckerRMuNEw">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkStateFoundMP">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkStateChecker">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkStateCheckerI">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.Network_State_CMC_MP">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.Network_State_Pit">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Installation_Rajasthan">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name="update.gautamsolar.creda.UploadAll" />
+        <activity android:name="update.gautamsolar.creda.BeneficiaryList" />
+        <activity android:name="update.gautamsolar.creda.UploadBenificieryPic" />
+        <activity android:name="update.gautamsolar.creda.FoundationActivity" />
+        <activity android:name="update.gautamsolar.creda.Material" />
+        <activity android:name="update.gautamsolar.creda.SiteSurvey" />
+        <activity android:name="update.gautamsolar.creda.beneficiary_share" />
+        <activity android:name="update.gautamsolar.creda.SaralActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+</manifest>

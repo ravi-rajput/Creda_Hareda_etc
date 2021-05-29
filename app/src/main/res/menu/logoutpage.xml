@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activities.BaseActivity"
+    >
+
+    <item
+        android:title="local"
+        android:id="@+id/credalocal"
+        android:icon="@mipmap/data"
+        android:showAsAction="always|withText"
+        app:showAsAction="always|withText"
+        tools:ignore="AppCompatResource" />
+    <item
+        android:title="profile"
+        android:id="@+id/profile"
+        android:icon="@drawable/usermy"
+        android:showAsAction="always|withText"
+        app:showAsAction="always|withText"
+        tools:ignore="AppCompatResource" />
+    <item
+        android:title="logout"
+        android:id="@+id/credalogut"
+        android:icon="@mipmap/exi"
+        android:showAsAction="always|withText"
+        app:showAsAction="always|withText"
+        tools:ignore="AppCompatResource" />
+</menu>

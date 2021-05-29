@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "371171753281",
+    "project_id": "creda-b6e48",
+    "storage_bucket": "creda-b6e48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371171753281:android:edca33c498bd8d7456f5c0",
+        "android_client_info": {
+          "package_name": "update.gautamsolar.creda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371171753281-j3c277gapsc6qchgpi35gssk79d8mekj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-g7wqoNSuZNykomEjRa2mAsvs0dMW5Vo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371171753281-j3c277gapsc6qchgpi35gssk79d8mekj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

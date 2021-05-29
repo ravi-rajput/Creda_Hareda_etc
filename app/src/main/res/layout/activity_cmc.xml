@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="update.gautamsolar.creda.UploadBenificieryPic">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical|center_horizontal"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_height="35dp">
+            <TextView
+                android:layout_width="0dp"
+
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                android:text="Benificiary Details"
+                android:textSize="18dp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="#9f3342"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            android:layout_margin="3dp"
+            android:layout_height="130dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@drawable/button_corner"
+                android:weightSum="10"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:weightSum="7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:weightSum="10"
+                        android:layout_weight="2">
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="2dp"
+                            android:layout_weight="4"
+                            android:text="@string/father_name"
+                            android:textColor="@color/primary"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/fatherideic"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="6"
+                            android:maxLength="10"
+                            android:text="father"
+                            android:textColor="#2c3e50"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+
+                            />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:weightSum="10"
+                        android:layout_weight="2.5">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5"
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:textStyle="bold"
+                            android:paddingRight="25dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/primary"
+                            android:text="@string/Contact"
+
+                            />
+                        <TextView
+                            android:id="@+id/contactideic"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5.5"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#2c3e50"
+                            android:text="Contact"
+
+                            />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:weightSum="10"
+                        android:layout_weight="2">
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5"
+
+                            android:paddingRight="25dp"
+                            android:textStyle="bold"
+                            android:layout_marginLeft="2dp"
+                            android:textSize="15dp"
+
+                            android:textColor="@color/primary"
+                            android:text="@string/Village"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/villageideic"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="6"
+                            android:text="Village"
+                            android:textColor="#2c3e50"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+
+                            />
+
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:weightSum="10"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:weightSum="7"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:weightSum="10"
+                            android:layout_weight="1.5">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:textSize="16dp"
+                                android:layout_marginLeft="5dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/primary"
+                                android:text="@string/Benificiary"
+
+                                />
+
+                            <TextView
+                                android:id="@+id/benificiaryideic"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:maxLength="10"
+                                android:text="father"
+                                android:textColor="#2c3e50"
+                                android:textSize="16dp"
+                                android:textStyle="bold"
+
+
+                                />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:weightSum="10"
+                            android:layout_weight="1.5">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:textColor="@color/primary"
+                                android:text="@string/Block"
+                                android:layout_marginLeft="5dp"
+                                android:textStyle="bold"
+
+                                android:paddingRight="25dp"
+                                android:textSize="16dp"
+
+
+                                />
+                            <TextView
+                                android:id="@+id/blockideic"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:textColor="#2c3e50"
+                                android:text="Block"
+                                android:textStyle="bold"
+                                android:textSize="16dp"
+
+                                />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_height="30dp">
+            <TextView
+                android:layout_width="0dp"
+
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:text="@string/CMC_REPORT_PHOTO"
+                android:textSize="15sp"
+                android:textColor="#9f3342"
+                android:layout_margin="5dp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:text="@string/benificiary_passport_photo"
+                android:textSize="15sp"
+                android:textColor="#9f3342"
+                android:layout_margin="5dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_margin="10dp"
+            android:layout_height="200dp">
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                app:cardCornerRadius="10dp"
+                android:layout_weight="5"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="60dp"
+                app:cardElevation="10dp"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:background="@drawable/card_view"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imagecmc_one"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/folder"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/t1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Tap to Click "-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textColor="#9f3342"-->
+                    <!--android:layout_margin="5dp"/>-->
+                    <!--<ImageView-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:src="@drawable/demo_iv"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentBottom="true"/>-->
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                app:cardCornerRadius="10dp"
+                android:layout_weight="5"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="60dp"
+                app:cardElevation="10dp"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/card_view">
+
+                    <ImageView
+                        android:id="@+id/imagecmc_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/folder"
+                        android:scaleType="fitXY" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/t2"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Tap to Click Image With Controller(Open)"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textColor="#9f3342"-->
+                    <!--android:layout_margin="5dp"/>-->
+                    <!--<ImageView-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:src="@drawable/demo_iv"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentBottom="true"/>-->
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_height="30dp">
+            <TextView
+                android:layout_width="0dp"
+                android:textAlignment="center"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:text="@string/water_output"
+                android:textSize="15sp"
+                android:textColor="#9f3342"
+                android:layout_margin="5dp"/>
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="5"
+                android:text="@string/controller_image"
+                android:textAlignment="center"
+                android:textColor="#9f3342"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:weightSum="10"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:layout_height="200dp">
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                app:cardCornerRadius="10dp"
+                android:layout_weight="5"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="60dp"
+                app:cardElevation="10dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_view">
+
+                    <ImageView
+                        android:id="@+id/imagecmc_three"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/folder"
+                        android:layout_height="match_parent"
+
+                        android:scaleType="fitXY" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/t3"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Tap to Click Image With Controller Box"-->
+                    <!--android:textColor="#9f3342"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:layout_margin="5dp"/>-->
+                    <!--<ImageView-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:src="@drawable/demo_iv"-->
+
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentBottom="true"/>-->
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                app:cardCornerRadius="10dp"
+                android:layout_weight="5"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="60dp"
+                app:cardElevation="10dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_view">
+
+                    <ImageView
+                        android:id="@+id/imagecmc_four"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/folder"
+                        android:layout_height="match_parent"
+
+                        android:scaleType="fitXY" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/t3"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Tap to Click Image With Controller Box"-->
+                    <!--android:textColor="#9f3342"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:layout_margin="5dp"/>-->
+                    <!--<ImageView-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:src="@drawable/demo_iv"-->
+
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentBottom="true"/>-->
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--  <Button
+              android:id="@+id/btninst_capturevideo"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="#9f3342"
+              android:padding="5px"
+              android:layout_marginTop="80dp"
+              android:layout_marginLeft="5dp"
+              android:layout_marginRight="5dp"
+              android:text="Capture Video"
+              android:layout_marginBottom="10dp"
+              android:textColor="#ffffff"
+
+              />-->
+
+        <Button
+            android:id="@+id/btn_cmc_upload"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/benifbuttoncorner"
+            android:padding="5px"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_marginTop="40dp"
+            android:text="Upload"
+            android:layout_marginBottom="10dp"
+            android:textColor="#ffffff"
+
+            />
+
+
+    </LinearLayout>
+
+</ScrollView>

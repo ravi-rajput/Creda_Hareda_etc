@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="update.gautamsolar.creda.RMU_Update">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardElevation="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_height="130dp">
+        <LinearLayout
+            android:id="@+id/updatermudata"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_margin="5dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:src="@drawable/refresh" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="5.9"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textColor="@android:color/background_dark"
+                android:textStyle="bold"
+                android:text="Update Rmu"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        app:cardElevation="10dp"
+        android:layout_height="130dp">
+        <LinearLayout
+            android:id="@+id/checkrmudata"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_margin="5dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="0dp"
+                android:src="@drawable/test"
+                android:layout_weight="4"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="5.9"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textColor="@android:color/background_dark"
+                android:textStyle="bold"
+                android:text=" Check  Rmu Data "
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

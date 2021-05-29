@@ -1,0 +1,1641 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="2dp"
+        android:gravity="center_vertical|center_horizontal"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_height="35dp">
+            <TextView
+                android:layout_width="0dp"
+
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                android:text="Benificiary Details"
+                android:textSize="18dp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="#9f3342"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Registration_number"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/numberid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:textColor="#2c3e50"
+                android:textSize="22dp" />
+
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_corner"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:text="@string/father_name"
+                            android:textColor="@color/primary"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/fatheride"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="father"
+                            android:textColor="#2c3e50"
+                            android:textSize="16sp"
+
+                            />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:gravity="left"
+                            android:text="@string/Contact"
+                            android:textColor="@color/primary"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/contactide"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Contact"
+                            android:maxLines="1"
+                            android:textColor="#2c3e50"
+                            android:textSize="16sp"
+
+                            />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:text="@string/Village"
+                            android:textColor="@color/primary"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/villageide"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Village"
+                            android:maxLines="1"
+                            android:textSize="16sp"
+                            android:textColor="#2c3e50" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/Benificiary"
+                                android:textColor="@color/primary"
+                                android:layout_marginRight="5dp"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/benificiaryide"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:text="father"
+                                android:textColor="#2c3e50"
+                                android:textSize="16sp"
+                                />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/Block"
+                                android:textColor="@color/primary"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/blockide"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Block"
+                                android:maxLines="1"
+                                android:textColor="#2c3e50"
+                                android:textSize="16sp"
+
+                                />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:visibility="gone"
+            android:weightSum="2"
+            >
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Select Rod"
+
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+
+
+                />
+
+            <CheckBox
+                android:id="@+id/rod_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="Rod"
+                android:textColor="#676767"
+                android:textSize="15sp"
+                android:textStyle="bold|italic" />
+
+        </LinearLayout>
+
+        <!--Choose Farma-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:weightSum="2"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="Choose \n Structure"
+
+                android:textSize="18dp"
+                android:textStyle="bold"
+
+                android:textColor="@color/primary"
+
+
+                />
+
+            <CheckBox
+                android:id="@+id/structure_checkbox"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+
+                android:padding="20dp"
+                android:text="Structure"
+                android:textColor="#676767"
+                android:textSize="15sp"
+                android:textStyle="bold|italic" />
+
+        </LinearLayout>
+
+
+        <!--Choose Structure-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:weightSum="2"
+            >
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Choose \n Accessories"
+
+                android:textSize="18dp"
+                android:textStyle="bold"
+
+                android:textColor="@color/primary"
+
+
+                />
+
+            <CheckBox
+                android:id="@+id/accessories_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:padding="20dp"
+                android:text="Accessories"
+                android:textColor="#676767"
+                android:textSize="15dp"
+                android:textStyle="bold|italic" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Select Farma"
+
+                android:textColor="@color/primary"
+                android:textSize="18dp"
+                android:textStyle="bold"
+
+
+                />
+
+            <CheckBox
+                android:id="@+id/farma_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:padding="20dp"
+                android:text="Farma"
+                android:textColor="#676767"
+                android:textSize="15sp"
+                android:textStyle="bold|italic" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:weightSum="2"
+            >
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Choose Cable"
+
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary"
+
+
+                />
+            <RadioGroup
+                android:id="@+id/radiocable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+
+                >
+
+                <RadioButton
+                    android:id="@+id/radio100cable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Cable/Rope,100" />
+
+
+                <RadioButton
+                    android:id="@+id/radio70cable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cable/Rope,70" />
+                <RadioButton
+                    android:id="@+id/radio50cable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cable/Rope,50" />
+                <RadioButton
+                    android:id="@+id/radio30cable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cable/Rope,30" />
+
+            </RadioGroup>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:weightSum="2"
+            >
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Choose Pipe"
+
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary"
+
+
+                />
+            <RadioGroup
+                android:id="@+id/radiopipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+
+                >
+
+                <RadioButton
+                    android:id="@+id/radio100pipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Pipe,100" />
+
+
+                <RadioButton
+                    android:id="@+id/radio70pipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pipe,70" />
+                <RadioButton
+                    android:id="@+id/radio50pipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pipe,50" />
+                <RadioButton
+                    android:id="@+id/radio30pipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pipe,30" />
+
+            </RadioGroup>
+
+
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Sim Number"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:textSize="15sp"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:layout_height="wrap_content" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColorHint="#000000">
+
+            <EditText
+                android:id="@+id/simeone"
+                android:layout_width="match_parent"
+                android:maxLength="22"
+                android:layout_height="match_parent"
+                android:hint="Enter Sim Number" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Mobile Number"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:maxLength="13"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:layout_height="wrap_content" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColorHint="#000000">
+        <EditText
+            android:id="@+id/mobileone"
+            android:layout_width="match_parent"
+            android:hint="Enter Mobile Number"
+            android:maxLength="13"
+            android:inputType="number"
+            android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SCAN PUMP SERIAL NUMBER"
+            android:textSize="18dp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/primary"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/pumpSerail"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters"
+                android:maxLength="30"
+                android:hint="Pump Serial"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/btnPumpScan"
+                android:layout_width="0dp"
+                android:layout_margin="5dp"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+
+
+                android:text="Pump Serial"
+                />
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="SCAN MOTOR SERIAL NUMBER"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/primary"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/MotorSerial"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters"
+android:maxLength="30"
+                android:hint="Motor Serial"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/btnMotorScan"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Motor Serial"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SCAN CONTROLLER NUMBER"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/primary"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/ControllerNumber"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters"
+                android:hint="Controller Number"
+                android:maxLength="30"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/ControllerbtnNumber"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_margin="5dp"
+                android:background="@android:color/transparent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Controller No"
+                />
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SCAN IMEI NUMBER"
+            android:textSize="18dp"
+            android:textColor="@color/primary"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/RmuNumber"
+                android:layout_weight="9"
+                android:layout_width="0dp"
+                android:maxLength="15"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:hint="IMEI Number"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/btnRmuNumber"
+                android:src="@mipmap/arcode"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:text="RMU Number"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SCAN PANEL NUMBER"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:textColor="@color/primary"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel1edit"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:inputType="textCapCharacters"
+                android:hint="Panel One"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel1btn"
+                android:background="@mipmap/arcode"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                />
+
+        </LinearLayout>
+        <!--2-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel2edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Two"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:layout_marginTop="5dp"
+                android:src="@mipmap/arcode"
+                android:id="@+id/panel2btn"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:text="Panel 2"
+                />
+
+        </LinearLayout>
+        <!--3-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel3edit"
+                android:layout_width="0dp"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:layout_height="match_parent"
+
+                android:hint="Panel Three"
+                android:padding="5dp" />
+            <ImageButton
+                android:id="@+id/panel3btn"
+                android:layout_width="0dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 3"
+                />
+
+        </LinearLayout>
+        <!--4-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel4edit"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:maxLength="20"
+                android:inputType="textCapCharacters"
+                android:layout_height="match_parent"
+
+                android:hint="Panel Four"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel4btn"
+                android:layout_width="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 4"
+                />
+
+        </LinearLayout>
+        <!--5-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel5edit"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters"
+                android:maxLength="20"
+
+                android:hint="Panel Five"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel5btn"
+
+                android:src="@mipmap/arcode"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_margin="5dp"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+
+                android:text="Panel 5"
+                />
+
+        </LinearLayout>
+        <!--6-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel6edit"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters"
+                android:maxLength="20"
+
+                android:hint="Panel Six"
+
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel6btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 6"
+                />
+
+        </LinearLayout>
+        <!--7-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel7edit"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters"
+                android:maxLength="20"
+
+                android:hint="Panel Seven"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel7btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 7"
+                />
+
+        </LinearLayout>
+        <!--8-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel8edit"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters"
+                android:maxLength="20"
+
+                android:hint="Panel Eight"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel8btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 8"
+                />
+
+        </LinearLayout>
+        <!--9-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel9edit"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters"
+                android:maxLength="20"
+                android:hint="Panel Nine"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel9btn"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 9"
+                />
+
+        </LinearLayout>
+        <!--10-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel10edit"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:hint="Panel Ten"
+                android:inputType="textCapCharacters"
+
+                android:maxLength="20"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel10btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 10"
+                />
+
+        </LinearLayout>
+        <!--11-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel11edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:hint="Panel Eleven"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel11btn"
+                android:layout_width="0dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 11"
+                />
+
+        </LinearLayout>
+        <!--12-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel12edit"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+
+                android:inputType="textCapCharacters"
+                android:maxLength="20"
+
+                android:hint="Panel Twelve"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel12btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 12"
+                />
+
+        </LinearLayout>
+        <!--13-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel13edit"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters"
+                android:maxLength="20"
+
+                android:hint="Panel Thirteen"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel13btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 13"
+                />
+
+        </LinearLayout>
+        <!--14-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel14edit"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters"
+                android:maxLength="20"
+
+                android:hint="Panel Fourteen"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel14btn"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 14"
+                />
+
+        </LinearLayout>
+        <!--15-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel15edit"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters"
+                android:maxLength="20"
+                android:hint="Panel Fifteen"
+                android:padding="5dp"
+                />
+
+            <ImageButton
+                android:id="@+id/panel15btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 15"
+                />
+
+        </LinearLayout>
+        <!--16-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel16edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+
+                android:hint="Panel Sixteen"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel16btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 16"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel17edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Seventeen"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel17btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 17"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel18edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Eighteen"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel18btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 18"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel19edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Nineteen"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel19btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 19"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel20edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Twenty"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel20btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 20"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel21edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Twenty One"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel21btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 21"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel22edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Twenty Two"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel22btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 22"
+                />
+
+        </LinearLayout>
+  <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel23edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Twenty Three"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel23btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 23"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel24edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Twenty Four"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel24btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 24"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel25edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Twenty Five"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel25btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 25"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel26edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Twenty Six"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel26btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 26"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel27edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Twenty Seven"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel27btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 27"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/panel28edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLength="20"
+                android:layout_weight="9"
+                android:inputType="textCapCharacters"
+                android:hint="Panel Twenty Eight"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panel28btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/arcode"
+                android:text="Panel 28"
+                />
+
+        </LinearLayout>
+
+        <!--radio Cable-->
+
+
+
+
+        <!--Choose Structure-->
+
+
+
+        <Button
+            android:id="@+id/btnDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/btnDisplay"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/benifbuttoncorner"/>
+
+
+    </LinearLayout>
+
+</ScrollView>

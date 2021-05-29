@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical|center_horizontal"
+        >
+
+        <Spinner
+            android:id="@+id/dealerlist"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+
+            android:background="@drawable/spinner"
+            android:textColor="#000" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/PanelTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Panel Inventory"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            />
+        <Spinner
+            android:id="@+id/panel_type"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+
+            android:background="@drawable/spinner"
+            android:textColor="#000" />
+
+
+        <EditText
+            android:id="@+id/edittextpanelstock"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Panel Stock"
+            android:inputType="number"
+            android:layout_marginHorizontal="110dp"
+
+            />
+
+        <Button
+            android:id="@+id/btnpanelstock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="110dp"
+            android:text="Upload Panel Stock"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:background="#9F3342"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <!--Pump -->
+
+        <TextView
+            android:id="@+id/pumpinventoryinTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pump Inventory"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            />
+        <Spinner
+            android:id="@+id/pump_pump_head"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+
+
+            android:background="@drawable/spinner"
+            android:textColor="#000" />
+        <Spinner
+            android:id="@+id/pump_product_type"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+
+            android:background="@drawable/spinner"
+            android:textColor="#000" />
+        <Spinner
+            android:id="@+id/pump_source_type"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+
+
+            android:background="@drawable/spinner"
+            android:textColor="#000" />
+
+
+
+        <Spinner
+            android:id="@+id/pump_pump_type"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+
+            android:background="@drawable/spinner"
+            android:textColor="#000" />
+
+
+        <EditText
+            android:id="@+id/edittextpumpstock"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Pump Stock"
+            android:inputType="number"
+            android:layout_marginHorizontal="110dp"
+
+            />
+
+
+        <Button
+            android:id="@+id/btnpumpstock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="110dp"
+            android:text="Upload Pump Stock"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="5dp"
+            android:background="#9F3342"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <!--Controller  Form-->
+
+        <TextView
+            android:id="@+id/ControllerTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Controller Inventory"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            />
+
+
+
+        <EditText
+            android:id="@+id/edittextcontrollerstock"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Controller Stock"
+            android:inputType="number"
+            android:layout_marginHorizontal="110dp"
+
+            />
+
+        <Button
+            android:id="@+id/btnControllerstock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="110dp"
+            android:text="Upload Controller Stock"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:background="#9F3342"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+
+        <!--Motor  Form-->
+
+        <TextView
+            android:id="@+id/MotorTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Motor Inventory"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            />
+
+        <Spinner
+            android:id="@+id/motor_product_type"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+
+            android:background="@drawable/spinner"
+            android:textColor="#000" />
+
+
+        <EditText
+            android:id="@+id/edittextmotorstock"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Motor Stock"
+            android:inputType="number"
+            android:layout_marginHorizontal="110dp"
+
+            />
+
+        <Button
+            android:id="@+id/btnMotorstock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="110dp"
+            android:text="Upload Motor Stock"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:background="#9F3342"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+
+
+
+        <!--Structure  Form-->
+
+        <TextView
+            android:id="@+id/StructureTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Structure Inventory"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            />
+        <Spinner
+            android:id="@+id/structure_product_type"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+
+            android:background="@drawable/spinner"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/edittextstructurestock"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Structure Stock"
+            android:inputType="number"
+            android:layout_marginHorizontal="110dp"
+
+            />
+
+        <Button
+            android:id="@+id/btnstructurestock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="110dp"
+            android:text="Upload Structure Stock"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:background="#9F3342"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+
+        <!--Pipe  Form-->
+
+        <TextView
+            android:id="@+id/pipeinventoryTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pipe Inventory"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            />
+        <Spinner
+            android:id="@+id/pipeType"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+
+            android:background="@drawable/spinner"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/edittextpipestock"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Pipe Stock"
+            android:inputType="number"
+            android:layout_marginHorizontal="110dp"
+
+            />
+
+        <Button
+            android:id="@+id/btnpipestock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="110dp"
+            android:text="Upload Pipe Stock"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:background="#9F3342"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--Accessories  Form-->
+
+        <TextView
+            android:id="@+id/AccessoriesTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Assessories Inventory"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            />
+
+
+        <EditText
+            android:id="@+id/edittextaccessoriesstock"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Accessories Stock"
+            android:inputType="number"
+            android:layout_marginHorizontal="110dp"
+
+            />
+
+        <Button
+            android:id="@+id/btnAccessoriesstock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="110dp"
+            android:text="Upload Accessories Stock"
+            android:textColor="#ffffff"
+            android:padding="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:background="#9F3342"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+
+        <!--Cable  Form-->
+
+        <TextView
+            android:id="@+id/cableinventoryinTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cable Inventory"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            />
+        <Spinner
+            android:id="@+id/cableType"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+
+            android:background="@drawable/spinner"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/edittextcablestock"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Cable Stock"
+            android:inputType="number"
+            android:layout_marginHorizontal="110dp"
+
+            />
+
+        <Button
+            android:id="@+id/btncbablestock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="110dp"
+            android:text="Upload Cable Stock"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="5dp"
+            android:background="#9F3342"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <!--Rod  Form-->
+
+        <TextView
+            android:id="@+id/RodTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rod Inventory"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            />
+
+
+        <EditText
+            android:id="@+id/edittextrodstock"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Rod Stock"
+            android:inputType="number"
+            android:layout_marginHorizontal="110dp"
+
+            />
+
+        <Button
+            android:id="@+id/btnrodstock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="110dp"
+            android:text="Upload Rod Stock"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:background="#9F3342"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <!--Farma  Form-->
+
+        <TextView
+            android:id="@+id/FarmaTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Farma Inventory"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            />
+
+
+        <EditText
+            android:id="@+id/edittextfarmastock"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Farma Stock"
+            android:inputType="number"
+            android:layout_marginHorizontal="110dp"
+
+            />
+
+        <Button
+            android:id="@+id/btnfarmastock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="110dp"
+            android:text="Upload Farma Stock"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:background="#9F3342"/>
+
+
+
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">Pump Installation</string>
+
+    <string name="title_activity_engineers_login">Home</string>
+    <string name="Registration_number">रजिस्ट्रेशन नंबर - </string>
+    <string name="father_name"> पिता नाम - </string>
+    <string name="Contact">संपर्क - </string>
+    <string name="Village">गाँव - </string>
+    <string name="Old_rmu"> साइट मार्केड pic - </string>
+    <string name="is_bore_empty">क्या बोर  खाली हैं और तीन महीने से  इस्तेमाल मैं नहीं हैं </string>
+    <string name="Pump_type">पंप प्रकार - </string>
+    <string name="District">जिला - </string>
+    <string name="image_with_jali_base">जाली (बेस ) और  PPC  फोटो</string>
+    <string name="image_with_satring">सटरिंग प्लेट  के साथ फोटो</string>
+    <string name="image_wit_final_foundation"> फाइनल  फाउंडेशन फोटो</string>
+
+    <string name="image_with_base_pilar">बेस और पिलर के साथ फोटो</string>
+    <string name="ir_image_one">IR image one</string>
+    <string name="ir_image_two">IR image two</string>
+    <string name="ir_image_three">IR image three</string>
+
+    <string name="image_with_foundation_pit">फाउंडेशन पिट फोटो</string>
+
+    <string name="image_with_water_discharge">वाटर डिस्चार्ज  के साथ फोटो</string>
+
+    <string name="image_with_earthing">अर्थिंग के साथ फोटो</string>
+
+    <string name="image_with_lightning_arrester">लाइटनिंग अरेस्टर   के साथ फोटो</string>
+
+    <string name="image_with_anti_theft">एंटी थेफ़्ट नट  के साथ फोटो</string>
+
+    <string name="controller_box">कंट्रोलर बॉक्स के साथ फोटो(close)</string>
+    <string name="controller_image">कंट्रोलर  फोटो(close)</string>
+
+    <string name="image_with_controller">कंट्रोलर के साथ फोटो(open)</string>
+
+    <string name="Block">ब्लॉक - </string>
+    <string name="new_rmu_image">नया  RMU  फोटो</string>
+
+    <string name="image_with_panel">पैनल के साथ फोटो</string>
+
+    <string name="new_rmu_number">नया आरएमयू नंबर</string>
+
+
+    <string name="Benificiary">लाभार्थी</string>
+    <string name="CMC_REPORT_PHOTO"> CMC रिपोर्ट फोटो</string>
+    <string name="benificiary_passport_photo">लाभार्थी पासपोर्ट फोटो</string>
+    <string name="water_output">पानी उत्पादन फोटो</string>
+
+
+    <string name="benificiary_aadhar_photo">लाभार्थी आधार फोटो</string>
+    <string name="benificiary_information">लाभार्थी की जानकारी</string>
+    <string name="benificiary_passbook_image">लाभार्थी पासबुक फोटो</string>
+    <string name="foundation_image">फाउंडेशन फोटो</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="titleTecnologies">Panel No</string>
+    <string name="btnRemove">Remove</string>
+    <string name="btnAdd">Add</string>
+    <string name="btnDisplay">Upload</string>
+</resources>

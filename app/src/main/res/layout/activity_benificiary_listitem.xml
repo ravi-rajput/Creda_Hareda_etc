@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:background="@color/primary"-->
+    <!--android:weightSum="10"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_height="50dp">-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_weight="7"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--</LinearLayout>-->
+    <!--<ImageView-->
+    <!--android:id="@+id/localimage"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_weight="1.5"-->
+    <!--android:src="@mipmap/offdata"-->
+    <!--android:layout_height="match_parent" />-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/localdatatext"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:text=""-->
+    <!--android:textSize="40dp"-->
+    <!--android:textStyle="bold"-->
+    <!--android:background="@mipmap/offdata"-->
+    <!--android:gravity="bottom"-->
+    <!--android:textAlignment="center"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:layout_weight="1.5"-->
+    <!--android:layout_height="match_parent" />-->
+
+
+    <!--</LinearLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:weightSum="8">
+
+        <ImageView
+            android:id="@+id/searchbyregn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_margin="3dp"
+            android:layout_weight="2"
+
+
+            android:src="@mipmap/research" />
+
+        <ImageView
+            android:id="@+id/searchbyname"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:layout_weight="2"
+
+            android:src="@mipmap/name" />
+
+        <ImageView
+            android:id="@+id/searchbyno"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:layout_weight="2"
+            android:src="@mipmap/phonenumber" />
+
+        <ImageView
+            android:id="@+id/searchbydist"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:layout_weight="2"
+            android:src="@mipmap/placeholder" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:weightSum="8">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/refresh"
+            android:layout_weight="7"
+            app:iconifiedByDefault="false"
+            app:queryHint="Search here for list"
+            app:searchIcon="@null" />
+
+        <ImageView
+            android:id="@+id/refresh"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:src="@mipmap/refresh" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/noInto"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:src="@mipmap/slowi" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerbenif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>
