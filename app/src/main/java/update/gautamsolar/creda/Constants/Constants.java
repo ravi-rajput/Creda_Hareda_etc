@@ -9,7 +9,7 @@ public class Constants {
 
     public static final String CustomerList = New_Root_URL + "getallList_v1.php";
     public static final String RMU_API = New_Root_URL + "update_rmu_by_bluetooth.php";
-    public static final String MATERIAL_DISPATCH = New_Root_URL + "MaterialUploadNewjatin.php";
+    public static final String MATERIAL_DISPATCH = New_Root_URL + "MaterialUploadNewjatin_v1.php";
     public static final String FETCH_MATERIAL_DISPATCH = New_Root_URL + "get_panelnew.php";
 
     public static final String ENGINEER_LOGIN = New_Root_URL + "engineer_login.php";

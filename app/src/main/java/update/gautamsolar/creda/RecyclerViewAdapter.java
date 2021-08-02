@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 
 import java.util.List;
 

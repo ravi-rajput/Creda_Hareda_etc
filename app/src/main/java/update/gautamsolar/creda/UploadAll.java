@@ -43,7 +43,7 @@ import update.gautamsolar.creda.Creda_Rajasthan.Installation_Rajasthan;
 import update.gautamsolar.creda.Creda_Rajasthan.Material_Dispatch_Rajasthan;
 import update.gautamsolar.creda.Creda_Rajasthan.Site_Survey_Rajasthan;
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;

@@ -9,7 +9,7 @@ import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import android.view.View;
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 
 public class CMCButtons extends AppCompatActivity {
 

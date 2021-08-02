@@ -257,6 +257,27 @@
                     android:text="" />
 
             </LinearLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp">
+            <ImageView
+                android:id="@+id/upload"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"
+                android:background="@drawable/upload_vdo"
+                />
+
+    <ImageView
+        android:id="@+id/download"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:visibility="gone"
+        android:background="@drawable/download"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

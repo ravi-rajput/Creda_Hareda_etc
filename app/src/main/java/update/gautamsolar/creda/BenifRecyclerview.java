@@ -1,8 +1,12 @@
 package update.gautamsolar.creda;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,14 +15,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Benifviewholder> implements Filterable, View.OnClickListener {
 
@@ -334,8 +340,44 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
         }
 
         else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")) {
-
             final CredaModel credaModel = filterList.get(position);
+
+            if(project.equals("HAREDA")){
+                holder.upload.setVisibility(View.VISIBLE);
+                holder.download.setVisibility(View.VISIBLE);
+                holder.upload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                       Intent i = new Intent(v.getContext(),VideoCaptureActivity.class);
+                        i.putExtra("regnnumber",credaModel.getRegistrationno());
+                        v.getContext().startActivity(i);
+                    }
+                });
+                holder.download.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(credaModel.getInstallation_video().equals("null")||credaModel.getInstallation_video().equals("")){
+                            Toast.makeText(mCtx, "Video Not Found Please Upload", Toast.LENGTH_SHORT).show();
+                        }else{
+                        Uri uri= Uri.parse( credaModel.getInstallation_video());
+                        DownloadManager downloadManager = (DownloadManager)v.getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+                        DownloadManager.Request request = new DownloadManager.Request(uri);
+                        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI |
+                                DownloadManager.Request.NETWORK_MOBILE);
+
+                        request.setTitle("Video Downloading..");
+                        request.setDescription("video download for "+credaModel.getBenifname());
+
+                        request.allowScanningByMediaScanner();
+                        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
+                       request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,credaModel.getRegistrationno()+".mp4");
+                        request.setMimeType("*/*");
+                        downloadManager.enqueue(request);
+                    }}
+                });
+            }
+
 
             //binding the data with the viewholder views
             holder.Benifname.setText(credaModel.getBenifname());
@@ -505,6 +547,7 @@ editor.putString("saralyear",credaModel.getSaralyear());
 
         TextView OLD_RMU, Benifname, Regnnumber, Fname, contactno, village, pumptype, district, block,sceme;
         RelativeLayout Next;
+        ImageView upload,download;
 
         public Benifviewholder(View itemView) {
             super(itemView);
@@ -520,6 +563,8 @@ editor.putString("saralyear",credaModel.getSaralyear());
             block = itemView.findViewById(R.id.blockid);
             Next = itemView.findViewById(R.id.item);
             sceme=itemView.findViewById(R.id.sceme);
+            upload = itemView.findViewById(R.id.upload);
+            download=itemView.findViewById(R.id.download);
 
         }
 

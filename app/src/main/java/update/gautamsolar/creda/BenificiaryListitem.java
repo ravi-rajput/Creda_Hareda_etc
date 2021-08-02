@@ -39,7 +39,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -349,7 +349,6 @@ BenificiaryListitem extends Activity {
                             credaModel.setBor_depth(jsonObject.getString("bor_depth"));
                             credaModel.setPhase(jsonObject.getString("phase"));
                             credaModel.setRmu_number(jsonObject.getString("new_controler_rms_id"));
-
                             list_models.add(credaModel);
 
                         }
@@ -406,6 +405,7 @@ BenificiaryListitem extends Activity {
                             credaModel.setRate_gitti_status(jsonObject.optString("rate_status"));
                             credaModel.setSaralid(jsonObject.getString("saralid"));
                             credaModel.setSaralyear(jsonObject.getString("saralyear"));
+                            credaModel.setInstallation_video(jsonObject.getString("installation_video"));
 
                             Log.d("foundation_ma",jsonObject.optString("reg_no")+jsonObject.optString("road_status")+
                                     jsonObject.optString("saria_status")+jsonObject.optString("rate_status"));
@@ -600,5 +600,9 @@ BenificiaryListitem extends Activity {
         return true;
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        all_complaints();
+    }
 }

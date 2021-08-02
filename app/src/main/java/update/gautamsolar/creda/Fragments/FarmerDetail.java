@@ -17,7 +17,7 @@ import android.widget.EditText;
 
 import update.gautamsolar.creda.BenificiaryListitem;
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import update.gautamsolar.creda.SharedPrefManager;
 
 /**

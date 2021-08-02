@@ -49,7 +49,7 @@ import update.gautamsolar.creda.MySingleton;
 import update.gautamsolar.creda.SiteSurvey;
 import update.gautamsolar.creda.UploadAll;
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;

@@ -40,7 +40,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -116,7 +116,7 @@ public class Material extends AppCompatActivity {
     TextView Beneficiary_textName, Beneficiary_txtRegNo;
     ProgressDialog pb;
     TextView Father, Contactid, Villageide, Pumpide, Contactide, Blockid, districtid, numberid;
-    EditText panel1edit, panel2edit,
+    EditText villageName,panel1edit, panel2edit,
             panel3edit, panel4edit, panel5edit,
             panel6edit, panel7edit, panel8edit, panel9edit,
             panel10edit, panel11edit, panel12edit, panel13edit,
@@ -148,6 +148,7 @@ public class Material extends AppCompatActivity {
 
         farma_checkbox = findViewById(R.id.farma_checkbox);
         rod_checkbox = findViewById(R.id.rod_checkbox);
+        villageName = findViewById(R.id.villageName);
         dialog = new Dialog(Material.this); // Cont
         pb = new ProgressDialog(this, R.style.MyGravity);
         pb.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -577,6 +578,23 @@ public class Material extends AppCompatActivity {
                 panel28btn.setVisibility(View.GONE);
             }
 
+            if (pump_capacity.equals("7.5 HP") || pump_capacity.equals("7.5 HP") || pump_capacity.equals("7.5HP") || pump_capacity.equals("7.5HP")) {
+
+
+                panel23edit.setVisibility(View.GONE);
+                panel24edit.setVisibility(View.GONE);
+                panel25edit.setVisibility(View.GONE);
+                panel26edit.setVisibility(View.GONE);
+                panel27edit.setVisibility(View.GONE);
+                panel28edit.setVisibility(View.GONE);
+
+                panel23btn.setVisibility(View.GONE);
+                panel24btn.setVisibility(View.GONE);
+                panel25btn.setVisibility(View.GONE);
+                panel26btn.setVisibility(View.GONE);
+                panel27btn.setVisibility(View.GONE);
+                panel28btn.setVisibility(View.GONE);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1976,7 +1994,7 @@ public class Material extends AppCompatActivity {
 
 
     public void loadalreadydata() {
-
+        pb.show();
         StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST, Constants.FETCH_MATERIAL_DISPATCH,
                 new Response.Listener<String>() {
 
@@ -1984,10 +2002,10 @@ public class Material extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-
+                            pb.dismiss();
                             JSONArray jsonArray = new JSONArray(response);
                             JSONObject jsonObject = jsonArray.getJSONObject(0);
-                            String Sim = jsonObject.getString("sim_no");
+                            String Sim = jsonObject.getString("sim_number");
 //                            String Mobile=jsonObject.getString("sim_mob_no");
                             pannew1 = jsonObject.getString("panel1");
                             pannew2 = jsonObject.getString("panel2");
@@ -2027,7 +2045,7 @@ public class Material extends AppCompatActivity {
                             accessories_checkbox_string = jsonObject.getString("accessories_status");
                             rod_checkbox_string = jsonObject.getString("rod");
                             farma_checkbox_string = jsonObject.getString("farma");
-
+                            villageName.setText(jsonObject.getString("village"));
 
                             panel1edit.setText(pannew1);
                             SimNumber.setText(Sim);
@@ -2326,7 +2344,7 @@ public class Material extends AppCompatActivity {
 
 
                         } catch (JSONException e) {
-
+                            pb.dismiss();
                             e.printStackTrace();
                         }
 
@@ -2335,7 +2353,7 @@ public class Material extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                pb.dismiss();
                 Toast.makeText(Material.this, "Error", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
 
@@ -2689,11 +2707,11 @@ public class Material extends AppCompatActivity {
 
                 params.put("radio_pipe", radio_pipe_string);
                 params.put("radio_cable", radio_cable_string);
-if(simno!=null && !simno.equals("")){
-    params.put("sim_no", simno);
-}else {
-    params.put("sim_no", SimNumber.getText().toString());
-}
+                if (simno != null && !simno.equals("")) {
+                    params.put("sim_no", simno);
+                } else {
+                    params.put("sim_no", SimNumber.getText().toString());
+                }
                 if (structure_checkbox.isChecked()) {
                     structure_checkbox_string = "Yes";
                     params.put("structure_checkbox_string", structure_checkbox_string);
@@ -2736,6 +2754,7 @@ if(simno!=null && !simno.equals("")){
                 params.put("reg_number", regnnumber);
                 params.put("eng_id", eng_id);
                 params.put("project", project);
+                params.put("village", villageName.getText().toString());
 //                params.put("sim_mob_no",mobileno);
                 return params;
             }

@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 
 public class Owner_Portion_Activity extends AppCompatActivity {
     RelativeLayout mis_pen_found,mis_pen_insta,mislenious;

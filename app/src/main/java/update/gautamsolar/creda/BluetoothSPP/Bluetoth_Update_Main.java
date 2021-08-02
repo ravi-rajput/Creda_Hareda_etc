@@ -53,7 +53,7 @@ import com.android.volley.toolbox.StringRequest;
 import update.gautamsolar.creda.CameraUtils;
 import update.gautamsolar.creda.Constants.Constants;
 import update.gautamsolar.creda.MySingleton;
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import update.gautamsolar.creda.Database.RMU_Table;
 import update.gautamsolar.creda.UploadAll;
 import com.karumi.dexter.Dexter;

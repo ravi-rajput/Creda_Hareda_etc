@@ -24,7 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 
 import java.io.IOException;
 import java.io.InputStream;
