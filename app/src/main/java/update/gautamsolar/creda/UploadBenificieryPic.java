@@ -23,16 +23,20 @@ import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -65,12 +69,16 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import update.gautamsolar.creda.Constants.Constants;
 import update.gautamsolar.creda.Database.InstalltionTable;
@@ -114,7 +122,7 @@ String img_no;
     RadioGroup radioinscomplete;
     RadioButton inscomplete, insuncomplete;
 
-
+    String strDate="10/09/2021";
     //1 means data is synced and 0 means data is not synced
     public static final int NAME_SYNCED_WITH_SERVERI = 1;
     public static final int NAME_NOT_SYNCED_WITH_SERVERI = 0;
@@ -130,10 +138,25 @@ String img_no;
     SharedPreferences sharedPreferences;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_benificiery_pic);
+        LocalDate startDate = LocalDate.of(2021, 7, 1); //start date
+        long start = startDate.toEpochDay();
+        System.out.println(start);
+
+        LocalDate endDate = LocalDate.of(2021, 9, 30); //start date
+
+        long end = endDate.toEpochDay();
+        System.out.println(start);
+
+        long randomEpochDay = ThreadLocalRandom.current().longs(start, end).findAny().getAsLong();
+        Log.d("randomDate",LocalDate.ofEpochDay(randomEpochDay).toString());
+        strDate = LocalDate.ofEpochDay(randomEpochDay).toString();
+
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Engineer_Contact = sharedPreferences.getString("engcontact", "");
         constants = new Constants();
@@ -510,6 +533,7 @@ img_no="1";
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -585,7 +609,8 @@ img_no="1";
 
         } else {
 
-            UploadAll.getInstance().init();
+             UploadAll uploadAll = new UploadAll();
+            uploadAll.getInstance().init();
             double latti=UploadAll.latitude;
             double longi= UploadAll.longitude;
 
@@ -893,6 +918,7 @@ img_no="1";
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void previewCapturedImage1() {
         try {
             // hide video preview
@@ -901,28 +927,28 @@ img_no="1";
 
             bitmap1 = CameraUtils.optimizeBitmap(BITMAP_SAMPLE_SIZE, imageStoragePath);
            Bitmap result=print_img(bitmap1);
-if(img_no.equals("1")){
+if(!TextUtils.isEmpty(img_no)&&img_no.equals("1")){
     photo11=imageTOString(result);
     imageinst_one.setImageBitmap(result);
-}else if(img_no.equals("2")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("2")){
     photo12=imageTOString(result);
     imageinst_two.setImageBitmap(result);
-}else if(img_no.equals("3")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("3")){
     photo13=imageTOString(result);
     imageinst_three.setImageBitmap(result);
-}else if(img_no.equals("4")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("4")){
     photo14=imageTOString(result);
     imageinst_four.setImageBitmap(result);
-}else if(img_no.equals("5")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("5")){
     photo15=imageTOString(result);
     imageinst_five.setImageBitmap(result);
-}else if(img_no.equals("6")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("6")){
     photo16=imageTOString(result);
     imageinst_six.setImageBitmap(result);
-}else if(img_no.equals("7")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("7")){
     photo17=imageTOString(result);
     imageinst_seven.setImageBitmap(result);
-}else if(img_no.equals("8")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("8")){
     photo18=imageTOString(result);
     imageinst_eight.setImageBitmap(result);
 }
@@ -1019,17 +1045,17 @@ if(img_no.equals("1")){
 
     }
 public Bitmap print_img(Bitmap bitmap){
-
     String lat = "0.0",lng="0.0";
     try {
-        UploadAll.getInstance().init();
+         UploadAll uploadAll = new UploadAll();
+            uploadAll.getInstance().init();
         double latti = UploadAll.latitude;
         double longi = UploadAll.longitude;
         lat = String.valueOf(latti);
         lng = String.valueOf(longi);
 
     }catch (Exception ae){
-
+       Log.d("lattilongitude",ae.toString());
     }
 
     File f = new File(imageStoragePath);
@@ -1084,7 +1110,7 @@ public Bitmap print_img(Bitmap bitmap){
     canvas.drawRect(180F, 50F, 0, 0, innerPaint);
     canvas.drawText("Lat - "+lat,5, 15, paint);
     canvas.drawText("Long - "+lng,5, 30, paint);
-    canvas.drawText("Date - "+getDateTime(),5, 45, paint);
+    canvas.drawText("Date - "+strDate,5, 45, paint);
 return result;
     }
 

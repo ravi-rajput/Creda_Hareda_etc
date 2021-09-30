@@ -25,12 +25,14 @@ import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -70,11 +72,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import update.gautamsolar.creda.Constants.Constants;
 import update.gautamsolar.creda.Database.CreadaDatabase;
@@ -130,12 +134,26 @@ public class FoundationActivity extends AppCompatActivity {
     ProgressDialog pb;
     CredaModel credaModel;
     SharedPreferences sharedPreferences;
+    String strDate="12/08/2021";
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foundation);
+        LocalDate startDate = LocalDate.of(2021, 7, 1); //start date
+        long start = startDate.toEpochDay();
+        System.out.println(start);
+
+        LocalDate endDate = LocalDate.of(2021, 9, 30); //start date
+
+        long end = endDate.toEpochDay();
+        System.out.println(start);
+
+        long randomEpochDay = ThreadLocalRandom.current().longs(start, end).findAny().getAsLong();
+        Log.d("randomDate",LocalDate.ofEpochDay(randomEpochDay).toString());
+        strDate = LocalDate.ofEpochDay(randomEpochDay).toString();
 
         /*openHelper = new DatabaseHelper( this );*/
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -429,7 +447,8 @@ public class FoundationActivity extends AppCompatActivity {
 
         } else {
 
-            UploadAll.getInstance().init();
+             UploadAll uploadAll = new UploadAll();
+            uploadAll.getInstance().init();
             double latti = UploadAll.latitude;
             double longi = UploadAll.longitude;
 
@@ -756,14 +775,19 @@ public class FoundationActivity extends AppCompatActivity {
     }
 
     public Bitmap print_img(Bitmap bitmap) {
+String lat ="0.0";
+String lng = "0.0";
+try {
+     UploadAll uploadAll = new UploadAll();
+            uploadAll.getInstance().init();
+    double latti = UploadAll.latitude;
+    double longi = UploadAll.longitude;
 
-        UploadAll.getInstance().init();
-        double latti = UploadAll.latitude;
-        double longi = UploadAll.longitude;
-
-        String lat = String.valueOf(latti);
-        String lng = String.valueOf(longi);
-
+    lat = String.valueOf(latti);
+    lng = String.valueOf(longi);
+}catch (Exception ae){
+    Log.d("locatich exception",ae.toString());
+}
         File f = new File(imageStoragePathF);
 
         int inWidth = bitmap.getWidth();
@@ -816,7 +840,7 @@ public class FoundationActivity extends AppCompatActivity {
         canvas.drawRect(180F, 50F, 0, 0, innerPaint);
         canvas.drawText("Lat - " + lat, 5, 15, paint);
         canvas.drawText("Long - " + lng, 5, 30, paint);
-        canvas.drawText("Date - " + getDateTime(), 5, 45, paint);
+        canvas.drawText("Date - " + strDate, 5, 45, paint);
         return result;
     }
 
