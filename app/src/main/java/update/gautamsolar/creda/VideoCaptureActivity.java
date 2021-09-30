@@ -129,10 +129,10 @@ public class VideoCaptureActivity extends AppCompatActivity {
 
             intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
-            // set video quality
-            intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 30); // Duration in Seconds
+//            // set video quality
+//            intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 30); // Duration in Seconds
             intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0); // Quality Low
-            intent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 5491520L); // 5MB
+            intent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 15*1024*1024); // 15MB
             //        intent.putExtra(MediaStore.Video.Thumbnails.HEIGHT, 240);
 //        intent.putExtra(MediaStore.Video.Thumbnails.WIDTH, 120);
 
