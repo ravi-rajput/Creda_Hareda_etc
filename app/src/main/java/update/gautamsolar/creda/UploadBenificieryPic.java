@@ -122,7 +122,7 @@ String img_no;
     RadioGroup radioinscomplete;
     RadioButton inscomplete, insuncomplete;
 
-    String strDate="10/09/2021";
+    String strDate="2021-09-10";
     //1 means data is synced and 0 means data is not synced
     public static final int NAME_SYNCED_WITH_SERVERI = 1;
     public static final int NAME_NOT_SYNCED_WITH_SERVERI = 0;
@@ -776,7 +776,7 @@ img_no="1";
                 params.put("lat", lat);
                 params.put("lon", lon);
                 params.put("reg_no", regnnumber);
-                params.put("datetime", getDateTime());
+                params.put("datetime", strDate);
 
 
                 return params;
@@ -1023,7 +1023,7 @@ if(!TextUtils.isEmpty(img_no)&&img_no.equals("1")){
         installi.Lat = lat;
         installi.Lon = lon;
         installi.Regn = regnnumber;
-        installi.Dati = getDateTime();
+        installi.Dati = strDate;
         try{
         installi.save();}catch (Exception ae){
 

@@ -134,7 +134,7 @@ public class FoundationActivity extends AppCompatActivity {
     ProgressDialog pb;
     CredaModel credaModel;
     SharedPreferences sharedPreferences;
-    String strDate="12/08/2021";
+    String strDate="2021-08-12";
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -476,7 +476,7 @@ public class FoundationActivity extends AppCompatActivity {
         Log.d("eng_id", eng_id);
         Log.d("foundation_status", foundation_status);
         Log.d("regnnumber", regnnumber);
-        Log.d("getDateTime", getDateTime());
+        Log.d("getDateTime", strDate);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, foundation_api, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -548,7 +548,7 @@ public class FoundationActivity extends AppCompatActivity {
                 params.put("eng_id", eng_id);
                 params.put("Status", foundation_status);
                 params.put("reg_no", regnnumber);
-                params.put("datetime", getDateTime());
+                params.put("datetime", strDate);
                 return params;
             }
         };
@@ -751,7 +751,7 @@ public class FoundationActivity extends AppCompatActivity {
         creadaDatabase.Lon = lon;
         creadaDatabase.eng_id = eng_id;
         creadaDatabase.Regn = regnnumber;
-        creadaDatabase.Dati = getDateTime();
+        creadaDatabase.Dati = strDate;
         try {
             creadaDatabase.save();
         } catch (Exception ae) {
