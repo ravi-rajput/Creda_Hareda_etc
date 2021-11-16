@@ -94,7 +94,7 @@ String img_no;
     public static final int MEDIA_TYPE_VIDEO = 310;
     //public static final int MEDIA_TYPE_VIDEO = 190;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     private static String imageStoragePath;
     Dialog dialog, Localdialog;
     LocationManager locationManager;
@@ -123,6 +123,7 @@ String img_no;
     RadioButton inscomplete, insuncomplete;
 
     String strDate="2021-09-10";
+    String pic_date;
     //1 means data is synced and 0 means data is not synced
     public static final int NAME_SYNCED_WITH_SERVERI = 1;
     public static final int NAME_NOT_SYNCED_WITH_SERVERI = 0;
@@ -143,7 +144,7 @@ String img_no;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_benificiery_pic);
-        LocalDate startDate = LocalDate.of(2021, 7, 1); //start date
+        LocalDate startDate = LocalDate.of(2021, 9, 1); //start date
         long start = startDate.toEpochDay();
         System.out.println(start);
 
@@ -235,6 +236,7 @@ String img_no;
         KEYPHOTO6 = bundleUploadB.getString("instimg6");
         KEYPHOTO7 = bundleUploadB.getString("instimg7");
         KEYPHOTO8 = bundleUploadB.getString("fondimg5");
+        pic_date = bundleUploadB.getString("pic_date");
         if (!KEYPHOTO1.equals("null")) {
             imageinst_one.setBackgroundResource(R.mipmap.tickclick);
         }
@@ -776,7 +778,7 @@ img_no="1";
                 params.put("lat", lat);
                 params.put("lon", lon);
                 params.put("reg_no", regnnumber);
-                params.put("datetime", strDate);
+                params.put("datetime", pic_date);
 
 
                 return params;
@@ -1023,7 +1025,7 @@ if(!TextUtils.isEmpty(img_no)&&img_no.equals("1")){
         installi.Lat = lat;
         installi.Lon = lon;
         installi.Regn = regnnumber;
-        installi.Dati = strDate;
+        installi.Dati = pic_date;
         try{
         installi.save();}catch (Exception ae){
 
@@ -1099,9 +1101,9 @@ public Bitmap print_img(Bitmap bitmap){
     Paint paint = new Paint();
     paint.setColor(Color.BLACK);
 
-//    paint.setStyle(Paint.Style.STROKE);
-    paint.setTextSize(15);
-    paint.setAntiAlias(true);
+    paint.setStyle(Paint.Style.STROKE);
+    paint.setTextSize(12);
+    paint.setAntiAlias(false);
 
     Paint innerPaint = new Paint();
     innerPaint.setColor(Color.parseColor("#61ECECEC"));
@@ -1110,7 +1112,7 @@ public Bitmap print_img(Bitmap bitmap){
     canvas.drawRect(180F, 50F, 0, 0, innerPaint);
     canvas.drawText("Lat - "+lat,5, 15, paint);
     canvas.drawText("Long - "+lng,5, 30, paint);
-    canvas.drawText("Date - "+strDate,5, 45, paint);
+    canvas.drawText("Date - "+pic_date,5, 45, paint);
 return result;
     }
 

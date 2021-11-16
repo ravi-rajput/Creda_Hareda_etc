@@ -463,6 +463,7 @@ f_material.setOnClickListener(new View.OnClickListener() {
                         bundleUploadB.putString("instimg6", sKEYPHOTO6);
                         bundleUploadB.putString("instimg7", sKEYPHOTO7);
                         bundleUploadB.putString("fondimg5", sFKEYPHOTO5);
+                        bundleUploadB.putString("pic_date", settings.getString("pic_date", ""));
                         intent.putExtras(bundleUploadB);
                         startActivity(intent);
                     }
@@ -497,6 +498,8 @@ f_material.setOnClickListener(new View.OnClickListener() {
                         bundlef.putString("fondimg3", sFKEYPHOTO3);
                         bundlef.putString("fondimg4", sFKEYPHOTO4);
                         bundlef.putString("fondimg5", sFKEYPHOTO5);
+                        bundlef.putString("pic_date", settings.getString("pic_date", ""));
+
 
                         intent.putExtras(bundlef);
                         startActivity(intent);

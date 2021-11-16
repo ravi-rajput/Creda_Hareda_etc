@@ -19,6 +19,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.media.ExifInterface;
@@ -101,7 +103,7 @@ public class FoundationActivity extends AppCompatActivity {
     public static final int MEDIA_TYPE_IMAGEF = 155;
 
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     private static String imageStoragePathF;
 
     private Button btnfoundation_upload;
@@ -135,6 +137,7 @@ public class FoundationActivity extends AppCompatActivity {
     CredaModel credaModel;
     SharedPreferences sharedPreferences;
     String strDate="2021-08-12";
+    String pic_date;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -142,7 +145,7 @@ public class FoundationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foundation);
-        LocalDate startDate = LocalDate.of(2021, 7, 1); //start date
+        LocalDate startDate = LocalDate.of(2021, 9, 1); //start date
         long start = startDate.toEpochDay();
         System.out.println(start);
 
@@ -235,6 +238,7 @@ public class FoundationActivity extends AppCompatActivity {
         KEYPHOTO3 = bundlef.getString("fondimg3");
         KEYPHOTO4 = bundlef.getString("fondimg4");
         KEYPHOTO5 = bundlef.getString("fondimg5");
+        pic_date = bundlef.getString("pic_date");
         if (!KEYPHOTO1.equals("null")) {
             imagefound_one.setBackgroundResource(R.mipmap.tickclick);
         }
@@ -476,7 +480,7 @@ public class FoundationActivity extends AppCompatActivity {
         Log.d("eng_id", eng_id);
         Log.d("foundation_status", foundation_status);
         Log.d("regnnumber", regnnumber);
-        Log.d("getDateTime", strDate);
+        Log.d("getDateTime", pic_date);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, foundation_api, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -548,7 +552,7 @@ public class FoundationActivity extends AppCompatActivity {
                 params.put("eng_id", eng_id);
                 params.put("Status", foundation_status);
                 params.put("reg_no", regnnumber);
-                params.put("datetime", strDate);
+                params.put("datetime", pic_date);
                 return params;
             }
         };
@@ -751,7 +755,7 @@ public class FoundationActivity extends AppCompatActivity {
         creadaDatabase.Lon = lon;
         creadaDatabase.eng_id = eng_id;
         creadaDatabase.Regn = regnnumber;
-        creadaDatabase.Dati = strDate;
+        creadaDatabase.Dati = pic_date;
         try {
             creadaDatabase.save();
         } catch (Exception ae) {
@@ -829,18 +833,18 @@ try {
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
 
-//    paint.setStyle(Paint.Style.STROKE);
-        paint.setTextSize(15);
+    paint.setStyle(Paint.Style.STROKE);
+        paint.setTextSize(12);
         paint.setAntiAlias(true);
 
         Paint innerPaint = new Paint();
         innerPaint.setColor(Color.parseColor("#61ECECEC"));
 //    innerPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-        innerPaint.setAntiAlias(true);
+        innerPaint.setAntiAlias(false);
         canvas.drawRect(180F, 50F, 0, 0, innerPaint);
         canvas.drawText("Lat - " + lat, 5, 15, paint);
         canvas.drawText("Long - " + lng, 5, 30, paint);
-        canvas.drawText("Date - " + strDate, 5, 45, paint);
+        canvas.drawText("Date - " + pic_date, 5, 45, paint);
         return result;
     }
 

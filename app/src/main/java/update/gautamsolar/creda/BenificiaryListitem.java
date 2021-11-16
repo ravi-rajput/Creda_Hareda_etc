@@ -406,6 +406,7 @@ BenificiaryListitem extends Activity {
                             credaModel.setSaralid(jsonObject.getString("saralid"));
                             credaModel.setSaralyear(jsonObject.getString("saralyear"));
                             credaModel.setInstallation_video(jsonObject.getString("installation_video"));
+                            credaModel.setPic_date(jsonObject.optString("invoice_image_date"));
 
                             Log.d("foundation_ma",jsonObject.optString("reg_no")+jsonObject.optString("road_status")+
                                     jsonObject.optString("saria_status")+jsonObject.optString("rate_status"));

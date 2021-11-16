@@ -343,7 +343,7 @@ public class Material extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                rmuno = String.valueOf(s);
+                rmuno = String.valueOf(s).trim();
 
 
             }
@@ -1379,7 +1379,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel13edit.setText(result.getContents().toString());
+                            panel13edit.setText(result.getContents().toString().trim());
                             pan13 = String.valueOf(panel13edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1411,7 +1411,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel14edit.setText(result.getContents().toString());
+                            panel14edit.setText(result.getContents().toString().trim());
                             pan14 = String.valueOf(panel14edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1443,7 +1443,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel15edit.setText(result.getContents().toString());
+                            panel15edit.setText(result.getContents().toString().trim());
                             pan15 = String.valueOf(panel15edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1475,7 +1475,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel16edit.setText(result.getContents().toString());
+                            panel16edit.setText(result.getContents().toString().trim());
                             pan16 = String.valueOf(panel16edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1507,7 +1507,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel17edit.setText(result.getContents().toString());
+                            panel17edit.setText(result.getContents().toString().trim());
                             pan17 = String.valueOf(panel17edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1539,7 +1539,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel18edit.setText(result.getContents().toString());
+                            panel18edit.setText(result.getContents().toString().trim());
                             pan18 = String.valueOf(panel18edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1571,7 +1571,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel19edit.setText(result.getContents().toString());
+                            panel19edit.setText(result.getContents().toString().trim());
                             pan19 = String.valueOf(panel19edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1603,7 +1603,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel20edit.setText(result.getContents().toString());
+                            panel20edit.setText(result.getContents().toString().trim());
                             pan20 = String.valueOf(panel20edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1635,7 +1635,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel21edit.setText(result.getContents().toString());
+                            panel21edit.setText(result.getContents().toString().trim());
                             pan21 = String.valueOf(panel21edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1667,7 +1667,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel22edit.setText(result.getContents().toString());
+                            panel22edit.setText(result.getContents().toString().trim());
                             pan22 = String.valueOf(panel22edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1699,7 +1699,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel23edit.setText(result.getContents().toString());
+                            panel23edit.setText(result.getContents().toString().trim());
                             pan23 = String.valueOf(panel23edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1731,7 +1731,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel24edit.setText(result.getContents().toString());
+                            panel24edit.setText(result.getContents().toString().trim());
                             pan24 = String.valueOf(panel24edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1763,7 +1763,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel25edit.setText(result.getContents().toString());
+                            panel25edit.setText(result.getContents().toString().trim());
                             pan25 = String.valueOf(panel25edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1795,7 +1795,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel26edit.setText(result.getContents().toString());
+                            panel26edit.setText(result.getContents().toString().trim());
                             pan26 = String.valueOf(panel26edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1827,7 +1827,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel27edit.setText(result.getContents().toString());
+                            panel27edit.setText(result.getContents().toString().trim());
                             pan27 = String.valueOf(panel27edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1859,7 +1859,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel28edit.setText(result.getContents().toString());
+                            panel28edit.setText(result.getContents().toString().trim());
                             pan28 = String.valueOf(panel28edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1888,7 +1888,7 @@ public class Material extends AppCompatActivity {
                         e.printStackTrace();
 
 
-                        pumpSerail.setText(result.getContents().toString());
+                        pumpSerail.setText(result.getContents().toString().trim());
                         PumpSerial = pumpSerail.getText().toString();
                         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                     }
@@ -1916,7 +1916,7 @@ public class Material extends AppCompatActivity {
                         e.printStackTrace();
 
 
-                        MotorSerial.setText(result.getContents().toString());
+                        MotorSerial.setText(result.getContents().toString().trim());
 
                         motorSerial = MotorSerial.getText().toString();
                         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
@@ -1945,7 +1945,7 @@ public class Material extends AppCompatActivity {
                         e.printStackTrace();
 
 
-                        ControllerNumber.setText(result.getContents().toString());
+                        ControllerNumber.setText(result.getContents().toString().trim());
 
                         controllerNumber = ControllerNumber.getText().toString();
                         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
@@ -1974,7 +1974,7 @@ public class Material extends AppCompatActivity {
                         e.printStackTrace();
 
 
-                        RmuNumber.setText(result.getContents().toString());
+                        RmuNumber.setText(result.getContents().toString().trim());
 
                         rmuNumber = RmuNumber.getText().toString();
                         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();

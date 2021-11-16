@@ -16,7 +16,7 @@ public class CredaModel {
             inst_image2, inst_image3, inst_image4, inst_image5, inst_image6, inst_image7, fname,
             contact, village, pumptype, district, block, registrationno, benifname, foundation_status,
             installetion_status, sitesurvey, pump_capacity, dipatch_status,phase,rmu_number,pit_status,
-            site_format,aadhar_back,boaring,survay2,road_status,saria_status,rate_gitti_status,rmu_status,saralid,saralyear,installation_video;
+            site_format,aadhar_back,boaring,survay2,road_status,saria_status,rate_gitti_status,rmu_status,saralid,saralyear,installation_video,pic_date;
 
     public String getInstallation_video() {
         return installation_video;
@@ -104,6 +104,14 @@ public class CredaModel {
 
     public void setInstalletion_status(String installetion_status) {
         this.installetion_status = installetion_status;
+    }
+
+    public String getPic_date() {
+        return pic_date;
+    }
+
+    public void setPic_date(String pic_date) {
+        this.pic_date = pic_date;
     }
 
     public String getSitesurvey() {
