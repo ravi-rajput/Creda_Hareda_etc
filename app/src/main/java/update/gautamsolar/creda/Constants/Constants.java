@@ -14,11 +14,11 @@ public class Constants {
 
     public static final String ENGINEER_LOGIN = New_Root_URL + "engineer_login.php";
     public static final String CMC_UPDATE = New_Root_URL + "cmc_update.php";
-    public static final String INSTALLATION_API = New_Root_URL + "instimage_uploadv_1.php";
+    public static final String INSTALLATION_API = New_Root_URL + "instimage_uploadv_2.php";
 
-    public static final String FOUNDATION_API = New_Root_URL + "foundation_uploadv_1.php";
+    public static final String FOUNDATION_API = New_Root_URL + "foundation_uploadv_2.php";
 
-    public static final String SITE_SURVEY_API = New_Root_URL + "sitedatauploadv_2.php";
+    public static final String SITE_SURVEY_API = New_Root_URL + "sitedatauploadv_3.php";
 
     public static final String SARAL_AP = New_Root_URL + "saral_upload_v1.php";
 

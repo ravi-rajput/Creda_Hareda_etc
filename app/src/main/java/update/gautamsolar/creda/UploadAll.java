@@ -337,7 +337,7 @@ saral = findViewById(R.id.saral);
 
         }
 
-        else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")) {
+        else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")||project.equals("PEDA")) {
             getSupportActionBar().setTitle("Pump Installation Chattisgarh");
             sitesurvey = findViewById(R.id.sitesurvey);
             farmerPhoto = findViewById(R.id.farmerPhoto);
