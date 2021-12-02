@@ -356,7 +356,7 @@ BenificiaryListitem extends Activity {
                         benifRecyclerview = new BenifRecyclerview(list_models, BenificiaryListitem.this);
                         mRecyclerView.setAdapter(benifRecyclerview);
 
-                    } else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")) {
+                    } else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")||project.equals("PEDA")) {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             credaModel = new CredaModel();
