@@ -137,7 +137,7 @@ public class FoundationActivity extends AppCompatActivity {
     CredaModel credaModel;
     SharedPreferences sharedPreferences;
     String strDate="2021-08-12";
-    String pic_date;
+    String pic_date,project;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -165,6 +165,8 @@ public class FoundationActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Engineer_Contact = sharedPreferences.getString("engcontact", "");
         eng_id = sharedPreferences.getString("eng_id", "");
+        project = sharedPreferences.getString("project", "");
+
         //   Toast.makeText(getApplicationContext(),eng_id,Toast.LENGTH_LONG).show();
         constants = new Constants();
         foundation_api = constants.FOUNDATION_API;
@@ -238,7 +240,11 @@ public class FoundationActivity extends AppCompatActivity {
         KEYPHOTO3 = bundlef.getString("fondimg3");
         KEYPHOTO4 = bundlef.getString("fondimg4");
         KEYPHOTO5 = bundlef.getString("fondimg5");
-        pic_date = bundlef.getString("pic_date");
+        if(project.equals("PEDA")){
+            pic_date = getDateTime();
+        }else {
+            pic_date = bundlef.getString("pic_date");
+        }
         if (!KEYPHOTO1.equals("null")) {
             imagefound_one.setBackgroundResource(R.mipmap.tickclick);
         }

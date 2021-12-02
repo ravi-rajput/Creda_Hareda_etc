@@ -123,7 +123,7 @@ String img_no;
     RadioButton inscomplete, insuncomplete;
 
     String strDate="2021-09-10";
-    String pic_date;
+    String pic_date,project;
     //1 means data is synced and 0 means data is not synced
     public static final int NAME_SYNCED_WITH_SERVERI = 1;
     public static final int NAME_NOT_SYNCED_WITH_SERVERI = 0;
@@ -163,6 +163,7 @@ String img_no;
         constants = new Constants();
         installation_api = constants.INSTALLATION_API;
         eng_id = sharedPreferences.getString("eng_id", "");
+        project = sharedPreferences.getString("project", "");
 
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -236,8 +237,11 @@ String img_no;
         KEYPHOTO6 = bundleUploadB.getString("instimg6");
         KEYPHOTO7 = bundleUploadB.getString("instimg7");
         KEYPHOTO8 = bundleUploadB.getString("fondimg5");
-        pic_date = bundleUploadB.getString("pic_date");
-        if (!KEYPHOTO1.equals("null")) {
+        if(project.equals("PEDA")){
+            pic_date = getDateTime();
+        }else {
+            pic_date = bundleUploadB.getString("pic_date");
+        }if (!KEYPHOTO1.equals("null")) {
             imageinst_one.setBackgroundResource(R.mipmap.tickclick);
         }
         if (!KEYPHOTO2.equals("null")) {
