@@ -530,16 +530,6 @@ public class Material extends AppCompatActivity {
             }
             if (pump_capacity.equals("05 HP") || pump_capacity.equals("5 HP") || pump_capacity.equals("5HP") || pump_capacity.equals("05HP")) {
 
-                panel7edit.setVisibility(View.GONE);
-                panel8edit.setVisibility(View.GONE);
-                panel9edit.setVisibility(View.GONE);
-                panel10edit.setVisibility(View.GONE);
-                panel11edit.setVisibility(View.GONE);
-                panel12edit.setVisibility(View.GONE);
-                panel13edit.setVisibility(View.GONE);
-                panel14edit.setVisibility(View.GONE);
-                panel15edit.setVisibility(View.GONE);
-                panel16edit.setVisibility(View.GONE);
                 panel17edit.setVisibility(View.GONE);
                 panel18edit.setVisibility(View.GONE);
                 panel19edit.setVisibility(View.GONE);
@@ -553,16 +543,6 @@ public class Material extends AppCompatActivity {
                 panel27edit.setVisibility(View.GONE);
                 panel28edit.setVisibility(View.GONE);
 
-                panel7btn.setVisibility(View.GONE);
-                panel8btn.setVisibility(View.GONE);
-                panel9btn.setVisibility(View.GONE);
-                panel10btn.setVisibility(View.GONE);
-                panel11btn.setVisibility(View.GONE);
-                panel12btn.setVisibility(View.GONE);
-                panel13btn.setVisibility(View.GONE);
-                panel14btn.setVisibility(View.GONE);
-                panel15btn.setVisibility(View.GONE);
-                panel16btn.setVisibility(View.GONE);
                 panel16btn.setVisibility(View.GONE);
                 panel17btn.setVisibility(View.GONE);
                 panel18btn.setVisibility(View.GONE);
