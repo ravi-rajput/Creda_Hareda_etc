@@ -143,7 +143,7 @@ public class NetworkStateCheckerS extends BroadcastReceiver {
                 Map<String, String> params = new HashMap<>();
                 params.put("photo1", photo1);
                 params.put("photo2", photo2);
-                params.put("photo3", photo3);
+//                params.put("photo3", photo3);
                 params.put("photo4", photo4);
                 params.put("photo5", photo5);
                 params.put("photo6", photo6);

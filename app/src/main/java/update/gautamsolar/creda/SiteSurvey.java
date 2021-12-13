@@ -746,7 +746,7 @@ img_no="5";
                 Map<String, String> params = new HashMap<>();
                 params.put("photo1", photo11);
                 params.put("photo2", photo12);
-                params.put("photo3", photo13);
+//                params.put("photo3", photo13);
                 params.put("photo4", photo14);
                 params.put("photo5", photo15);
                 params.put("photo6", photo16);

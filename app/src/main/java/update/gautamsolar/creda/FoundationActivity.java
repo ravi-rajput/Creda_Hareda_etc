@@ -240,7 +240,7 @@ public class FoundationActivity extends AppCompatActivity {
         KEYPHOTO3 = bundlef.getString("fondimg3");
         KEYPHOTO4 = bundlef.getString("fondimg4");
         KEYPHOTO5 = bundlef.getString("fondimg5");
-        if(project.equals("PEDA")){
+        if(project.equals("PEDA")||sharedPreferences.getString("lead_phase","").equals("HAREDA_PHASE2")){
             pic_date = getDateTime();
         }else {
             pic_date = bundlef.getString("pic_date");

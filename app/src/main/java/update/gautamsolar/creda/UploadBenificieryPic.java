@@ -237,7 +237,7 @@ String img_no;
         KEYPHOTO6 = bundleUploadB.getString("instimg6");
         KEYPHOTO7 = bundleUploadB.getString("instimg7");
         KEYPHOTO8 = bundleUploadB.getString("fondimg5");
-        if(project.equals("PEDA")){
+        if(project.equals("PEDA")||sharedPreferences.getString("lead_phase","").equals("HAREDA_PHASE2")){
             pic_date = getDateTime();
         }else {
             pic_date = bundleUploadB.getString("pic_date");
