@@ -118,7 +118,9 @@ String img_no;
     Constants constants;
     private static String storage_video;
     ProgressDialog progressDialog;
-    String Engineer_contact, reg_no, lat, lon, radioinscomplete_string, regnnumber, benifname, fathername, contact, block, village, installation_status;
+    String Engineer_contact, reg_no, lat, lon, radioinscomplete_string, regnnumber,
+            benifname, fathername, contact,
+            block, village, installation_status,site_lat_new,site_long_new;
     RadioGroup radioinscomplete;
     RadioButton inscomplete, insuncomplete;
 
@@ -165,7 +167,11 @@ String img_no;
         eng_id = sharedPreferences.getString("eng_id", "");
         project = sharedPreferences.getString("project", "");
 
-
+        site_lat_new=sharedPreferences.getString("site_lat_new","");
+        site_long_new=sharedPreferences.getString("site_long_new","");
+       if(site_lat_new.equals("null")||site_long_new.equals("null")){
+           Toast.makeText(this,"Site Survay Location is null",Toast.LENGTH_SHORT).show();
+       }
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
@@ -237,7 +243,7 @@ String img_no;
         KEYPHOTO6 = bundleUploadB.getString("instimg6");
         KEYPHOTO7 = bundleUploadB.getString("instimg7");
         KEYPHOTO8 = bundleUploadB.getString("fondimg5");
-        if(project.equals("PEDA")||sharedPreferences.getString("lead_phase","").equals("HAREDA_PHASE2")){
+        if(project.equals("PEDA")||sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2")){
             pic_date = getDateTime();
         }else {
             pic_date = bundleUploadB.getString("pic_date");
@@ -1114,8 +1120,13 @@ public Bitmap print_img(Bitmap bitmap){
 //    innerPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
     innerPaint.setAntiAlias(true);
     canvas.drawRect(180F, 50F, 0, 0, innerPaint);
-    canvas.drawText("Lat - "+lat,5, 15, paint);
-    canvas.drawText("Long - "+lng,5, 30, paint);
+    if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2")){
+        canvas.drawText("Lat - "+site_lat_new,5, 15, paint);
+        canvas.drawText("Long - "+site_long_new,5, 30, paint);
+    }else {
+        canvas.drawText("Lat - "+lat,5, 15, paint);
+        canvas.drawText("Long - "+lng,5, 30, paint);
+    }
     canvas.drawText("Date - "+pic_date,5, 45, paint);
 return result;
     }

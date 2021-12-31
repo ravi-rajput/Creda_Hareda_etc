@@ -407,6 +407,8 @@ BenificiaryListitem extends Activity {
                             credaModel.setSaralyear(jsonObject.getString("saralyear"));
                             credaModel.setInstallation_video(jsonObject.getString("installation_video"));
                             credaModel.setPic_date(jsonObject.optString("invoice_image_date"));
+                            credaModel.setSite_lat_new(jsonObject.optString("site_lat_new"));
+                            credaModel.setSite_long_new(jsonObject.optString("site_long_new"));
 
                             Log.d("foundation_ma",jsonObject.optString("reg_no")+jsonObject.optString("road_status")+
                                     jsonObject.optString("saria_status")+jsonObject.optString("rate_status"));
@@ -493,8 +495,6 @@ BenificiaryListitem extends Activity {
                     pd.dismiss();
 //                            mRecyclerView.setVisibility(View.GONE);
 //                            intiimageview.setVisibility(View.VISIBLE);
-
-
                     e.printStackTrace();
                 }
 
@@ -548,11 +548,13 @@ BenificiaryListitem extends Activity {
             @Override
             protected void deliverResponse(String response) {
                 super.deliverResponse(response);
+                pb.dismiss();
             }
 
             @Override
             public void deliverError(VolleyError error) {
                 super.deliverError(error);
+                pb.dismiss();
             }
 
             @Override

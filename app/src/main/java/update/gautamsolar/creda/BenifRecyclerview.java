@@ -478,6 +478,8 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
                     editor.putString("saralyear",credaModel.getSaralyear());
                     editor.putString("pic_date",credaModel.getPic_date());
                     editor.putString("lead_phase",credaModel.getPhase());
+                    editor.putString("site_lat_new",credaModel.getSite_lat_new());
+                    editor.putString("site_long_new",credaModel.getSite_long_new());
 
 
 
