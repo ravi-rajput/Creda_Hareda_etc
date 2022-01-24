@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_beneficiary_list.xml" value="0.13632246376811594" />
+        <entry key="app/src/main/res/layout/activity_foundation.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/activity_foundation_pit.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_material.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_site_survey.xml" value="0.10643115942028986" />
         <entry key="app/src/main/res/layout/activity_upload_all.xml" value="0.1" />
