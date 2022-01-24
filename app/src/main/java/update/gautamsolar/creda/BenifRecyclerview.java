@@ -339,7 +339,7 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
 
         }
 
-        else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")||project.equals("PEDA")) {
+        else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")||project.equals("PEDA")||project.equals("MSEDCL")||project.equals("MEDA")) {
             final CredaModel credaModel = filterList.get(position);
 
             if(project.equals("HAREDA")){

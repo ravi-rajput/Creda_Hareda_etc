@@ -337,7 +337,7 @@ saral = findViewById(R.id.saral);
 
         }
 
-        else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")||project.equals("PEDA")) {
+        else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")||project.equals("PEDA")||project.equals("MSEDCL")||project.equals("MEDA")) {
             getSupportActionBar().setTitle("Pump Installation");
             sitesurvey = findViewById(R.id.sitesurvey);
             farmerPhoto = findViewById(R.id.farmerPhoto);
