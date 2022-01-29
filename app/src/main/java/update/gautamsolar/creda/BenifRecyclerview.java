@@ -10,12 +10,14 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -390,6 +392,18 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
             holder.block.setText(credaModel.getBlock());
             holder.OLD_RMU.setText(credaModel.getOld_rmu_id());
             holder.sceme.setText(credaModel.getPhase());
+            if(TextUtils.isEmpty(credaModel.getMedaReg())){
+                holder.benifIdLayout.setVisibility(View.GONE);
+            }else{
+                holder.benifIdLayout.setVisibility(View.VISIBLE);
+            }
+            holder.meda_reg.setText(credaModel.getMedaReg());
+            holder.meda_reg.setSelected(true);
+            holder.meda_reg.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            holder.meda_reg.setSingleLine(true);
+            holder.Regnnumber.setSelected(true);
+            holder.Regnnumber.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            holder.Regnnumber.setSingleLine(true);
 
             holder.Next.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -513,7 +527,8 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
                         if (row.getBenifname().toLowerCase().contains(charString.toLowerCase()) || row.getContact().contains(charSequence)
-                                || row.getRegistrationno().contains(charSequence) || row.getDistrict().contains(charSequence)) {
+                                || row.getRegistrationno().contains(charSequence) || row.getDistrict().contains(charSequence)
+                                || row.getMedaReg().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row);
                         }
                     }
@@ -549,9 +564,11 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
 
     class Benifviewholder extends RecyclerView.ViewHolder {
 
-        TextView OLD_RMU, Benifname, Regnnumber, Fname, contactno, village, pumptype, district, block,sceme;
+        TextView OLD_RMU, Benifname, Regnnumber, Fname,meda_reg, contactno, village,
+                pumptype, district, block,sceme;
         RelativeLayout Next;
         ImageView upload,download;
+        LinearLayout benifIdLayout;
 
         public Benifviewholder(View itemView) {
             super(itemView);
@@ -569,6 +586,8 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
             sceme=itemView.findViewById(R.id.sceme);
             upload = itemView.findViewById(R.id.upload);
             download=itemView.findViewById(R.id.download);
+            meda_reg=itemView.findViewById(R.id.meda_reg);
+            benifIdLayout = itemView.findViewById(R.id.benifId);
 
         }
 

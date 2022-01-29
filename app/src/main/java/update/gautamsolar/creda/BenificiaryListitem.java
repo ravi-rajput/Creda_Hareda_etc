@@ -409,6 +409,7 @@ BenificiaryListitem extends Activity {
                             credaModel.setPic_date(jsonObject.optString("invoice_image_date"));
                             credaModel.setSite_lat_new(jsonObject.optString("site_lat_new"));
                             credaModel.setSite_long_new(jsonObject.optString("site_long_new"));
+                            credaModel.setMedaReg(jsonObject.optString("meda_reg"));
 
                             Log.d("foundation_ma",jsonObject.optString("reg_no")+jsonObject.optString("road_status")+
                                     jsonObject.optString("saria_status")+jsonObject.optString("rate_status"));
@@ -419,7 +420,7 @@ BenificiaryListitem extends Activity {
 
                         benifRecyclerview = new BenifRecyclerview(list_models, BenificiaryListitem.this);
                         mRecyclerView.setAdapter(benifRecyclerview);
-
+                        pd.dismiss();
 
                     } else if (project.equals("MP")) {
                         for (int i = 0; i < jsonArray.length(); i++) {
@@ -512,8 +513,6 @@ BenificiaryListitem extends Activity {
             @Override
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
                 pd.dismiss();
-
-
                 try {
                     Cache.Entry cacheEntry = HttpHeaderParser.parseCacheHeaders(response);
                     if (cacheEntry == null) {
@@ -541,6 +540,7 @@ BenificiaryListitem extends Activity {
                             HttpHeaderParser.parseCharset(response.headers));
                     return Response.success(new String(jsonString), cacheEntry);
                 } catch (UnsupportedEncodingException e) {
+                    pd.dismiss();
                     return Response.error(new ParseError(e));
                 }
             }
@@ -559,6 +559,7 @@ BenificiaryListitem extends Activity {
 
             @Override
             protected VolleyError parseNetworkError(VolleyError volleyError) {
+                pd.dismiss();
                 return super.parseNetworkError(volleyError);
             }
 

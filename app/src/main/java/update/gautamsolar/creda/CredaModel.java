@@ -17,7 +17,16 @@ public class CredaModel {
             contact, village, pumptype, district, block, registrationno, benifname, foundation_status,
             installetion_status, sitesurvey, pump_capacity, dipatch_status,phase,rmu_number,pit_status,
             site_format,aadhar_back,boaring,survay2,road_status,saria_status,rate_gitti_status,rmu_status,
-            saralid,saralyear,installation_video,pic_date,site_lat_new,site_long_new;
+            saralid,saralyear,installation_video,pic_date,site_lat_new,site_long_new,medaReg;
+
+
+    public String getMedaReg() {
+        return (medaReg==null) ? "" : medaReg;
+    }
+
+    public void setMedaReg(String medaReg) {
+        this.medaReg = medaReg;
+    }
 
     public String getInstallation_video() {
         return installation_video;
