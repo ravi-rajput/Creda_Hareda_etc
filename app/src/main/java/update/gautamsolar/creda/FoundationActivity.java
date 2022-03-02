@@ -839,7 +839,7 @@ try {
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
 
-    paint.setStyle(Paint.Style.STROKE);
+//    paint.setStyle(Paint.Style.STROKE);
         paint.setTextSize(12);
         paint.setAntiAlias(true);
 

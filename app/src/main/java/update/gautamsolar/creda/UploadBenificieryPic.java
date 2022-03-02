@@ -124,7 +124,7 @@ String img_no;
     RadioGroup radioinscomplete;
     RadioButton inscomplete, insuncomplete;
 
-    String strDate="2021-09-10";
+    String strDate="2022-2-7";
     String pic_date,project;
     //1 means data is synced and 0 means data is not synced
     public static final int NAME_SYNCED_WITH_SERVERI = 1;
@@ -146,11 +146,11 @@ String img_no;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_benificiery_pic);
-        LocalDate startDate = LocalDate.of(2021, 9, 1); //start date
+        LocalDate startDate = LocalDate.of(2021, 12, 1); //start date
         long start = startDate.toEpochDay();
         System.out.println(start);
 
-        LocalDate endDate = LocalDate.of(2021, 9, 30); //start date
+        LocalDate endDate = LocalDate.of(2022, 2, 8); //start date
 
         long end = endDate.toEpochDay();
         System.out.println(start);
@@ -243,11 +243,16 @@ String img_no;
         KEYPHOTO6 = bundleUploadB.getString("instimg6");
         KEYPHOTO7 = bundleUploadB.getString("instimg7");
         KEYPHOTO8 = bundleUploadB.getString("fondimg5");
-        if(project.equals("MSEDCL")||project.equals("MEDA")||project.equals("PEDA")||sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2")){
+        if(project.equals("MSEDCL")||project.equals("MEDA")||project.equals("PEDA")){
             pic_date = getDateTime();
-        }else {
+        }else if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2"))
+        {
+           pic_date =  strDate;
+        }
+        else {
             pic_date = bundleUploadB.getString("pic_date");
-        }if (!KEYPHOTO1.equals("null")) {
+        }
+        if (!KEYPHOTO1.equals("null")) {
             imageinst_one.setBackgroundResource(R.mipmap.tickclick);
         }
         if (!KEYPHOTO2.equals("null")) {
@@ -1111,7 +1116,7 @@ public Bitmap print_img(Bitmap bitmap){
     Paint paint = new Paint();
     paint.setColor(Color.BLACK);
 
-    paint.setStyle(Paint.Style.STROKE);
+//    paint.setStyle(Paint.Style.STROKE);
     paint.setTextSize(12);
     paint.setAntiAlias(false);
 
