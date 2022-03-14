@@ -3,7 +3,9 @@ package update.gautamsolar.creda;
 import android.app.Application;
 import com.activeandroid.ActiveAndroid;
 
+import dagger.hilt.android.HiltAndroidApp;
 
+@HiltAndroidApp
 public class MyApplication extends Application {
     private static MyApplication mInstance;
     @Override

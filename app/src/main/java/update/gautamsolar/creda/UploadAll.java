@@ -109,7 +109,7 @@ CardView pit_card;
     private Location mCurrentLocation;
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates;
-    Button saral;
+    Button saral,hareda_update;
     private static UploadAll instance;
     @Override
     public void onBackPressed() {
@@ -127,6 +127,7 @@ CardView pit_card;
 saral = findViewById(R.id.saral);
         foundation = findViewById(R.id.siteSurveyf);
         pit_submit = findViewById(R.id.pit_submit);
+        hareda_update = findViewById(R.id.hareda_update);
         mtrDetail = findViewById(R.id.mtrDetail);
         pit_card=findViewById(R.id.pit_card);
         f_material=findViewById(R.id.f_material);
@@ -135,6 +136,14 @@ saral = findViewById(R.id.saral);
         CMCButton=findViewById(R.id.cmcbutton);
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         project = settings.getString("project", "");
+        hareda_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(UploadAll.this,QuarterListActivity.class);
+                startActivity(i);
+            }
+        });
+
         saral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

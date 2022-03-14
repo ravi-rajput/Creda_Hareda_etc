@@ -9,6 +9,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center">
+
+        <Button
+            android:id="@+id/hareda_update"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/primary"
+            android:textColor="@color/white"
+            android:layout_margin="20dp"
+            android:textSize="20sp"
+            android:visibility="visible"
+            android:text="क्वार्टरली रिपोर्ट"/>
+
 <Button
     android:id="@+id/saral"
     android:layout_width="match_parent"

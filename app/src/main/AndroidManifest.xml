@@ -66,7 +66,8 @@
             android:exported="false" />
 
 
-        <activity android:name="update.gautamsolar.creda.MainActivity">
+        <activity android:name="update.gautamsolar.creda.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -76,6 +77,9 @@
 
 
         <activity android:name="update.gautamsolar.creda.Creda_MP.CMCButtons"></activity>
+        <activity android:name="update.gautamsolar.creda.QuarterListActivity"></activity>
+        <activity android:name="update.gautamsolar.creda.QuarterlyDetailUpdate"></activity>
+        <activity android:name="update.gautamsolar.creda.HaredaInstallationUpdate"></activity>
         <activity android:name="update.gautamsolar.creda.Creda_MP.CMCActivity" />
         <activity android:name="update.gautamsolar.creda.Creda_Rajasthan.Device_list_rajastha" />
         <activity android:name="update.gautamsolar.creda.Creda_MP.DeviceLIst_MP" />
@@ -110,74 +114,88 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Found_Rajasthan">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Found_Rajasthan"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Site_Survey_MP">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Site_Survey_MP"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_RMU_Rajasthan">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_RMU_Rajasthan"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_RMU_MP">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_RMU_MP"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Site_Survey_Rajasthan">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Site_Survey_Rajasthan"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Installation_MP">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Installation_MP"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkStateCheckerS">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkStateCheckerS"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkstateCheckerRMuNEw">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkstateCheckerRMuNEw"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkStateFoundMP">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkStateFoundMP"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkStateChecker">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkStateChecker"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkStateCheckerI">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkStateCheckerI"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.Network_State_CMC_MP">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.Network_State_CMC_MP"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.Network_State_Pit">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.Network_State_Pit"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Installation_Rajasthan">
+        <receiver android:name="update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetWork_State_Installation_Rajasthan"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
