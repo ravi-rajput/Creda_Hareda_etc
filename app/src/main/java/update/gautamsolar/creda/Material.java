@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -270,6 +271,37 @@ public class Material extends AppCompatActivity {
         panel26edit = findViewById(R.id.panel26edit);
         panel27edit = findViewById(R.id.panel27edit);
         panel28edit = findViewById(R.id.panel28edit);
+
+       panelToServer(panel1edit);
+       panelToServer(panel2edit);
+       panelToServer(panel3edit);
+       panelToServer(panel4edit);
+       panelToServer(panel5edit);
+       panelToServer(panel6edit);
+       panelToServer(panel7edit);
+       panelToServer(panel8edit);
+       panelToServer(panel9edit);
+       panelToServer(panel10edit);
+       panelToServer(panel11edit);
+       panelToServer(panel12edit);
+       panelToServer(panel13edit);
+       panelToServer(panel14edit);
+       panelToServer(panel15edit);
+       panelToServer(panel16edit);
+       panelToServer(panel17edit);
+       panelToServer(panel18edit);
+       panelToServer(panel19edit);
+       panelToServer(panel20edit);
+       panelToServer(panel21edit);
+       panelToServer(panel22edit);
+       panelToServer(panel23edit);
+       panelToServer(panel24edit);
+       panelToServer(panel25edit);
+       panelToServer(panel26edit);
+       panelToServer(panel27edit);
+       panelToServer(panel28edit);
+
+
         pumpSerail = findViewById(R.id.pumpSerail);
         MotorSerial = findViewById(R.id.MotorSerial);
         RmuNumber = findViewById(R.id.RmuNumber);
@@ -2747,5 +2779,190 @@ public class Material extends AppCompatActivity {
         MySingleton.getInstance(getApplicationContext()).addTorequestque(stringRequest);
     }
 
+public void panelToServer(EditText panel){
 
+    panel.addTextChangedListener(new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            panel.setTextColor(getResources().getColor(R.color.black));
+        }
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(String.valueOf(s).length()>=18){
+                if(!checkDuplicateLocal(panel,String.valueOf(s)))
+                   uploadPanels(String.valueOf(s),panel);
+                }
+        }
+    });
+}
+
+    public void uploadPanels(String panel_no, EditText panel) {
+        pb.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://gautamsolar.co.in/pumpall_api/check_panel.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                pb.dismiss();
+
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    //  Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                    Log.d("response_panel",response);
+                    int status = obj.getInt("status");
+                    String code = obj.getString("code");
+                    if (status == 0) {
+                        Toast.makeText(Material.this,code,Toast.LENGTH_SHORT).show();
+                        panel.setTextColor(getResources().getColor(R.color.primary_darker));
+                    }
+                    pb.dismiss();
+                } catch (JSONException e) {
+                    pb.dismiss();
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pb.dismiss();
+                Toast.makeText(Material.this,error.toString(),Toast.LENGTH_SHORT).show();
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("eng_id", eng_id);
+                params.put("panel", panel_no);
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setShouldCache(false);
+        MySingleton.getInstance(getApplicationContext()).addTorequestque(stringRequest);
+    }
+public Boolean checkDuplicateLocal(EditText panel,String panelNo){
+
+        if(panel.getId()!=panel1edit.getId()&&panelNo.equals(panel1edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel2edit.getId()&&panelNo.equals(panel2edit.getText().toString())){
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            return true;
+        }else if(panel.getId()!=panel3edit.getId()&&panelNo.equals(panel3edit.getText().toString())){
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            return true;
+        }else if(panel.getId()!=panel4edit.getId()&&panelNo.equals(panel4edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel5edit.getId()&&panelNo.equals(panel5edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel6edit.getId()&&panelNo.equals(panel6edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel7edit.getId()&&panelNo.equals(panel7edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel8edit.getId()&&panelNo.equals(panel8edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel9edit.getId()&&panelNo.equals(panel9edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel10edit.getId()&&panelNo.equals(panel10edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel11edit.getId()&&panelNo.equals(panel11edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel12edit.getId()&&panelNo.equals(panel12edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel13edit.getId()&&panelNo.equals(panel13edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel14edit.getId()&&panelNo.equals(panel14edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel15edit.getId()&&panelNo.equals(panel15edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel16edit.getId()&&panelNo.equals(panel16edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel17edit.getId()&&panelNo.equals(panel17edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel18edit.getId()&&panelNo.equals(panel18edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel19edit.getId()&&panelNo.equals(panel19edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel20edit.getId()&&panelNo.equals(panel20edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel21edit.getId()&&panelNo.equals(panel21edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel22edit.getId()&&panelNo.equals(panel22edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel23edit.getId()&&panelNo.equals(panel23edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel24edit.getId()&&panelNo.equals(panel24edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel25edit.getId()&&panelNo.equals(panel25edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel26edit.getId()&&panelNo.equals(panel26edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel27edit.getId()&&panelNo.equals(panel27edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel28edit.getId()&&panelNo.equals(panel28edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 }
