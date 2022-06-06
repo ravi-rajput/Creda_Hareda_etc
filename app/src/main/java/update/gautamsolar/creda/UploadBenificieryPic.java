@@ -1115,7 +1115,6 @@ public Bitmap print_img(Bitmap bitmap){
     canvas.drawBitmap(rotatedBitmap, 0, 0, null);
     Paint paint = new Paint();
     paint.setColor(Color.BLACK);
-
 //    paint.setStyle(Paint.Style.STROKE);
     paint.setTextSize(12);
     paint.setAntiAlias(false);
@@ -1124,15 +1123,21 @@ public Bitmap print_img(Bitmap bitmap){
     innerPaint.setColor(Color.parseColor("#61ECECEC"));
 //    innerPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
     innerPaint.setAntiAlias(true);
-    canvas.drawRect(180F, 50F, 0, 0, innerPaint);
     if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2")){
-        canvas.drawText("Lat - "+site_lat_new,5, 15, paint);
-        canvas.drawText("Long - "+site_long_new,5, 30, paint);
+        if(!TextUtils.isEmpty(site_lat_new)&&!TextUtils.isEmpty(site_long_new)) {
+
+            canvas.drawRect(180F, result.getHeight(), 0, result.getHeight()-50, innerPaint);
+            canvas.drawText("Lat - " + site_lat_new, 5, result.getHeight()-40, paint);
+            canvas.drawText("Long - " + site_long_new, 5, result.getHeight()-25, paint);
+            canvas.drawText("Name - " + benifname, 5, result.getHeight()-10, paint);
+        }
     }else {
-        canvas.drawText("Lat - "+lat,5, 15, paint);
-        canvas.drawText("Long - "+lng,5, 30, paint);
+        canvas.drawRect(180F, result.getHeight(), 0, result.getHeight()-50, innerPaint);
+        canvas.drawText("Lat - "+lat,5, result.getHeight()-40, paint);
+        canvas.drawText("Long - "+lng,5, result.getHeight()-25, paint);
+        canvas.drawText("Date - "+pic_date,5, result.getHeight()-10, paint);
     }
-    canvas.drawText("Date - "+pic_date,5, 45, paint);
+
 return result;
     }
 
