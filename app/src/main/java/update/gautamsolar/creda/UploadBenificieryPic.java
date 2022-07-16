@@ -1124,14 +1124,22 @@ public Bitmap print_img(Bitmap bitmap){
 //    innerPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
     innerPaint.setAntiAlias(true);
     if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2")){
-        if(!TextUtils.isEmpty(site_lat_new)&&!TextUtils.isEmpty(site_long_new)) {
+        if(site_lat_new.length()>4&&site_long_new.length()>4) {
 
             canvas.drawRect(180F, result.getHeight(), 0, result.getHeight()-50, innerPaint);
             canvas.drawText("Lat - " + site_lat_new, 5, result.getHeight()-40, paint);
             canvas.drawText("Long - " + site_long_new, 5, result.getHeight()-25, paint);
             canvas.drawText("Name - " + benifname, 5, result.getHeight()-10, paint);
         }
-    }else {
+    }else if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("PEDA_PHASE1")){
+        if(site_lat_new.length()>4&&site_long_new.length()>4) {
+            canvas.drawRect(180F, result.getHeight(), 0, result.getHeight() - 50, innerPaint);
+            canvas.drawText("Lat - " + site_lat_new, 5, result.getHeight()-40, paint);
+            canvas.drawText("Long - " + site_long_new, 5, result.getHeight()-25, paint);
+
+        }
+    }
+    else {
         canvas.drawRect(180F, result.getHeight(), 0, result.getHeight()-50, innerPaint);
         canvas.drawText("Lat - "+lat,5, result.getHeight()-40, paint);
         canvas.drawText("Long - "+lng,5, result.getHeight()-25, paint);
