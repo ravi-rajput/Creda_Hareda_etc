@@ -71,7 +71,7 @@ import java.util.Date;
 public class UploadAll extends AppCompatActivity {
 
 
-    LinearLayout CMCButton,foundation, mtrDetail, farmerPhoto, sitesurvey, RmuInstallation,pit_submit,f_material;
+    LinearLayout new_installation,CMCButton,foundation, mtrDetail, farmerPhoto, sitesurvey, RmuInstallation,pit_submit,f_material;
     Intent intent;
     TextView textViewname, textViewrole, textViewproject, textViewdist, textViewcontact;
     CredaModel credaModel;
@@ -128,6 +128,7 @@ saral = findViewById(R.id.saral);
         foundation = findViewById(R.id.siteSurveyf);
         pit_submit = findViewById(R.id.pit_submit);
         hareda_update = findViewById(R.id.hareda_update);
+        new_installation = findViewById(R.id.new_installation);
         mtrDetail = findViewById(R.id.mtrDetail);
         pit_card=findViewById(R.id.pit_card);
         f_material=findViewById(R.id.f_material);
@@ -418,6 +419,28 @@ f_material.setOnClickListener(new View.OnClickListener() {
     }
 });
 
+if(project.equals("PEDA")){
+    new_installation.setVisibility(View.VISIBLE);
+}else{
+    new_installation.setVisibility(View.GONE);
+}
+
+            new_installation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i= new Intent(UploadAll.this,NewInstalationActivity.class);
+                    i.putExtra("reg_no",settings.getString("regnnumber", ""));
+                    i.putExtra("name",settings.getString("benifname", ""));
+                    i.putExtra("fname",settings.getString("fname", ""));
+                    i.putExtra("contact",settings.getString("contact", ""));
+                    i.putExtra("village",settings.getString("village", ""));
+                    i.putExtra("block",settings.getString("block", ""));
+                    i.putExtra("saralid",settings.getString("saralid", ""));
+                    i.putExtra("saralyear",settings.getString("saralyear", ""));
+                    startActivity(i);
+                }
+            });
+
             pit_submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -428,17 +451,13 @@ f_material.setOnClickListener(new View.OnClickListener() {
 
                     } else {
                         intent = new Intent(getApplicationContext(), Activity_Pit.class);
-                        Bundle bundlef = new Bundle();
-                        bundlef.putString("benifname", sbenifname);
-                        bundlef.putString("regnnumber", cregnnumber);
-                        bundlef.putString("fathername", sfname);
-                        bundlef.putString("fondimg1", sFKEYPHOTO1);
-                        bundlef.putString("contact", scontact);
-                        bundlef.putString("block", sblock);
-                        bundlef.putString("village", svillage);
-                        bundlef.putString("foundation_status", sfoundation_status);
+                        intent.putExtra("name", sbenifname);
+                        intent.putExtra("fname", sfname);
+                        intent.putExtra("reg_no", cregnnumber);
+                        intent.putExtra("block", sblock);
+                        intent.putExtra("village", svillage);
+                        intent.putExtra("contact", scontact);
 
-                        intent.putExtras(bundlef);
                         startActivity(intent);
                     }
 

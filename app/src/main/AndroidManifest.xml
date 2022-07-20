@@ -79,6 +79,7 @@
         <activity android:name="update.gautamsolar.creda.Creda_MP.CMCButtons"></activity>
         <activity android:name="update.gautamsolar.creda.QuarterListActivity"></activity>
         <activity android:name="update.gautamsolar.creda.QuarterlyDetailUpdate"></activity>
+        <activity android:name="update.gautamsolar.creda.NewInstalationActivity"></activity>
         <activity android:name="update.gautamsolar.creda.HaredaInstallationUpdate"></activity>
         <activity android:name="update.gautamsolar.creda.Creda_MP.CMCActivity" />
         <activity android:name="update.gautamsolar.creda.Creda_Rajasthan.Device_list_rajastha" />

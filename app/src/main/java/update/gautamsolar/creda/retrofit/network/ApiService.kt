@@ -16,4 +16,8 @@ interface ApiService {
     @POST("pumpall_api/quaterly_update_v1.php")
     @FormUrlEncoded
     suspend fun postDetails(@FieldMap params: HashMap<String,String>): QuarterListModel
+
+    @POST("pumpall_api/peda_insnew_v1.php")
+    @FormUrlEncoded
+    suspend fun postNewInstallation(@FieldMap params: HashMap<String,String>): QuarterListModel
 }

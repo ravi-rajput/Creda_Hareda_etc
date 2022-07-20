@@ -300,13 +300,12 @@ BenificiaryListitem extends Activity {
 
         project = sharedPreferences.getString("project", "");
         pd = new ProgressDialog(BenificiaryListitem.this);
-        pd.setMessage("Loading");
+        pd.setMessage("Loading...");
         pd.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, customerlistapi, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
 
                 try {
                     pd.dismiss();
@@ -410,6 +409,12 @@ BenificiaryListitem extends Activity {
                             credaModel.setSite_lat_new(jsonObject.optString("site_lat_new"));
                             credaModel.setSite_long_new(jsonObject.optString("site_long_new"));
                             credaModel.setMedaReg(jsonObject.optString("meda_reg"));
+                            credaModel.setPeda_image1(jsonObject.optString("peda_image1"));
+                            credaModel.setPeda_image2(jsonObject.optString("peda_image2"));
+                            credaModel.setPeda_image3(jsonObject.optString("peda_image3"));
+                            credaModel.setPeda_image4(jsonObject.optString("peda_image4"));
+                            credaModel.setPeda_image5(jsonObject.optString("peda_image5"));
+
 
                             Log.d("foundation_ma",jsonObject.optString("reg_no")+jsonObject.optString("road_status")+
                                     jsonObject.optString("saria_status")+jsonObject.optString("rate_status"));
@@ -488,6 +493,7 @@ BenificiaryListitem extends Activity {
 
 
                     }
+                    pd.dismiss();
                     Toast.makeText(getApplicationContext(),"List Updated",Toast.LENGTH_LONG).show();
 
 
@@ -549,12 +555,14 @@ BenificiaryListitem extends Activity {
             protected void deliverResponse(String response) {
                 super.deliverResponse(response);
                 pb.dismiss();
+                pd.dismiss();
             }
 
             @Override
             public void deliverError(VolleyError error) {
                 super.deliverError(error);
                 pb.dismiss();
+                pd.dismiss();
             }
 
             @Override

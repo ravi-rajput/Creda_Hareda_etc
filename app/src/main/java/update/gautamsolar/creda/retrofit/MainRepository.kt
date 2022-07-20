@@ -24,4 +24,10 @@ constructor(private val apiService: ApiService, @ApplicationContext private val 
     ): Flow<QuarterListModel> = flow {
         emit(apiService.postDetails( params))
     }.flowOn(Dispatchers.IO)
+
+   fun postNewInstallation(
+        params: HashMap<String, String>
+    ): Flow<QuarterListModel> = flow {
+        emit(apiService.postNewInstallation( params))
+    }.flowOn(Dispatchers.IO)
 }

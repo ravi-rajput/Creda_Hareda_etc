@@ -49,6 +49,18 @@ constructor(private val mainRepository: MainRepository) : ViewModel() {
             }
     }
 
+ fun postNewInstallation(hashMap: HashMap<String, String>) = viewModelScope.launch {
+
+        mainRepository.postNewInstallation(hashMap)
+            .onStart {
+                response.value = ApiState.Loading
+            }.catch {
+                response.value = ApiState.Failure(it)
+            }.collect {
+                response.value = ApiState.QuarterlyList(it)
+            }
+    }
+
     fun convertImageFileToBase64(bm: Bitmap): String {
     val baos = ByteArrayOutputStream()
     bm.compress(Bitmap.CompressFormat.JPEG, 40, baos) //bm is the bitmap object

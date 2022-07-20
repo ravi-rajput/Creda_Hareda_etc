@@ -17,7 +17,8 @@ public class CredaModel {
             contact, village, pumptype, district, block, registrationno, benifname, foundation_status,
             installetion_status, sitesurvey, pump_capacity, dipatch_status,phase,rmu_number,pit_status,
             site_format,aadhar_back,boaring,survay2,road_status,saria_status,rate_gitti_status,rmu_status,
-            saralid,saralyear,installation_video,pic_date,site_lat_new,site_long_new,medaReg;
+            saralid,saralyear,installation_video,pic_date,site_lat_new,site_long_new,medaReg,peda_image1,peda_image2
+            ,peda_image3,peda_image4,peda_image5;
 
 
     public String getMedaReg() {
@@ -34,6 +35,46 @@ public class CredaModel {
 
     public void setInstallation_video(String installation_video) {
         this.installation_video = installation_video;
+    }
+
+    public String getPeda_image1() {
+        return peda_image1;
+    }
+
+    public void setPeda_image1(String peda_image1) {
+        this.peda_image1 = peda_image1;
+    }
+
+    public String getPeda_image2() {
+        return peda_image2;
+    }
+
+    public void setPeda_image2(String peda_image2) {
+        this.peda_image2 = peda_image2;
+    }
+
+    public String getPeda_image3() {
+        return peda_image3;
+    }
+
+    public void setPeda_image3(String peda_image3) {
+        this.peda_image3 = peda_image3;
+    }
+
+    public String getPeda_image4() {
+        return peda_image4;
+    }
+
+    public void setPeda_image4(String peda_image4) {
+        this.peda_image4 = peda_image4;
+    }
+
+    public String getPeda_image5() {
+        return peda_image5;
+    }
+
+    public void setPeda_image5(String peda_image5) {
+        this.peda_image5 = peda_image5;
     }
 
     public String getFname() {
