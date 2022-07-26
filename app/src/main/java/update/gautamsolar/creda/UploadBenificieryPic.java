@@ -1127,8 +1127,8 @@ public Bitmap print_img(Bitmap bitmap){
         if(!TextUtils.isEmpty(site_lat_new)&&(site_lat_new.length()>4&&site_long_new.length()>4)) {
 
             canvas.drawRect(180F, result.getHeight(), 0, result.getHeight()-50, innerPaint);
-            canvas.drawText("Lat - " + site_lat_new, 5, result.getHeight()-40, paint);
-            canvas.drawText("Long - " + site_long_new, 5, result.getHeight()-25, paint);
+            canvas.drawText("Lat - " + replaceLastItem(site_lat_new,Integer.parseInt(img_no)), 5, result.getHeight()-40, paint);
+            canvas.drawText("Long - " + replaceLastItem(site_long_new,Integer.parseInt(img_no)), 5, result.getHeight()-25, paint);
             canvas.drawText("Name - " + benifname, 5, result.getHeight()-10, paint);
         }
     }else if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("PEDA_PHASE1")){
@@ -1148,5 +1148,10 @@ public Bitmap print_img(Bitmap bitmap){
 
 return result;
     }
-
+public String replaceLastItem(String value , int increase){
+    int number = Integer.parseInt(value.substring(value.length() - 1));
+    String substring = value.substring(0, value.length() - 1); // AB
+    String replaced = substring + String.valueOf(number+increase);
+    return replaced;
+}
 }
