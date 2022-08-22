@@ -5,16 +5,21 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.graphics.Matrix
 import android.graphics.Paint
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.ManagedActivityResultLauncher
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -27,6 +32,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -68,6 +74,7 @@ class NewInstalationActivity : ComponentActivity() {
     lateinit var sharedPreferences: SharedPreferences
 
     private var shouldShowCamera: MutableState<Boolean> = mutableStateOf(false)
+    private var shouldShowGalary: MutableState<Boolean> = mutableStateOf(false)
     private var photoBitmap: Bitmap? = null
     private var photoBitmap2: Bitmap? = null
     private var photoBitmap3: Bitmap? = null
@@ -100,6 +107,7 @@ class NewInstalationActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     requestCameraPermission()
+                    val openDialog = remember { mutableStateOf(false)  }
                     val coroutineScope = rememberCoroutineScope()
                     sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
                     site_lat_new = sharedPreferences.getString("site_lat_new", "")
@@ -122,7 +130,7 @@ class NewInstalationActivity : ComponentActivity() {
                             .padding(0.dp, 0.dp, 0.dp, 70.dp)
                     ) {
                         showUI()
-                        updateData()
+                        updateData(openDialog)
                     }
                     MyButton()
 
@@ -134,7 +142,10 @@ class NewInstalationActivity : ComponentActivity() {
                         coroutineScope.launch {
                             if (shouldShowCamera.value) {
                                 shouldShowCamera.value = false
-                            } else {
+                            }else if(shouldShowGalary.value) {
+                                shouldShowGalary.value = false
+                            }
+                            else {
                                 finish()
                             }
                         }
@@ -146,6 +157,42 @@ class NewInstalationActivity : ComponentActivity() {
                             onImageCaptured = ::handleImageCapture
                         ) { Log.e("kilo", "View error:", it) }
                     }
+                    var imageUri by remember {
+                        mutableStateOf<Uri?>(null)
+                    }
+                    val context = LocalContext.current
+
+                    val launcher = rememberLauncherForActivityResult(
+                        contract =
+                        ActivityResultContracts.GetContent()
+                    ) { uri: Uri? ->
+                        imageUri = uri
+                        shouldShowGalary.value = true
+                    }
+                    var bitmap = remember {
+                        mutableStateOf<Bitmap?>(null)
+                    }
+                    AlertDialogSample(launcher, openDialog,bitmap)
+                if(shouldShowGalary.value) {
+
+                    imageUri?.let {
+                        if (Build.VERSION.SDK_INT < 28) {
+                            bitmap.value = MediaStore.Images
+                                .Media.getBitmap(context.contentResolver, it)
+
+                        } else {
+                            var source = ImageDecoder
+                                .createSource(context.contentResolver, it)
+                            bitmap.value = ImageDecoder.decodeBitmap(source)
+                        }
+
+                        bitmap.value?.let { btm ->
+                            shouldShowGalary.value=false
+                            val bmp_Copy: Bitmap = btm.copy(Bitmap.Config.ARGB_8888, true)
+                            setImageCaptureData(bmp_Copy)
+                        }
+                    }
+                }
 
                 }
             }
@@ -245,7 +292,9 @@ class NewInstalationActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
-    fun updateData() {
+    fun updateData(openDialog: MutableState<Boolean>) {
+
+
         getLocation()
         Column() {
             Row(horizontalArrangement = Arrangement.Center) {
@@ -256,7 +305,7 @@ class NewInstalationActivity : ComponentActivity() {
                         .padding(5.dp)
                         .clickable {
                             img = "1"
-                            shouldShowCamera.value = true
+                            openDialog.value = true
                         },
                     backgroundColor = colorResource(id = R.color.white),
                     elevation = 0.5.dp,
@@ -290,7 +339,7 @@ class NewInstalationActivity : ComponentActivity() {
                         .padding(5.dp)
                         .clickable {
                             img = "2"
-                            shouldShowCamera.value = true
+                            openDialog.value = true
                         },
                     backgroundColor = colorResource(id = R.color.white),
                     elevation = 0.5.dp,
@@ -327,7 +376,7 @@ class NewInstalationActivity : ComponentActivity() {
                         .padding(5.dp)
                         .clickable {
                             img = "3"
-                            shouldShowCamera.value = true
+                            openDialog.value = true
                         },
                     backgroundColor = colorResource(id = R.color.white),
                     elevation = 0.5.dp,
@@ -365,7 +414,7 @@ class NewInstalationActivity : ComponentActivity() {
                         .padding(5.dp)
                         .clickable {
                             img = "4"
-                            shouldShowCamera.value = true
+                            openDialog.value = true
                         },
                     backgroundColor = colorResource(id = R.color.white),
                     elevation = 0.5.dp,
@@ -401,7 +450,7 @@ class NewInstalationActivity : ComponentActivity() {
                         .padding(5.dp)
                         .clickable {
                             img = "5"
-                            shouldShowCamera.value = true
+                            openDialog.value = true
                         },
                     backgroundColor = colorResource(id = R.color.white),
                     elevation = 0.5.dp,
@@ -554,7 +603,12 @@ class NewInstalationActivity : ComponentActivity() {
 
     private fun handleImageCapture(bitmap: Bitmap, file: File) {
         shouldShowCamera.value = false
+        setImageCaptureData(bitmap)
 
+
+//        shouldShowPhoto.value = true
+    }
+    private fun setImageCaptureData(bitmap: Bitmap) {
         if (img.equals("1")) {
             photoBitmap = bitmap
             img1 = mainViewModel.convertImageFileToBase64(printOnImage(bitmap))
@@ -669,6 +723,55 @@ class NewInstalationActivity : ComponentActivity() {
     fun Bitmap.rotate(degrees: Float): Bitmap {
         val matrix = Matrix().apply { postRotate(degrees) }
         return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
+    }
+
+
+    @Composable
+    fun AlertDialogSample(
+        launcher: ManagedActivityResultLauncher<String, Uri?>,
+        openDialog: MutableState<Boolean>,
+        bitmap: MutableState<Bitmap?>
+    ) {
+        MaterialTheme {
+            Column {
+
+                if (openDialog.value) {
+
+                    AlertDialog(
+                        onDismissRequest = {
+                            // Dismiss the dialog when the user clicks outside the dialog or on the back
+                            // button. If you want to disable that functionality, simply use an empty
+                            // onCloseRequest.
+                            openDialog.value = false
+                        },
+                        title = {
+                            Text(text = "Click to get image")
+                        },
+                        confirmButton = {
+                            Button(
+
+                                onClick = {
+                                    openDialog.value = false
+                                    launcher.launch("image/*")
+                                }) {
+                                Text("Gallary")
+                            }
+                        },
+                        dismissButton = {
+                            Button(
+
+                                onClick = {
+                                    openDialog.value = false
+                                    shouldShowCamera.value = true
+                                }) {
+                                Text("Camera")
+                            }
+                        }
+                    )
+                }
+            }
+
+        }
     }
 
 }
