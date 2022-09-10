@@ -240,6 +240,7 @@
             android:weightSum="10"
             android:layout_height="30dp">
             <TextView
+                android:id="@+id/img1Text"
                 android:layout_width="0dp"
                 android:textAlignment="center"
                 android:layout_height="match_parent"
@@ -267,6 +268,7 @@
         android:weightSum="10"
         android:layout_height="200dp">
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardImage1"
             android:layout_width="0dp"
             app:cardCornerRadius="10dp"
             android:layout_weight="5"
@@ -360,6 +362,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
                     android:text="Aadharcard Image Back"
                     android:background="#A0A0A0"></TextView>
 
@@ -382,6 +385,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Boaring Image with customer"
+                    android:textColor="#ffffff"
                     android:background="#A0A0A0"></TextView>
 
                 <ImageView
@@ -402,6 +406,7 @@
             android:weightSum="10"
             android:layout_height="30dp">
             <TextView
+                android:id="@+id/img5Text"
                 android:layout_width="0dp"
                 android:textAlignment="center"
                 android:layout_height="match_parent"
@@ -418,6 +423,7 @@
                 android:layout_weight="5"
                 android:text="@string/Old_rmu"
                 android:textSize="15sp"
+                android:visibility="gone"
                 android:textColor="#ffffff"
                 android:background="#8B8B8B"
                 android:layout_margin="5dp"/>
@@ -511,8 +517,10 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/img6Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="Site Marked Pic 2 Image"
                 android:background="#999999"/>
 
@@ -526,6 +534,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/img7Text"
             android:layout_width="match_parent"
             android:textAlignment="center"
             android:layout_height="match_parent"
@@ -687,8 +696,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Existing Motor Running "
-
-
                     android:maxLines="1"
                     android:textColorHint="#000000"
                     android:textSize="15dp"
@@ -707,20 +714,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="10dp"
-
-            >
+            android:layout_margin="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/is_bore_empty"
-
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_marginTop="15dp"
                 android:textColor="@color/primary"
-
-
                 />
 
             <RadioGroup
@@ -730,9 +732,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal"
-                android:layout_gravity="center"
-
-                >
+                android:layout_gravity="center">
 
                 <RadioButton
                     android:id="@+id/boremptysc"
@@ -740,17 +740,163 @@
                     android:layout_height="wrap_content"
                     android:text="Yes" />
 
-
                 <RadioButton
                     android:id="@+id/borusedsc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No" />
 
+            </RadioGroup>
+    <LinearLayout
+        android:id="@+id/hareda3Options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bore Clean"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary"
+                />
 
+            <RadioGroup
+                android:id="@+id/radiogroupclean"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <RadioButton
+                    android:id="@+id/borecleanyes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/borecleanno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
 
             </RadioGroup>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pump Head Options"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary"
+                />
+
+            <RadioGroup
+                android:id="@+id/radiogrouppumpHead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <RadioButton
+                    android:id="@+id/borePump1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30" />
+
+                <RadioButton
+                    android:id="@+id/borePump2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50" />
+
+               <RadioButton
+                    android:id="@+id/borePump3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="70" />
+
+               <RadioButton
+                    android:id="@+id/borePump4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer is Satisfy"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary"
+                />
+
+            <RadioGroup
+                android:id="@+id/radiogroupsatisfy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <RadioButton
+                    android:id="@+id/satisfyYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/satisfyNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jaha koi Pump Lagna h vha koi light connection"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary"
+                />
+
+            <RadioGroup
+                android:id="@+id/radiogroupLightConnection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <RadioButton
+                    android:id="@+id/lightyes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/lightno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
+
+            </RadioGroup>
+    </LinearLayout>
 
 
         </LinearLayout>

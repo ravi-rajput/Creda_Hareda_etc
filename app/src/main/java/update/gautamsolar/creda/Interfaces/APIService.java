@@ -14,7 +14,7 @@ public interface APIService {
 
     @POST("upload_video_v1.php")
     @Multipart
-    Call<List<responce_model>> savePost(@Part MultipartBody.Part photo, @Part("reg_number") RequestBody regNumber,@Part("eng_id") RequestBody eng_id);
+    Call<List<responce_model>> savePost(@Part MultipartBody.Part photo, @Part("reg_number") RequestBody regNumber,@Part("eng_id") RequestBody eng_id, @Part("phase") RequestBody phase);
 
 
 }

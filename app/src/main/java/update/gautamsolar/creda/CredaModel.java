@@ -18,8 +18,16 @@ public class CredaModel {
             installetion_status, sitesurvey, pump_capacity, dipatch_status,phase,rmu_number,pit_status,
             site_format,aadhar_back,boaring,survay2,road_status,saria_status,rate_gitti_status,rmu_status,
             saralid,saralyear,installation_video,pic_date,site_lat_new,site_long_new,medaReg,peda_image1,peda_image2
-            ,peda_image3,peda_image4,peda_image5;
+            ,peda_image3,peda_image4,peda_image5,siteVideo,Consent_Letter_photo_farmer,Consent_Letter_photo,bor_clean_status
+            ,customer_satify_status,power_connection_status,pump_head;
 
+    public String getPump_head() {
+        return pump_head;
+    }
+
+    public void setPump_head(String pump_head) {
+        this.pump_head = pump_head;
+    }
 
     public String getMedaReg() {
         return (medaReg==null) ? "" : medaReg;
@@ -75,6 +83,54 @@ public class CredaModel {
 
     public void setPeda_image5(String peda_image5) {
         this.peda_image5 = peda_image5;
+    }
+
+    public String getSiteVideo() {
+        return siteVideo;
+    }
+
+    public void setSiteVideo(String siteVideo) {
+        this.siteVideo = siteVideo;
+    }
+
+    public String getConsent_Letter_photo_farmer() {
+        return Consent_Letter_photo_farmer;
+    }
+
+    public void setConsent_Letter_photo_farmer(String consent_Letter_photo_farmer) {
+        Consent_Letter_photo_farmer = consent_Letter_photo_farmer;
+    }
+
+    public String getConsent_Letter_photo() {
+        return Consent_Letter_photo;
+    }
+
+    public void setConsent_Letter_photo(String consent_Letter_photo) {
+        Consent_Letter_photo = consent_Letter_photo;
+    }
+
+    public String getBor_clean_status() {
+        return bor_clean_status;
+    }
+
+    public void setBor_clean_status(String bor_clean_status) {
+        this.bor_clean_status = bor_clean_status;
+    }
+
+    public String getCustomer_satify_status() {
+        return customer_satify_status;
+    }
+
+    public void setCustomer_satify_status(String customer_satify_status) {
+        this.customer_satify_status = customer_satify_status;
+    }
+
+    public String getPower_connection_status() {
+        return power_connection_status;
+    }
+
+    public void setPower_connection_status(String power_connection_status) {
+        this.power_connection_status = power_connection_status;
     }
 
     public String getFname() {

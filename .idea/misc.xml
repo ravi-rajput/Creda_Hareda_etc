@@ -9,11 +9,12 @@
         <entry key="app/src/main/res/layout/activity_foundation_pit.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_hareda_installation_update.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_material.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_site_survey.xml" value="0.10643115942028986" />
+        <entry key="app/src/main/res/layout/activity_site_survey.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_upload_all.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_upload_benificiery_pic.xml" value="0.1" />
         <entry key="app/src/main/res/layout/beniflistitem.xml" value="0.33" />
         <entry key="app/src/main/res/layout/foundation_material_activity.xml" value="0.1693840579710145" />
+        <entry key="app/src/main/res/layout/image_resolution.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/new_instalation_activity.xml" value="0.22" />
       </map>
     </option>

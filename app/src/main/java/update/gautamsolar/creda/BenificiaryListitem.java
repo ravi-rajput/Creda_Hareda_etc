@@ -414,6 +414,13 @@ BenificiaryListitem extends Activity {
                             credaModel.setPeda_image3(jsonObject.optString("peda_image3"));
                             credaModel.setPeda_image4(jsonObject.optString("peda_image4"));
                             credaModel.setPeda_image5(jsonObject.optString("peda_image5"));
+                             credaModel.setSiteVideo(jsonObject.optString("site_video"));
+                             credaModel.setConsent_Letter_photo_farmer(jsonObject.optString("Consent_Letter_photo_farmer"));
+                             credaModel.setConsent_Letter_photo(jsonObject.optString("Consent_Letter_photo"));
+                             credaModel.setBor_clean_status(jsonObject.optString("bor_clean_status"));
+                             credaModel.setCustomer_satify_status(jsonObject.optString("customer_satify_status"));
+                             credaModel.setPower_connection_status(jsonObject.optString("power_connection_status"));
+                             credaModel.setPump_head(jsonObject.optString("pump_head"));
 
 
                             Log.d("foundation_ma",jsonObject.optString("reg_no")+jsonObject.optString("road_status")+

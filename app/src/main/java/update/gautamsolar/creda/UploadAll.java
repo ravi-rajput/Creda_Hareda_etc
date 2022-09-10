@@ -109,7 +109,7 @@ CardView pit_card;
     private Location mCurrentLocation;
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates;
-    Button saral,hareda_update;
+    Button saral,hareda_update,hareda3InformaticRes;
     private static UploadAll instance;
     @Override
     public void onBackPressed() {
@@ -128,6 +128,7 @@ saral = findViewById(R.id.saral);
         foundation = findViewById(R.id.siteSurveyf);
         pit_submit = findViewById(R.id.pit_submit);
         hareda_update = findViewById(R.id.hareda_update);
+        hareda3InformaticRes = findViewById(R.id.hareda3InformaticRes);
         new_installation = findViewById(R.id.new_installation);
         mtrDetail = findViewById(R.id.mtrDetail);
         pit_card=findViewById(R.id.pit_card);
@@ -141,6 +142,16 @@ saral = findViewById(R.id.saral);
             @Override
             public void onClick(View v) {
                 Intent i= new Intent(UploadAll.this,QuarterListActivity.class);
+                startActivity(i);
+            }
+        });
+        if(settings.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE3")) {
+            hareda3InformaticRes.setVisibility(View.VISIBLE);
+        }
+            hareda3InformaticRes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(UploadAll.this,ImageResolution.class);
                 startActivity(i);
             }
         });

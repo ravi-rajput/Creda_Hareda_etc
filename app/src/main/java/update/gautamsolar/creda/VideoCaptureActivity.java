@@ -162,10 +162,15 @@ public class VideoCaptureActivity extends AppCompatActivity {
 
         RequestBody body1 = RequestBody.create(MediaType.parse("text/plain"), regNo);
         RequestBody body2 = RequestBody.create(MediaType.parse("text/plain"), eng_id);
+        RequestBody body3 = null;
+        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
+            body3 = RequestBody.create(MediaType.parse("text/plain"), sharedPreferences.getString("lead_phase", ""));
+        }else{
+            body3 = RequestBody.create(MediaType.parse("text/plain"), "");
+        }
 
-
-        APIService mAPIService = RetrofitClient.getClient().create(APIService.class);
-        mAPIService.savePost(vFile, body1, body2).enqueue(new Callback<List<responce_model>>() {
+            APIService mAPIService = RetrofitClient.getClient().create(APIService.class);
+        mAPIService.savePost(vFile, body1, body2, body3).enqueue(new Callback<List<responce_model>>() {
             @Override
             public void onResponse(Call<List<responce_model>> call, retrofit2.Response<List<responce_model>> response) {
 
