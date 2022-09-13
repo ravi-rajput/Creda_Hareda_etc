@@ -110,7 +110,7 @@ public class SiteSurvey extends AppCompatActivity {
     boolean isGPSEnabled = false;
     Dialog dialog, Localdialog;
     CardView cardImage1;
-    TextView img1Text, img5Text, img6Text, img7Text;
+    TextView img1Text, img5Text, img6Text, img7Text,isBore;
     LinearLayout hareda3Options, LinearLayout1;
     TextInputLayout boreDeptInput, boreSizeInput;
     ImageView passport_size_pic, adharImage, bankpassbookimage, imagemarkedsite, site_formate, aadhar_back, survay_image2, boaring_image;
@@ -183,6 +183,7 @@ public class SiteSurvey extends AppCompatActivity {
         satisfyNo = findViewById(R.id.satisfyNo);
         lightyes = findViewById(R.id.lightyes);
         lightNo = findViewById(R.id.lightno);
+        isBore = findViewById(R.id.isBore);
         LinearLayout1 = findViewById(R.id.LinearLayout1);
         borused = findViewById(R.id.borusedsc);
         Father = (TextView) findViewById(R.id.fatheride);
@@ -289,15 +290,6 @@ public class SiteSurvey extends AppCompatActivity {
             boaring_image.setBackgroundResource(R.mipmap.tickclick);
         }
 
-        if (bore_status.equals("empty")) {
-            borempty.setChecked(true);
-            radiogroupbor_string = "empty";
-
-        } else {
-            borused.setChecked(true);
-            radiogroupbor_string = "not_used_for_three_month";
-        }
-
 
         Engineer_contact = SharedPrefManager.getInstance(this).getUserContact();
         Bundle bundle6 = getIntent().getExtras();
@@ -310,6 +302,15 @@ public class SiteSurvey extends AppCompatActivity {
         }
         if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
 
+            isBore.setText("बोर हो रखा ह या नहीं?");
+            if (bore_status.equals("YES")) {
+                borempty.setChecked(true);
+                radiogroupbor_string = "YES";
+
+            } else {
+                borused.setChecked(true);
+                radiogroupbor_string = "NO";
+            }
             if (pump_capacity.equals("7.5 HP") || pump_capacity.equals("7.5 hp") || pump_capacity.equals("7.5HP") || pump_capacity.equals("7.5hp")) {
                 borePump1.setText("30M(3 इंच)");
                 borePump2.setText("50M(2 इंच)");
@@ -393,7 +394,20 @@ public class SiteSurvey extends AppCompatActivity {
             }
 
 
-        } else {
+        }
+
+        else {
+            isBore.setText("क्या बोर खाली हैं और तीन महीने से इस्तेमाल मैं नहीं हैं");
+
+            if (bore_status.equals("empty")) {
+                borempty.setChecked(true);
+                radiogroupbor_string = "empty";
+
+            } else {
+                borused.setChecked(true);
+                radiogroupbor_string = "not_used_for_three_month";
+            }
+
             edittextbordepth.setText(bor_depth);
             edittextborsize.setText(bor_size);
             edittextbordepth.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -533,11 +547,18 @@ public class SiteSurvey extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.boremptysc) {
+                    if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
+                        radiogroupbor_string = "YES";
+                    }else{
+                        radiogroupbor_string = "empty";
+                    }
 
-                    radiogroupbor_string = "empty";
                 } else if (checkedId == R.id.borusedsc) {
-
-                    radiogroupbor_string = "not_used_for_three_month";
+                    if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
+                        radiogroupbor_string = "NO";
+                    }else{
+                        radiogroupbor_string = "not_used_for_three_month";
+                    }
 
                 }
 
