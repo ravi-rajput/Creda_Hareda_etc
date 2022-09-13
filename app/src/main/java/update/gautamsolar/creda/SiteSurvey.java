@@ -1,5 +1,7 @@
 package update.gautamsolar.creda;
 
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -27,12 +29,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
@@ -45,6 +42,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -56,7 +59,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import update.gautamsolar.creda.R;
+import com.google.android.material.textfield.TextInputLayout;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -79,67 +82,59 @@ import java.util.Map;
 import update.gautamsolar.creda.Constants.Constants;
 import update.gautamsolar.creda.Database.SurveyTable;
 
-import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
-
 public class SiteSurvey extends AppCompatActivity {
 
-    TextView status_sitsurvey;
-    TextView Father, Contactid, Villageide, Pumpide, Contactide, Blockid, districtid,numberidi;
-
-    LocationManager locationManager;
-    boolean isGPSEnabled = false;
-    private static final int PICK_IMAGE_REQUEST_SITE1 = 63;
+    public static final String GALLERY_DIRECTORY_NAME = "GSPLCREDA";
+    public static final String IMAGE_EXTENSION = "jpg";
+    public static final String VIDEO_EXTENSION = "mp4";
+    public static final int MEDIA_TYPE_IMAGES = 302;
+    //public static final int MEDIA_TYPE_VIDEO = 190;
+    public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
+    public static final int BITMAP_SAMPLE_SIZE = 8;
+    //1 means data is synced and 0 means data is not synced
+    public static final int NAME_SYNCED_WITH_SERVERS = 1;
+    public static final int NAME_NOT_SYNCED_WITH_SERVERS = 0;
+    //a broadcast to know weather the data is synced or not
+    public static final String DATA_SAVED_BROADCASTS = "net.simplifiedcoding.datasaveds";
     static final int REQUEST_LOCATION = 60;
-    private Button btnsite_upload;
+    private static final int PICK_IMAGE_REQUEST_SITE1 = 63;
     private static final int PERMISSION_REQUEST_CODE_SITE = 62;
     private static final int PICK_IMAGE_REQUEST_SITE2 = 64;
     private static final int PICK_IMAGE_REQUEST_SITE3 = 65;
     private static final int PICK_IMAGE_REQUEST_SITE4 = 66;
     private static final int PICK_IMAGE_REQUEST_SITE5 = 67;
-    public static final String GALLERY_DIRECTORY_NAME = "GSPLCREDA";
-    public static final String IMAGE_EXTENSION = "jpg";
-    public static final String VIDEO_EXTENSION = "mp4";
-    public static final int MEDIA_TYPE_IMAGES = 302;
-    Dialog dialog, Localdialog;
-    //public static final int MEDIA_TYPE_VIDEO = 190;
-    public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-    public static final int BITMAP_SAMPLE_SIZE = 8;
     private static String imageStoragePathS;
+    TextView status_sitsurvey;
+    TextView Father, Contactid, Villageide, Pumpide, Contactide, Blockid, districtid, numberidi;
+    LocationManager locationManager;
+    boolean isGPSEnabled = false;
+    Dialog dialog, Localdialog;
     CardView cardImage1;
-    TextView img1Text,img5Text,img6Text,img7Text;
-    LinearLayout hareda3Options;
-
-
-    ImageView passport_size_pic, adharImage, bankpassbookimage, imagemarkedsite,site_formate,aadhar_back,survay_image2,boaring_image;
+    TextView img1Text, img5Text, img6Text, img7Text;
+    LinearLayout hareda3Options, LinearLayout1;
+    TextInputLayout boreDeptInput, boreSizeInput;
+    ImageView passport_size_pic, adharImage, bankpassbookimage, imagemarkedsite, site_formate, aadhar_back, survay_image2, boaring_image;
     EditText edittextwaterlevel, edittextbordepth, edittextborsize, edittextexisting_motor;
     String edittextwaterlevel_string, edittextbordepth_string, edittextborsize_string,
             radiogroupbor_string, edittextexisting_motor_string, radiocomplete_string, fathername, regnnumber, benifname, contact, block, village, survey_status;
-    Bitmap bitmap1 = null, bitmap2 = null, bitmap3 = null, bitmap4 = null, bitmap5=null;
-    String KEYPHOTO1, KEYPHOTO2, KEYPHOTO3, KEYPHOTO4,KEYPHOTO5,KEYPHOTO6,KEYPHOTO7,KEYPHOTO8, WATER_LEVEL_STRING, BORE_DEPTH_STRING,
+    Bitmap bitmap1 = null, bitmap2 = null, bitmap3 = null, bitmap4 = null, bitmap5 = null;
+    String KEYPHOTO1, KEYPHOTO2, KEYPHOTO3, KEYPHOTO4, KEYPHOTO5, KEYPHOTO6, KEYPHOTO7, KEYPHOTO8, WATER_LEVEL_STRING, BORE_DEPTH_STRING,
             BORE_SIZE_STRING, BORESTATUS_STRING, EXISTING_MOTOR_RUNNING_STRING, SCOMPLETE_STATUS_STRING,
-    radioCleanString,radioPumpHeadString,radioSatisfyString,radioLightString;
+            radioCleanString, radioPumpHeadString, radioSatisfyString, radioLightString;
     Constants constants;
-    RadioGroup radiogroupbor, radiocomplete,radiogroupclean,radiogrouppumpHead,radiogroupsatisfy,radiogroupLightConnection;
-    RadioButton borempty, borused, complete, uncomplete,borecleanyes,borecleanno,
-            borePump1,borePump2,borePump3,borePump4,satisfyYes,satisfyNo,lightyes,lightNo;
+    RadioGroup radiogroupbor, radiocomplete, radiogroupclean, radiogrouppumpHead, radiogroupsatisfy, radiogroupLightConnection;
+    RadioButton borempty, borused, complete, uncomplete, borecleanyes, borecleanno,
+            borePump1, borePump2, borePump3, borePump4, satisfyYes, satisfyNo, lightyes, lightNo;
     ProgressDialog progressDialog;
     String Engineer_contact, reg_no, lat, lon;
-    String water_level, bor_size, bor_depth, existing_moter_run, eng_id, photo11, photo12, photo13, photo14,photo15,photo16,photo17,photo18, Engineer_Contact, localcounti;
+    String water_level, bor_size, bor_depth, existing_moter_run, eng_id, photo11, photo12, photo13, photo14, photo15, photo16, photo17, photo18, Engineer_Contact, localcounti;
     int Status_SiteSurvey;
     ProgressDialog pb;
-String img_no;
-
+    String img_no, site_lat_new, site_long_new, pump_capacity;
     String bore_status, url1 = null, url2 = null, url3 = null, url4 = null, localcount;
     SharedPreferences sharedPreferences;
-
-
-    //1 means data is synced and 0 means data is not synced
-    public static final int NAME_SYNCED_WITH_SERVERS = 1;
-    public static final int NAME_NOT_SYNCED_WITH_SERVERS = 0;
     int localdatacount = 0;
-    //a broadcast to know weather the data is synced or not
-    public static final String DATA_SAVED_BROADCASTS = "net.simplifiedcoding.datasaveds";
-
+    private Button btnsite_upload;
     //Broadcast receiver to know the sync status
     private BroadcastReceiver broadcastReceivers;
 
@@ -147,6 +142,7 @@ String img_no;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_site_survey);
+        this.setTitle("Site Survey");
         //  registerReceiver( new NetworkStateCheckerS(), new IntentFilter( ConnectivityManager.CONNECTIVITY_ACTION ) );
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Engineer_Contact = sharedPreferences.getString("engcontact", "");
@@ -176,6 +172,8 @@ String img_no;
         radiogroupLightConnection = findViewById(R.id.radiogroupLightConnection);
         borempty = findViewById(R.id.boremptysc);
         borecleanyes = findViewById(R.id.borecleanyes);
+        boreDeptInput = findViewById(R.id.boreDeptInput);
+        boreSizeInput = findViewById(R.id.boreSizeInput);
         borecleanno = findViewById(R.id.borecleanno);
         borePump1 = findViewById(R.id.borePump1);
         borePump2 = findViewById(R.id.borePump2);
@@ -185,6 +183,7 @@ String img_no;
         satisfyNo = findViewById(R.id.satisfyNo);
         lightyes = findViewById(R.id.lightyes);
         lightNo = findViewById(R.id.lightno);
+        LinearLayout1 = findViewById(R.id.LinearLayout1);
         borused = findViewById(R.id.borusedsc);
         Father = (TextView) findViewById(R.id.fatheride);
         Contactid = (TextView) findViewById(R.id.contactide);
@@ -192,7 +191,7 @@ String img_no;
         Pumpide = (TextView) findViewById(R.id.benificiaryide);
         Contactide = (TextView) findViewById(R.id.contactide);
         Blockid = (TextView) findViewById(R.id.blockide);
-        numberidi=findViewById(R.id.numberid);
+        numberidi = findViewById(R.id.numberid);
         dialog = new Dialog(SiteSurvey.this); // Context, this, etc.
         Localdialog = new Dialog(SiteSurvey.this); // Context, this, etc.
         cardImage1 = findViewById(R.id.cardImage1);
@@ -215,8 +214,8 @@ String img_no;
         photo16 = "noimage";
         photo17 = "noimage";
         photo18 = "noimage";
-        lat="0";
-        lon="0";
+        lat = "0";
+        lon = "0";
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         localcounti = sharedPreferences.getString("localdata", "");
@@ -226,10 +225,10 @@ String img_no;
         adharImage = findViewById(R.id.adharImagesc);
         bankpassbookimage = findViewById(R.id.bankpassbookimagesc);
         imagemarkedsite = findViewById(R.id.imagemarkedsitesc);
-        site_formate=findViewById(R.id.site_formate);
-        aadhar_back=findViewById(R.id.aadhar_back);
-        boaring_image=findViewById(R.id.boaring_image);
-        survay_image2=findViewById(R.id.survey_image2);
+        site_formate = findViewById(R.id.site_formate);
+        aadhar_back = findViewById(R.id.aadhar_back);
+        boaring_image = findViewById(R.id.boaring_image);
+        survay_image2 = findViewById(R.id.survey_image2);
 
         dialog.setContentView(R.layout.uploaddialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -267,8 +266,6 @@ String img_no;
         Pumpide.setText(benifname);
         numberidi.setText(regnnumber);
         existing_moter_run = bundleUploadB.getString("existing_moter_run");
-        edittextbordepth.setText(bor_depth);
-        edittextborsize.setText(bor_size);
         edittextexisting_motor.setText(existing_moter_run);
         edittextwaterlevel.setText(water_level);
         if (!KEYPHOTO1.equals("null")) {
@@ -302,38 +299,70 @@ String img_no;
         }
 
 
-
         Engineer_contact = SharedPrefManager.getInstance(this).getUserContact();
         Bundle bundle6 = getIntent().getExtras();
         reg_no = bundle6.getString("reg_no");
+        pump_capacity = sharedPreferences.getString("pump_capacity", "");
+        site_lat_new = sharedPreferences.getString("site_lat_new", "");
+        site_long_new = sharedPreferences.getString("site_long_new", "");
+        if (site_lat_new.equals("null") || site_long_new.equals("null")) {
+            Toast.makeText(this, "Site Survay Location is null", Toast.LENGTH_SHORT).show();
+        }
+        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
 
+            if (pump_capacity.equals("7.5 HP") || pump_capacity.equals("7.5 hp") || pump_capacity.equals("7.5HP") || pump_capacity.equals("7.5hp")) {
+                borePump1.setText("30M(3 इंच)");
+                borePump2.setText("50M(2 इंच)");
+                borePump3.setText("70M(2 इंच)");
+                borePump4.setText("100M(2 इंच)");
+            } else if (pump_capacity.equals("10 HP") || pump_capacity.equals("10 hp") || pump_capacity.equals("10HP") || pump_capacity.equals("10hp")) {
+                borePump1.setText("30M(4 इंच)");
+                borePump2.setText("50M(2.5 इंच)");
+                borePump3.setText("70M(2 इंच)");
+                borePump4.setText("100M(2 इंच)");
+            } else {
+                borePump1.setText("30M");
+                borePump2.setText("50M");
+                borePump3.setText("70M");
+                borePump4.setText("100M");
+            }
 
-        if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE3")){
             cardImage1.setVisibility(View.GONE);
             img1Text.setVisibility(View.GONE);
             hareda3Options.setVisibility(View.VISIBLE);
-            img5Text.setText("Consent Letter Photo");
-            img6Text.setText("Consent Letter Photo With Farmer");
-            img7Text.setText("Record Video");
+            edittextbordepth.setInputType(InputType.TYPE_CLASS_TEXT);
+            boreDeptInput.setHint("ब्लॉक");
+            edittextborsize.setInputType(InputType.TYPE_CLASS_TEXT);
+            boreSizeInput.setHint("गांव");
+            if (!TextUtils.isEmpty(block)) {
+                edittextbordepth.setText(block);
+            }
+            if (!TextUtils.isEmpty(village)) {
+                edittextborsize.setText(village);
+            }
+            LinearLayout1.setVisibility(View.GONE);
+            img5Text.setText("कंसेंट लेटर फोटो");
+            img6Text.setText("कंसेंट लेटर फोटो किसान के साथ");
+            img7Text.setText("वीडियो बनाने के लिए क्लिक करे");
 
-             if(!sharedPreferences.getString("site_video","").equals("null")){
-                 site_formate.setBackgroundResource(R.mipmap.tickclick);
-                }
-             if(!sharedPreferences.getString("Consent_Letter_photo","").equals("null")){
-                 imagemarkedsite.setBackgroundResource(R.mipmap.tickclick);
-                }
-             if(!sharedPreferences.getString("Consent_Letter_photo_farmer","").equals("null")){
-                 survay_image2.setBackgroundResource(R.mipmap.tickclick);
-                 }
+            if (!sharedPreferences.getString("site_video", "").equals("null")) {
+                site_formate.setBackgroundResource(R.mipmap.tickclick);
+            }
+            if (!sharedPreferences.getString("Consent_Letter_photo", "").equals("null")) {
+                imagemarkedsite.setBackgroundResource(R.mipmap.tickclick);
+            }
+            if (!sharedPreferences.getString("Consent_Letter_photo_farmer", "").equals("null")) {
+                survay_image2.setBackgroundResource(R.mipmap.tickclick);
+            }
 
-            if(sharedPreferences.getString("bor_clean_status","").equals("YES")){
+            if (sharedPreferences.getString("bor_clean_status", "").equals("YES")) {
                 borecleanyes.setChecked(true);
                 radioCleanString = "YES";
             } else {
                 borecleanno.setChecked(true);
                 radioCleanString = "NO";
             }
-            if(sharedPreferences.getString("customer_satify_status","").equals("YES")){
+            if (sharedPreferences.getString("customer_satify_status", "").equals("YES")) {
                 satisfyYes.setChecked(true);
                 radioSatisfyString = "YES";
             } else {
@@ -341,7 +370,7 @@ String img_no;
                 radioSatisfyString = "NO";
             }
 
-           if(sharedPreferences.getString("power_connection_status","").equals("YES")){
+            if (sharedPreferences.getString("power_connection_status", "").equals("YES")) {
                 lightyes.setChecked(true);
                 radioLightString = "YES";
             } else {
@@ -349,26 +378,29 @@ String img_no;
                 radioLightString = "NO";
             }
 
-          if(sharedPreferences.getString("pump_head","").equals("30")){
-              borePump1.setChecked(true);
+            if (sharedPreferences.getString("pump_head", "").equals("30")) {
+                borePump1.setChecked(true);
                 radioPumpHeadString = "30";
-            }
-  else if(sharedPreferences.getString("pump_head","").equals("50")){
-              borePump2.setChecked(true);
+            } else if (sharedPreferences.getString("pump_head", "").equals("50")) {
+                borePump2.setChecked(true);
                 radioPumpHeadString = "50";
-            }
- else if(sharedPreferences.getString("pump_head","").equals("70")){
-              borePump3.setChecked(true);
+            } else if (sharedPreferences.getString("pump_head", "").equals("70")) {
+                borePump3.setChecked(true);
                 radioPumpHeadString = "70";
-            }
- else if(sharedPreferences.getString("pump_head","").equals("100")){
-              borePump4.setChecked(true);
+            } else if (sharedPreferences.getString("pump_head", "").equals("100")) {
+                borePump4.setChecked(true);
                 radioPumpHeadString = "100";
             }
 
 
-        }
-        else{
+        } else {
+            edittextbordepth.setText(bor_depth);
+            edittextborsize.setText(bor_size);
+            edittextbordepth.setInputType(InputType.TYPE_CLASS_NUMBER);
+            edittextbordepth.setHint("एंटर बोर डेप्थ ( फ़ीट मे)");
+            edittextborsize.setInputType(InputType.TYPE_CLASS_NUMBER);
+            edittextborsize.setHint("एंटर बोर साइज ( फ़ीट मे)");
+
             if (!KEYPHOTO3.equals("null")) {
                 imagemarkedsite.setBackgroundResource(R.mipmap.tickclick);
             }
@@ -388,7 +420,7 @@ String img_no;
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGES);
                 }
-                img_no="1";
+                img_no = "1";
             }
         });
         adharImage.setOnClickListener(new View.OnClickListener() {
@@ -402,7 +434,7 @@ String img_no;
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGES);
                 }
-                img_no="2";
+                img_no = "2";
             }
         });
         bankpassbookimage.setOnClickListener(new View.OnClickListener() {
@@ -415,7 +447,7 @@ String img_no;
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGES);
                 }
-                img_no="3";
+                img_no = "3";
             }
         });
         imagemarkedsite.setOnClickListener(new View.OnClickListener() {
@@ -429,7 +461,7 @@ String img_no;
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGES);
                 }
-                img_no="4";
+                img_no = "4";
 
             }
         });
@@ -439,8 +471,8 @@ String img_no;
             @Override
             public void onClick(View view) {
                 if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
-                    Intent i = new Intent(SiteSurvey.this,VideoCaptureActivity.class);
-                    i.putExtra("regnnumber",regnnumber);
+                    Intent i = new Intent(SiteSurvey.this, VideoCaptureActivity.class);
+                    i.putExtra("regnnumber", regnnumber);
                     startActivity(i);
                 } else {
                     if (CameraUtils.checkPermissions(getApplicationContext())) {
@@ -464,7 +496,7 @@ String img_no;
                     requestCameraPermission1(MEDIA_TYPE_IMAGES);
                 }
 
-                img_no="6";
+                img_no = "6";
             }
         });
         boaring_image.setOnClickListener(new View.OnClickListener() {
@@ -479,7 +511,7 @@ String img_no;
                     requestCameraPermission1(MEDIA_TYPE_IMAGES);
                 }
 
-                img_no="7";
+                img_no = "7";
             }
         });
         survay_image2.setOnClickListener(new View.OnClickListener() {
@@ -494,7 +526,7 @@ String img_no;
                     requestCameraPermission1(MEDIA_TYPE_IMAGES);
                 }
 
-                img_no="8";
+                img_no = "8";
             }
         });
         radiogroupbor.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -534,7 +566,7 @@ String img_no;
             }
         });
 
-  radiogroupLightConnection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        radiogroupLightConnection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.lightyes) {
@@ -545,16 +577,16 @@ String img_no;
             }
         });
 
-radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.borePump1) {
                     radioPumpHeadString = "30";
                 } else if (checkedId == R.id.borePump2) {
                     radioPumpHeadString = "50";
-                }else if (checkedId == R.id.borePump3) {
+                } else if (checkedId == R.id.borePump3) {
                     radioPumpHeadString = "70";
-                }else if (checkedId == R.id.borePump4) {
+                } else if (checkedId == R.id.borePump4) {
                     radioPumpHeadString = "100";
                 }
             }
@@ -574,26 +606,25 @@ radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeList
                 final NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
                 if (activeNetwork != null) {
-                    if (edittextexisting_motor.getText().toString().equals("")) {
+                    if (!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")&&edittextexisting_motor.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Fill Motor Running or Not", Toast.LENGTH_LONG).show();
 
-                    } else if (edittextbordepth.getText().toString().equals("")) {
+                    } else if (!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")&&edittextbordepth.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Enter Bore Depth", Toast.LENGTH_LONG).show();
 
-                    } else if (edittextborsize.getText().toString().equals("")) {
+                    } else if (!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")&&edittextborsize.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Enter Bore Size ", Toast.LENGTH_LONG).show();
 
-                    } else if (edittextwaterlevel.getText().toString().equals("")) {
+                    } else if (!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")&&edittextwaterlevel.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Enter Water Level", Toast.LENGTH_LONG).show();
 
                     } else if (radiogroupbor.getCheckedRadioButtonId() == -1) {
                         Toast.makeText(getApplicationContext(), "Please Enter Bore is in use or not from last three months", Toast.LENGTH_LONG).show();
 
-                    }  else if(lat.equals("0")&&lon.equals("0")){
-                       getLocation();
-                    }
-                        else
-                        { uploadsitedetail();
+                    } else if (lat.equals("0") && lon.equals("0")) {
+                        getLocation();
+                    } else {
+                        uploadsitedetail();
                     }
 
 
@@ -613,10 +644,11 @@ radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeList
                     } else if (radiogroupbor.getCheckedRadioButtonId() == -1) {
                         Toast.makeText(getApplicationContext(), "Please Enter Bore is in use or not from last three months", Toast.LENGTH_LONG).show();
 
-                    } else if(lat.equals("0")&&lon.equals("0")){
+                    } else if (lat.equals("0") && lon.equals("0")) {
                         getLocation();
-                    }else {
-                        save_local(); }
+                    } else {
+                        save_local();
+                    }
 
                 }
 
@@ -776,8 +808,8 @@ radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeList
         } else {
 
             UploadAll.getInstance().init();
-            double latti=UploadAll.latitude;
-            double longi= UploadAll.longitude;
+            double latti = UploadAll.latitude;
+            double longi = UploadAll.longitude;
 
             lat = String.valueOf(latti);
             lon = String.valueOf(longi);
@@ -818,13 +850,13 @@ radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeList
 
         pb.show();
         Constants constants = new Constants();
-        String apiName="";
-        if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE3")) {
-            apiName=constants.SITE_SURVEY_API_HAREDA;
-        }else{
+        String apiName = "";
+        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
+            apiName = constants.SITE_SURVEY_API_HAREDA;
+        } else {
             apiName = constants.SITE_SURVEY_API;
         }
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, apiName, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, apiName, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pb.dismiss();
@@ -891,20 +923,17 @@ radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeList
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("photo1", photo11);
-         //                params.put("photo3", photo13);
+                //                params.put("photo3", photo13);
                 params.put("photo5", photo15);
                 params.put("eng_id", eng_id);
-                params.put("boredepth", edittextbordepth.getText().toString());
-                params.put("boredsize", edittextborsize.getText().toString());
                 params.put("borewaterlevel", edittextwaterlevel.getText().toString());
                 params.put("radioborestatus", radiogroupbor_string);
-                params.put("edittextexisting_motor_string", edittextexisting_motor.getText().toString());
                 params.put("Status", survey_status);
                 params.put("lat", lat);
                 params.put("lon", lon);
                 params.put("reg_no", regnnumber);
                 params.put("datetime", getDateTime());
-                if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE3")) {
+                if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
                     params.put("bor_clean_status", radioCleanString);
                     params.put("pump_head", radioPumpHeadString);
                     params.put("customer_satify_status", radioSatisfyString);
@@ -914,13 +943,18 @@ radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeList
                     params.put("photo4", photo17);
                     params.put("Consent_Letter_photo", photo14);
                     params.put("Consent_Letter_photo_farmer", photo18);
-                }else{
+                    params.put("block", edittextbordepth.getText().toString());
+                    params.put("village", edittextborsize.getText().toString());
+
+                } else {
                     params.put("photo2", photo12);
                     params.put("photo4", photo14);
                     params.put("photo6", photo16);
                     params.put("photo7", photo17);
                     params.put("photo8", photo18);
-
+                    params.put("boredepth", edittextbordepth.getText().toString());
+                    params.put("boredsize", edittextborsize.getText().toString());
+                    params.put("edittextexisting_motor_string", edittextexisting_motor.getText().toString());
                 }
 
 
@@ -1078,30 +1112,30 @@ radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeList
 
 
             bitmap1 = CameraUtils.optimizeBitmap(BITMAP_SAMPLE_SIZE, imageStoragePathS);
-            Bitmap result=print_img(bitmap1);
-            if(img_no.equals("1")){
-                photo11=imageTOString(result);
+            Bitmap result = print_img(bitmap1);
+            if (img_no.equals("1")) {
+                photo11 = imageTOString(result);
                 passport_size_pic.setImageBitmap(result);
-            }else if(img_no.equals("2")){
-                photo12=imageTOString(result);
+            } else if (img_no.equals("2")) {
+                photo12 = imageTOString(result);
                 adharImage.setImageBitmap(result);
-            }else if(img_no.equals("3")){
-                photo13=imageTOString(result);
+            } else if (img_no.equals("3")) {
+                photo13 = imageTOString(result);
                 bankpassbookimage.setImageBitmap(result);
-            }else if(img_no.equals("4")){
-                photo14=imageTOString(result);
+            } else if (img_no.equals("4")) {
+                photo14 = imageTOString(result);
                 imagemarkedsite.setImageBitmap(result);
-            }else if(img_no.equals("5")){
-                photo15=imageTOString(result);
+            } else if (img_no.equals("5")) {
+                photo15 = imageTOString(result);
                 site_formate.setImageBitmap(result);
-            }else if(img_no.equals("6")){
-                photo16=imageTOString(result);
+            } else if (img_no.equals("6")) {
+                photo16 = imageTOString(result);
                 aadhar_back.setImageBitmap(result);
-            }else if(img_no.equals("7")){
-                photo17=imageTOString(result);
+            } else if (img_no.equals("7")) {
+                photo17 = imageTOString(result);
                 boaring_image.setImageBitmap(result);
-            }else if(img_no.equals("8")){
-                photo18=imageTOString(result);
+            } else if (img_no.equals("8")) {
+                photo18 = imageTOString(result);
                 survay_image2.setImageBitmap(result);
             }
 
@@ -1144,8 +1178,9 @@ radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeList
         survey.Lon = lon;
         survey.Regn = regnnumber;
         survey.Dati = getDateTime();
-        try{
-        survey.save();}catch (Exception ae){
+        try {
+            survey.save();
+        } catch (Exception ae) {
 
         }
         Localdialog.findViewById(R.id.clickmedismissf).setOnClickListener(new View.OnClickListener() {
@@ -1164,14 +1199,15 @@ radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeList
         //  Toast.makeText(getApplicationContext(),"Saved inLocal",Toast.LENGTH_SHORT).show();
 
     }
-    public Bitmap print_img(Bitmap bitmap){
+
+    public Bitmap print_img(Bitmap bitmap) {
 
         UploadAll.getInstance().init();
-        double latti=UploadAll.latitude;
-        double longi= UploadAll.longitude;
+        double latti = UploadAll.latitude;
+        double longi = UploadAll.longitude;
 
-        String lat=String.valueOf(latti);
-        String lng=String.valueOf(longi);
+        String lat = String.valueOf(latti);
+        String lng = String.valueOf(longi);
 
         File f = new File(imageStoragePathS);
 
@@ -1207,7 +1243,7 @@ radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeList
         Bitmap.Config config = rotatedBitmap.getConfig();
 
 
-        Bitmap result = Bitmap.createBitmap( rotatedBitmap.getWidth(), rotatedBitmap.getHeight(),config);
+        Bitmap result = Bitmap.createBitmap(rotatedBitmap.getWidth(), rotatedBitmap.getHeight(), config);
 
         Canvas canvas = new Canvas(result);
         canvas.drawBitmap(rotatedBitmap, 0, 0, null);
@@ -1222,10 +1258,28 @@ radiogrouppumpHead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeList
         innerPaint.setColor(Color.parseColor("#61ECECEC"));
 //    innerPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         innerPaint.setAntiAlias(true);
-        canvas.drawRect(180F, 50F, 0, 0, innerPaint);
-        canvas.drawText("Lat - "+lat,5, 15, paint);
-        canvas.drawText("Long - "+lng,5, 30, paint);
-        canvas.drawText("Date - "+getDateTime(),5, 45, paint);
+
+        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
+            if (!TextUtils.isEmpty(site_lat_new) && (site_lat_new.length() > 4 && site_long_new.length() > 4)) {
+
+                canvas.drawRect(180F, result.getHeight(), 0, result.getHeight() - 50, innerPaint);
+                canvas.drawText("Lat - " + replaceLastItem(site_lat_new, Integer.parseInt(img_no)), 5, result.getHeight() - 40, paint);
+                canvas.drawText("Long - " + replaceLastItem(site_long_new, Integer.parseInt(img_no)), 5, result.getHeight() - 25, paint);
+                canvas.drawText("Name - " + benifname, 5, result.getHeight() - 10, paint);
+            }
+        } else {
+            canvas.drawRect(180F, 50F, 0, 0, innerPaint);
+            canvas.drawText("Lat - " + lat, 5, 15, paint);
+            canvas.drawText("Long - " + lng, 5, 30, paint);
+            canvas.drawText("Date - " + getDateTime(), 5, 45, paint);
+        }
         return result;
+    }
+
+    public String replaceLastItem(String value, int increase) {
+        int number = Integer.parseInt(value.substring(value.length() - 1));
+        String substring = value.substring(0, value.length() - 1); // AB
+        String replaced = substring + String.valueOf(number + increase);
+        return replaced;
     }
 }

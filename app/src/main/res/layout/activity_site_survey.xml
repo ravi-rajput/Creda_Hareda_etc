@@ -363,7 +363,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
-                    android:text="Aadharcard Image Back"
+                    android:text="आधार कार्ड की पीछे की फोटो"
                     android:background="#A0A0A0"></TextView>
 
                 <ImageView
@@ -384,7 +384,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Boaring Image with customer"
+                    android:text="कस्टमर के साथ बोरिंग की फोटो"
                     android:textColor="#ffffff"
                     android:background="#A0A0A0"></TextView>
 
@@ -521,7 +521,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="Site Marked Pic 2 Image"
+                android:text="साइट मार्केड फोटो 2"
                 android:background="#999999"/>
 
             <ImageView
@@ -538,7 +538,7 @@
             android:layout_width="match_parent"
             android:textAlignment="center"
             android:layout_height="match_parent"
-            android:text="Site Format"
+            android:text="साइट फॉर्मेट"
             android:textSize="15sp"
             android:background="#8B8B8B"
             android:textStyle="bold"
@@ -596,18 +596,14 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="#000000">
                 <EditText
-
                     android:id="@+id/edittextwaterlevelsc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Water Level (In Feet)"
-
+                    android:hint="पानी का लेवल डालिये (फ़ीट में)"
                     android:inputType="number"
                     android:maxLines="1"
                     android:textColorHint="#000000"
                     android:textSize="15dp"
-
-
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -624,6 +620,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/boreDeptInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="#000000">
@@ -632,9 +629,6 @@
                     android:id="@+id/edittextbordepthsc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Bore Depth (In Feet) "
-                    android:inputType="number"
-
                     android:maxLines="1"
                     android:textColorHint="#000000"
                     android:textSize="15dp"
@@ -655,6 +649,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/boreSizeInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="#000000">
@@ -663,9 +658,6 @@
                     android:id="@+id/edittextborsizesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Bore Size (In Inch) "
-                    android:inputType="number"
-
                     android:maxLines="1"
                     android:textColorHint="#000000"
                     android:textSize="15dp"
@@ -678,7 +670,7 @@
 
 
         <LinearLayout
-
+android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -718,7 +710,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/is_bore_empty"
+                android:text="बोर हो रखा ह या नहीं?"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_marginTop="15dp"
@@ -756,7 +748,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bore Clean"
+                android:text="बोर क्लीन"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_marginTop="15dp"
@@ -789,7 +781,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pump Head Options"
+                android:text="पंप हेड ऑप्शन्स"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_marginTop="15dp"
@@ -802,39 +794,39 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="15dp"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_gravity="center">
 
                 <RadioButton
                     android:id="@+id/borePump1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="30" />
+                    />
 
                 <RadioButton
                     android:id="@+id/borePump2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="50" />
+                    />
 
                <RadioButton
                     android:id="@+id/borePump3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="70" />
+                     />
 
                <RadioButton
                     android:id="@+id/borePump4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="100" />
+                     />
 
             </RadioGroup>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Customer is Satisfy"
+                android:text="कस्टमर पाइप के डिलीवरी इंच से संतुस्ट है या नहीं?"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_marginTop="15dp"
@@ -867,7 +859,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jaha koi Pump Lagna h vha koi light connection"
+                android:text="जहा पंप लगना है वहां कोई लाइट कनेक्शन"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_marginTop="15dp"
