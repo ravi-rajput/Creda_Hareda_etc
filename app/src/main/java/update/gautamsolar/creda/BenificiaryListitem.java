@@ -377,6 +377,7 @@ BenificiaryListitem extends Activity {
                             credaModel.setSidemark_image(jsonObject.optString("sidemark_image"));
                             credaModel.setPassbook_image(jsonObject.optString("bankpassbook_image"));
                             credaModel.setBenifname(jsonObject.optString("fname"));
+                            credaModel.setBore_Status(jsonObject.getString("bor_status"));
                             credaModel.setFname(jsonObject.getString("fathername"));
                             credaModel.setFoundation_status(jsonObject.getString("foundation_status"));
                             credaModel.setContact(jsonObject.getString("contact_no"));
