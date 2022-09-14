@@ -297,9 +297,9 @@ public class SiteSurvey extends AppCompatActivity {
         pump_capacity = sharedPreferences.getString("pump_capacity", "");
         site_lat_new = sharedPreferences.getString("site_lat_new", "");
         site_long_new = sharedPreferences.getString("site_long_new", "");
-        if (site_lat_new.equals("null") || site_long_new.equals("null")) {
-            Toast.makeText(this, "Site Survay Location is null", Toast.LENGTH_SHORT).show();
-        }
+//        if (site_lat_new.equals("null") || site_long_new.equals("null")) {
+//            Toast.makeText(this, "Site Survay Location is null", Toast.LENGTH_SHORT).show();
+//        }
         if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
 
             isBore.setText("बोर हो रखा ह या नहीं?");
@@ -1281,13 +1281,13 @@ public class SiteSurvey extends AppCompatActivity {
         innerPaint.setAntiAlias(true);
 
         if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
-            if (!TextUtils.isEmpty(site_lat_new) && (site_lat_new.length() > 4 && site_long_new.length() > 4)) {
+//            if (!TextUtils.isEmpty(site_lat_new) && (site_lat_new.length() > 4 && site_long_new.length() > 4)) {
 
                 canvas.drawRect(180F, result.getHeight(), 0, result.getHeight() - 50, innerPaint);
-                canvas.drawText("Lat - " + replaceLastItem(site_lat_new, Integer.parseInt(img_no)), 5, result.getHeight() - 40, paint);
-                canvas.drawText("Long - " + replaceLastItem(site_long_new, Integer.parseInt(img_no)), 5, result.getHeight() - 25, paint);
+                canvas.drawText("Lat - " + replaceLastItem(lat, Integer.parseInt(img_no)), 5, result.getHeight() - 40, paint);
+                canvas.drawText("Long - " + replaceLastItem(lng, Integer.parseInt(img_no)), 5, result.getHeight() - 25, paint);
                 canvas.drawText("Name - " + benifname, 5, result.getHeight() - 10, paint);
-            }
+//            }
         } else {
             canvas.drawRect(180F, 50F, 0, 0, innerPaint);
             canvas.drawText("Lat - " + lat, 5, 15, paint);
