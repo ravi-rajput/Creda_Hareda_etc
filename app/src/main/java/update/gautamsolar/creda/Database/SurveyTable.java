@@ -63,5 +63,20 @@ public  class SurveyTable extends Model {
 
     @Column(name = "Dati")
     public String Dati;
+
+    @Column(name = "radioCleanString")
+    public String radioCleanString;
+
+    @Column(name = "radioPumpHeadString")
+    public String radioPumpHeadString;
+
+    @Column(name = "radioSatisfyString")
+    public String radioSatisfyString;
+
+    @Column(name = "radioLightString")
+    public String radioLightString;
+
+    @Column(name = "status")
+    public String status;
 }
 

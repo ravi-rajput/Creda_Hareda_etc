@@ -650,19 +650,19 @@ public class SiteSurvey extends AppCompatActivity {
 
 
                 } else {
-                    if (edittextexisting_motor.getText().toString().equals("")) {
+                    if (!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")&&edittextexisting_motor.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Fill Motor Running or Not", Toast.LENGTH_LONG).show();
 
-                    } else if (edittextbordepth.getText().toString().equals("")) {
+                    } else if (!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")&&edittextbordepth.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Enter Bore Depth", Toast.LENGTH_LONG).show();
 
-                    } else if (edittextborsize.getText().toString().equals("")) {
+                    } else if (!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")&&edittextborsize.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Enter Bore Size ", Toast.LENGTH_LONG).show();
 
-                    } else if (edittextwaterlevel.getText().toString().equals("")) {
+                    } else if (!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")&&edittextwaterlevel.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Enter Water Level", Toast.LENGTH_LONG).show();
 
-                    } else if (radiogroupbor.getCheckedRadioButtonId() == -1) {
+                    }  else if (radiogroupbor.getCheckedRadioButtonId() == -1) {
                         Toast.makeText(getApplicationContext(), "Please Enter Bore is in use or not from last three months", Toast.LENGTH_LONG).show();
 
                     } else if (lat.equals("0") && lon.equals("0")) {
@@ -1199,6 +1199,14 @@ public class SiteSurvey extends AppCompatActivity {
         survey.Lon = lon;
         survey.Regn = regnnumber;
         survey.Dati = getDateTime();
+survey.radioCleanString = radioCleanString;
+survey.radioPumpHeadString = radioPumpHeadString;
+survey.radioSatisfyString = radioSatisfyString;
+survey.radioLightString = radioLightString;
+survey.status = survey_status;
+
+
+
         try {
             survey.save();
         } catch (Exception ae) {

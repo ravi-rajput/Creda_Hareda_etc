@@ -130,7 +130,7 @@ class NewInstalationActivity : ComponentActivity() {
                             .padding(0.dp, 0.dp, 0.dp, 70.dp)
                     ) {
                         showUI()
-                        updateData(openDialog)
+                        update_Data(openDialog)
                     }
                     MyButton()
 
@@ -292,7 +292,7 @@ class NewInstalationActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
-    fun updateData(openDialog: MutableState<Boolean>) {
+    fun update_Data(openDialog: MutableState<Boolean>) {
 
 
         getLocation()

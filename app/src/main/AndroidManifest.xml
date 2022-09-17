@@ -38,7 +38,7 @@
             android:value="creda.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="9" />
+            android:value="10" />
         <meta-data
             android:name="AA_MODELS"
             android:value="update.gautamsolar.creda.Database.CMC_MP_Table,
