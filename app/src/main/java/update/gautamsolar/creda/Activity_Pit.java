@@ -77,7 +77,7 @@ public class Activity_Pit extends AppCompatActivity {
     public static final int MEDIA_TYPE_IMAGEF = 155;
 
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     private static String imageStoragePathF;
     private static final int IMAGE_CAPTURE1 = 20;
     Bitmap bitmap1 = null;

@@ -91,7 +91,7 @@ public class Installation_MP extends AppCompatActivity {
     public static final int MEDIA_TYPE_VIDEO = 310;
     //public static final int MEDIA_TYPE_VIDEO = 190;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     private static String imageStoragePath;
     Dialog dialog, Localdialog;
     LocationManager locationManager;
@@ -429,7 +429,10 @@ img_no="2";
 
         } else {
 
-            UploadAll.getInstance().init();
+            try {
+                UploadAll.getInstance().init();
+            }catch (Exception ae){
+            }
             double latti=UploadAll.latitude;
             double longi= UploadAll.longitude;
 
@@ -814,7 +817,10 @@ img_no="2";
     }
     public Bitmap print_img(Bitmap bitmap){
 
-        UploadAll.getInstance().init();
+        try {
+            UploadAll.getInstance().init();
+        }catch (Exception ae){
+        }
         double latti=UploadAll.latitude;
         double longi= UploadAll.longitude;
 

@@ -96,7 +96,7 @@ public class Foundation_MP extends AppCompatActivity {
     public static final int MEDIA_TYPE_IMAGEF= 155;
     //public static final int MEDIA_TYPE_VIDEX = 190;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     private static String imageStoragePathF;
 
     private Button btnfoundation_upload;
@@ -441,7 +441,10 @@ img_no="2";
 
         } else {
 
-            UploadAll.getInstance().init();
+            try {
+                UploadAll.getInstance().init();
+            }catch (Exception ae){
+            }
             double latti=UploadAll.latitude;
             double longi= UploadAll.longitude;
 
@@ -736,7 +739,10 @@ img_no="2";
 
     public Bitmap print_img(Bitmap bitmap){
 
-        UploadAll.getInstance().init();
+        try {
+            UploadAll.getInstance().init();
+        }catch (Exception ae){
+        }
         double latti=UploadAll.latitude;
         double longi= UploadAll.longitude;
 

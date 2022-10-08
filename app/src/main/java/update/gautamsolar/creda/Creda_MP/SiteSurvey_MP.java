@@ -105,7 +105,7 @@ public class SiteSurvey_MP extends AppCompatActivity {
     Dialog dialog, Localdialog;
     //public static final int MEDIA_TYPE_VIDEO = 190;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     private static String imageStoragePathS;
 
 
@@ -576,7 +576,10 @@ img_no="1";
 
         } else {
 
-            UploadAll.getInstance().init();
+            try {
+                UploadAll.getInstance().init();
+            }catch (Exception ae){
+            }
             double latti=UploadAll.latitude;
             double longi= UploadAll.longitude;
 
@@ -1003,7 +1006,10 @@ img_no="1";
     }
     public Bitmap print_img(Bitmap bitmap){
 
-        UploadAll.getInstance().init();
+        try {
+            UploadAll.getInstance().init();
+        }catch (Exception ae){
+        }
         double latti=UploadAll.latitude;
         double longi= UploadAll.longitude;
 

@@ -120,7 +120,10 @@ public class SaralActivity extends AppCompatActivity implements
     }
 
     public void upload() {
-        UploadAll.getInstance().init();
+        try {
+            UploadAll.getInstance().init();
+        }catch (Exception ae){
+        }
         latti = UploadAll.latitude;
         longi = UploadAll.longitude;
         pb.show();

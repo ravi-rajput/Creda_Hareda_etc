@@ -106,7 +106,7 @@ public class Bluetooth_RMU_MP extends AppCompatActivity {
     private ProgressDialog progress;
     static final int REQUEST_LOCATION = 60;
 
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     private static final int PICK_IMAGE_REQUEST_SITE1 = 164;
     BluetoothAdapter myBluetooth = null;
     LocationManager locationManager;

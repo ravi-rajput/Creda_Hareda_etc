@@ -144,7 +144,10 @@ if(road_status=="NO"&&saria_status=="NO"&&rate_gitt=="NO"){
     Toast.makeText(this, "Please Select any ONE", Toast.LENGTH_SHORT).show();
 }
        else if(latti==0.0&&longi==0.0){
-            UploadAll.getInstance().init();
+    try {
+        UploadAll.getInstance().init();
+    }catch (Exception ae){
+    }
             latti=UploadAll.latitude;
             longi= UploadAll.longitude;
             Toast.makeText(Foundation_Material.this, "Please wait we are getting location", Toast.LENGTH_SHORT).show();
@@ -166,8 +169,11 @@ if(road_status=="NO"&&saria_status=="NO"&&rate_gitt=="NO"){
     }
 
     public void upload() {
-       
-        UploadAll.getInstance().init();
+
+        try {
+            UploadAll.getInstance().init();
+        }catch (Exception ae){
+        }
         latti=UploadAll.latitude;
         longi= UploadAll.longitude;
   
@@ -273,7 +279,10 @@ if(road_status=="NO"&&saria_status=="NO"&&rate_gitt=="NO"){
     }
 
     public void save_local() {
-        UploadAll.getInstance().init();
+        try {
+            UploadAll.getInstance().init();
+        }catch (Exception ae){
+        }
         latti=UploadAll.latitude;
         longi= UploadAll.longitude;
 

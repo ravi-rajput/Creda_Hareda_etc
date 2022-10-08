@@ -90,7 +90,7 @@ public class SiteSurvey extends AppCompatActivity {
     public static final int MEDIA_TYPE_IMAGES = 302;
     //public static final int MEDIA_TYPE_VIDEO = 190;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     //1 means data is synced and 0 means data is not synced
     public static final int NAME_SYNCED_WITH_SERVERS = 1;
     public static final int NAME_NOT_SYNCED_WITH_SERVERS = 0;
@@ -130,7 +130,8 @@ public class SiteSurvey extends AppCompatActivity {
     String water_level, bor_size, bor_depth, existing_moter_run, eng_id, photo11, photo12, photo13, photo14, photo15, photo16, photo17, photo18, Engineer_Contact, localcounti;
     int Status_SiteSurvey;
     ProgressDialog pb;
-    String img_no, site_lat_new, site_long_new, pump_capacity;
+    String img_no = "0";
+    String site_lat_new, site_long_new, pump_capacity;
     String bore_status, url1 = null, url2 = null, url3 = null, url4 = null, localcount;
     SharedPreferences sharedPreferences;
     int localdatacount = 0;
@@ -828,7 +829,10 @@ public class SiteSurvey extends AppCompatActivity {
 
         } else {
 
-            UploadAll.getInstance().init();
+            try {
+                UploadAll.getInstance().init();
+            }catch (Exception ae){
+            }
             double latti = UploadAll.latitude;
             double longi = UploadAll.longitude;
 
@@ -1209,34 +1213,38 @@ survey.status = survey_status;
 
         try {
             survey.save();
+            Localdialog.findViewById(R.id.clickmedismissf).setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("ResourceAsColor")
+                public void onClick(View v) {
+                    Toast.makeText(SiteSurvey.this, "Saved", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(SiteSurvey.this, UploadAll.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+                    finish();
+                    Localdialog.dismiss();
+                }
+            });
+
+            Localdialog.show();
         } catch (Exception ae) {
-
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
         }
-        Localdialog.findViewById(R.id.clickmedismissf).setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            public void onClick(View v) {
-                Toast.makeText(SiteSurvey.this, "Saved", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(SiteSurvey.this, UploadAll.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
-                finish();
-                Localdialog.dismiss();
-            }
-        });
 
-        Localdialog.show();
         //  Toast.makeText(getApplicationContext(),"Saved inLocal",Toast.LENGTH_SHORT).show();
 
     }
 
     public Bitmap print_img(Bitmap bitmap) {
+try {
+    UploadAll.getInstance().init();
+}catch (Exception ae){
+}
+    double latti = UploadAll.latitude;
+    double longi = UploadAll.longitude;
+    String lat = String.valueOf(latti);
+    String lng = String.valueOf(longi);
 
-        UploadAll.getInstance().init();
-        double latti = UploadAll.latitude;
-        double longi = UploadAll.longitude;
 
-        String lat = String.valueOf(latti);
-        String lng = String.valueOf(longi);
 
         File f = new File(imageStoragePathS);
 
@@ -1290,17 +1298,29 @@ survey.status = survey_status;
 
         if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
 //            if (!TextUtils.isEmpty(site_lat_new) && (site_lat_new.length() > 4 && site_long_new.length() > 4)) {
+try {
+    canvas.drawRect(180F, result.getHeight(), 0, result.getHeight() - 50, innerPaint);
+    if(!lat.equals("0.0")&&!lng.equals("0.0") && !lat.equals("0")&&!lng.equals("0")) {
+        canvas.drawText("Lat - " + replaceLastItem(lat, Integer.parseInt(img_no)), 5, result.getHeight() - 40, paint);
+        canvas.drawText("Long - " + replaceLastItem(lng, Integer.parseInt(img_no)), 5, result.getHeight() - 25, paint);
+    }
+    canvas.drawText("Name - " + benifname, 5, result.getHeight() - 10, paint);
+}catch (Exception ae){
 
-                canvas.drawRect(180F, result.getHeight(), 0, result.getHeight() - 50, innerPaint);
-                canvas.drawText("Lat - " + replaceLastItem(lat, Integer.parseInt(img_no)), 5, result.getHeight() - 40, paint);
-                canvas.drawText("Long - " + replaceLastItem(lng, Integer.parseInt(img_no)), 5, result.getHeight() - 25, paint);
-                canvas.drawText("Name - " + benifname, 5, result.getHeight() - 10, paint);
-//            }
+}
+                //            }
         } else {
+            try{
             canvas.drawRect(180F, 50F, 0, 0, innerPaint);
-            canvas.drawText("Lat - " + lat, 5, 15, paint);
-            canvas.drawText("Long - " + lng, 5, 30, paint);
+                if(!lat.equals("0.0")&&!lng.equals("0.0") && !lat.equals("0")&&!lng.equals("0")) {
+                    canvas.drawText("Lat - " + lat, 5, 15, paint);
+                    canvas.drawText("Long - " + lng, 5, 30, paint);
+                }
             canvas.drawText("Date - " + getDateTime(), 5, 45, paint);
+
+        }catch (Exception ae){
+
+        }
         }
         return result;
     }
