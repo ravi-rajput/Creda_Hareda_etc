@@ -1,7 +1,5 @@
 package update.gautamsolar.creda;
 
-import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -13,6 +11,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -87,7 +86,7 @@ public class SiteSurvey extends AppCompatActivity {
     public static final String GALLERY_DIRECTORY_NAME = "GSPLCREDA";
     public static final String IMAGE_EXTENSION = "jpg";
     public static final String VIDEO_EXTENSION = "mp4";
-    public static final int MEDIA_TYPE_IMAGES = 302;
+    public static final int MEDIA_TYPE_IMAGES = 189;
     //public static final int MEDIA_TYPE_VIDEO = 190;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
     public static final int BITMAP_SAMPLE_SIZE = 4;
@@ -867,6 +866,26 @@ public class SiteSurvey extends AppCompatActivity {
                         .show();
             }
         }
+        else if (requestCode == 2) {
+            try{
+                Uri selectedImage = data.getData();
+                String[] filePath = {MediaStore.Images.Media.DATA};
+                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
+                c.moveToFirst();
+                int columnIndex = c.getColumnIndex(filePath[0]);
+                String picturePath = c.getString(columnIndex);
+                c.close();
+                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+                imageStoragePathS = picturePath;
+                CameraUtils.refreshGallery(getApplicationContext(), imageStoragePathS);
+
+                // successfully captured the image
+                // display it in image view
+                previewCapturedImage1();
+            }catch (Exception ae){
+                ae.getStackTrace();
+            }
+        }
     }
 
 
@@ -1036,7 +1055,7 @@ public class SiteSurvey extends AppCompatActivity {
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         if (report.areAllPermissionsGranted()) {
 
-                            if (type == MEDIA_TYPE_IMAGE) {
+                            if (type == MEDIA_TYPE_IMAGES) {
                                 // capture picture
                                 captureImage1();
 
@@ -1113,8 +1132,18 @@ public class SiteSurvey extends AppCompatActivity {
     }*/
 
     private void captureImage1() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Select Image Source");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Camera",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         File file = CameraUtils.getOutputMediaFile(MEDIA_TYPE_IMAGES);
         if (file != null) {
             imageStoragePathS = file.getAbsolutePath();
@@ -1126,6 +1155,28 @@ public class SiteSurvey extends AppCompatActivity {
 
         // start the image capture Intent
         startActivityForResult(intent, PICK_IMAGE_REQUEST_SITE1);
+
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "Gallary",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(intent, 2);
+
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+
+
+
+
+
     }
 
     private void previewCapturedImage1() {
