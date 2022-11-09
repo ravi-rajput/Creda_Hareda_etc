@@ -1623,6 +1623,20 @@ android:maxLength="30"
 
         <!--Choose Structure-->
 
+        <Button
+            android:id="@+id/btn_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Create Video"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:backgroundTint="@color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/benifbuttoncorner"/>
 
 
         <Button

@@ -111,7 +111,7 @@ public class Material extends AppCompatActivity {
             panel7btn, panel8btn, panel9btn, panel10btn, panel11btn,
             panel12btn, panel13btn, panel14btn, panel15btn, panel16btn, panel17btn, panel18btn, panel19btn, panel20btn, panel21btn, panel22btn, panel23btn, panel24btn, panel25btn, panel26btn, panel27btn, panel28btn, btnPumpScan, btnMotorScan,
             ControllerbtnNumber, btnRmuNumber;
-    Button btnDisplay;
+    Button btnDisplay,btnVideo;
     ImageButton btnAdd;
     ProgressDialog progressDialog;
     TextView Beneficiary_textName, Beneficiary_txtRegNo;
@@ -148,6 +148,23 @@ public class Material extends AppCompatActivity {
 
 
         farma_checkbox = findViewById(R.id.farma_checkbox);
+        btnVideo = findViewById(R.id.btn_video);
+        if(sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")){
+            btnVideo.setVisibility(View.VISIBLE);
+        }else{
+            btnVideo.setVisibility(View.GONE);
+        }
+
+        btnVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Material.this, VideoCaptureActivity.class);
+                i.putExtra("regnnumber", regnnumber);
+                i.putExtra("route", "material");
+                startActivity(i);
+            }
+        });
+
         rod_checkbox = findViewById(R.id.rod_checkbox);
         villageName = findViewById(R.id.villageName);
         dialog = new Dialog(Material.this); // Cont
