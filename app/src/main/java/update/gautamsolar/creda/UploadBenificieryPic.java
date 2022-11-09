@@ -1123,7 +1123,8 @@ public Bitmap print_img(Bitmap bitmap){
     innerPaint.setColor(Color.parseColor("#61ECECEC"));
 //    innerPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
     innerPaint.setAntiAlias(true);
-    if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2")){
+    if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2")||
+            sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE3")){
         if(!TextUtils.isEmpty(site_lat_new)&&(site_lat_new.length()>4&&site_long_new.length()>4)) {
 
             canvas.drawRect(180F, result.getHeight(), 0, result.getHeight()-50, innerPaint);
