@@ -15,8 +15,8 @@ android {
         applicationId "update.gautamsolar.creda"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 5
-        versionName "5.9"
+        versionCode 6
+        versionName "6.0"
         multiDexEnabled true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         lintOptions {

@@ -49,7 +49,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import update.gautamsolar.creda.Constants.Constants;
@@ -59,6 +62,7 @@ public class Material extends AppCompatActivity {
     /*static String panelnew;*/
     private static final int PERMISSION_REQUEST_CODE = 40;
     private static final int FIRST_REQUEST_CODE = 20;
+    private static final int ALL_REQUEST_CODE = 19;
     private static final int SECOND_REQUEST_CODE = 21;
     private static final int THIRD_REQUEST_CODE = 22;
     private static final int FOURTH_REQUEST_CODE = 23;
@@ -106,7 +110,7 @@ public class Material extends AppCompatActivity {
             rod_checkbox_string, pump_type, pump_capacity;
 
 
-    ImageButton panel1btn, panel2btn,
+    ImageButton panel1btn,panelall, panel2btn,
             panel3btn, panel4btn, panel5btn, panel6btn,
             panel7btn, panel8btn, panel9btn, panel10btn, panel11btn,
             panel12btn, panel13btn, panel14btn, panel15btn, panel16btn, panel17btn, panel18btn, panel19btn, panel20btn, panel21btn, panel22btn, panel23btn, panel24btn, panel25btn, panel26btn, panel27btn, panel28btn, btnPumpScan, btnMotorScan,
@@ -130,7 +134,7 @@ public class Material extends AppCompatActivity {
             pannew15, pannew16, pannew17, pannew18, pannew19, pannew20, pannew21, pannew22, pannew23, pannew24, pannew25, pannew26, pannew27, pannew28, fathername, benifname, regnnumber,
             contact, block, village, dispatch_status, simno, rmuno, mobileno,
             controler_srno, controler_rms_id, pumpserialnew, motorserialnew, project;
-    private IntentIntegrator qrScan1, qrScan2, qrScan3, qrScan4, qrScan5, qrScan6,
+    private IntentIntegrator qrScan1,qrScanall, qrScan2, qrScan3, qrScan4, qrScan5, qrScan6,
             qrScan7, qrScan8, qrScan9, qrScan10, qrScan11, qrScan12, qrScan13, qrScan14, qrScan15, qrScan16, qrScan_17, qrScan_18, qrScan_19, qrScan_20, qrScan_21, qrScan_22, qrScan_23, qrScan_24, qrScan_25, qrScan_26, qrScan_27, qrScan_28,
             qrScan17, qrScan18, qrScan19, qrScan20;
     SharedPreferences sharedPreferences;
@@ -223,6 +227,7 @@ public class Material extends AppCompatActivity {
 
 
         panel1btn = findViewById(R.id.panel1btn);
+        panelall = findViewById(R.id.panelall);
         panel2btn = findViewById(R.id.panel2btn);
         panel3btn = findViewById(R.id.panel3btn);
         panel4btn = findViewById(R.id.panel4btn);
@@ -326,6 +331,7 @@ public class Material extends AppCompatActivity {
 
         /*End of 16 Edit Text*/
         qrScan1 = new IntentIntegrator(this);
+        qrScanall = new IntentIntegrator(this);
         qrScan2 = new IntentIntegrator(this);
         qrScan3 = new IntentIntegrator(this);
         qrScan4 = new IntentIntegrator(this);
@@ -640,6 +646,13 @@ public class Material extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(qrScan1.createScanIntent(), FIRST_REQUEST_CODE);
+
+            }
+        });
+       panelall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(qrScanall.createScanIntent(), ALL_REQUEST_CODE);
 
             }
         });
@@ -1046,6 +1059,126 @@ public class Material extends AppCompatActivity {
                             panel1edit.setText(result.getContents().toString());
                             pan1 = String.valueOf(panel1edit.getText());
                         }
+                    }
+
+                }
+            }
+
+        } if (requestCode == ALL_REQUEST_CODE) {
+            IntentResult result = IntentIntegrator.parseActivityResult(qrScanall.REQUEST_CODE, resultCode, data);
+            if (result != null) {
+                if (result.getContents() == null) {
+                   /* pumpSerail.setText( "kkkk" );
+                    PumpSerial= String.valueOf( pumpSerail.getText() );*/
+                    Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
+                } else {
+                    try {
+
+                        JSONObject obj = new JSONObject(result.getContents());
+
+                        panel1edit.setText(obj.getString("name") + " " + obj.getString("address"));
+                        pan1 = String.valueOf(panel1edit.getText());
+                        /*PumpSerial = pumpSerail.getText().toString();*/
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Log.d("arrayValues",result.getContents());
+                        String myArray[] = result.getContents().split("  ");
+                        Log.d("arraySize",""+myArray.length);
+                        List myList = new ArrayList();
+                        Collections.addAll(myList, myArray);
+                        Log.d("listSize",""+myList.size());
+                        Toast.makeText(this, String.valueOf(myList.size()), Toast.LENGTH_LONG).show();
+//                        if (result.getContents().length() < 19) {
+//                            Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
+//                        } else {
+                            if(myList.size()>=1) {
+                                panel1edit.setText(myList.get(0).toString());
+                                pan1 = String.valueOf(panel1edit.getText());
+                            } if(myList.size()>=2) {
+                                panel2edit.setText(myList.get(1).toString());
+                                pan2 = String.valueOf(panel2edit.getText());
+                            }if(myList.size()>=3) {
+                                panel3edit.setText(myList.get(2).toString());
+                                pan3 = String.valueOf(panel3edit.getText());
+                            }if(myList.size()>=4) {
+                                panel4edit.setText(myList.get(3).toString());
+                                pan4 = String.valueOf(panel4edit.getText());
+                            }if(myList.size()>=5) {
+                                panel5edit.setText(myList.get(4).toString());
+                                pan5 = String.valueOf(panel5edit.getText());
+                            }if(myList.size()>=6) {
+                                panel6edit.setText(myList.get(5).toString());
+                                pan6 = String.valueOf(panel6edit.getText());
+                            }if(myList.size()>=7) {
+                                panel7edit.setText(myList.get(6).toString());
+                                pan7 = String.valueOf(panel7edit.getText());
+                            }if(myList.size()>=8) {
+                                panel8edit.setText(myList.get(7).toString());
+                                pan8 = String.valueOf(panel8edit.getText());
+                            }if(myList.size()>=9) {
+                                panel9edit.setText(myList.get(8).toString());
+                                pan9 = String.valueOf(panel9edit.getText());
+                            }if(myList.size()>=10) {
+                                panel10edit.setText(myList.get(9).toString());
+                                pan10 = String.valueOf(panel10edit.getText());
+                            }if(myList.size()>=11) {
+                                panel11edit.setText(myList.get(10).toString());
+                                pan11 = String.valueOf(panel11edit.getText());
+                            }if(myList.size()>=12) {
+                                panel12edit.setText(myList.get(11).toString());
+                                pan12 = String.valueOf(panel12edit.getText());
+                            }if(myList.size()>=13) {
+                                panel13edit.setText(myList.get(12).toString());
+                                pan13 = String.valueOf(panel13edit.getText());
+                            }if(myList.size()>=14) {
+                                panel14edit.setText(myList.get(13).toString());
+                                pan14 = String.valueOf(panel14edit.getText());
+                            }if(myList.size()>=15) {
+                                panel15edit.setText(myList.get(14).toString());
+                                pan15 = String.valueOf(panel15edit.getText());
+                            }if(myList.size()>=16) {
+                                panel16edit.setText(myList.get(15).toString());
+                                pan16 = String.valueOf(panel16edit.getText());
+                            }if(myList.size()>=17) {
+                                panel17edit.setText(myList.get(16).toString());
+                                pan17 = String.valueOf(panel17edit.getText());
+                            }if(myList.size()>=18) {
+                                panel18edit.setText(myList.get(17).toString());
+                                pan18 = String.valueOf(panel18edit.getText());
+                            }if(myList.size()>=19) {
+                                panel19edit.setText(myList.get(18).toString());
+                                pan19 = String.valueOf(panel19edit.getText());
+                            }if(myList.size()>=20) {
+                                panel20edit.setText(myList.get(19).toString());
+                                pan20 = String.valueOf(panel20edit.getText());
+                            }if(myList.size()>=21) {
+                                panel21edit.setText(myList.get(20).toString());
+                                pan21 = String.valueOf(panel21edit.getText());
+                            }if(myList.size()>=22) {
+                                panel22edit.setText(myList.get(21).toString());
+                                pan22 = String.valueOf(panel22edit.getText());
+                            }if(myList.size()>=23) {
+                                panel23edit.setText(myList.get(22).toString());
+                                pan23 = String.valueOf(panel23edit.getText());
+                            }if(myList.size()>=24) {
+                                panel24edit.setText(myList.get(23).toString());
+                                pan24 = String.valueOf(panel24edit.getText());
+                            }if(myList.size()>=25) {
+                                panel25edit.setText(myList.get(24).toString());
+                                pan25 = String.valueOf(panel25edit.getText());
+                            }if(myList.size()>=26) {
+                                panel26edit.setText(myList.get(25).toString());
+                                pan26 = String.valueOf(panel26edit.getText());
+                            }if(myList.size()>=27) {
+                                panel27edit.setText(myList.get(26).toString());
+                                pan27 = String.valueOf(panel27edit.getText());
+                            }if(myList.size()>=28) {
+                                panel28edit.setText(myList.get(27).toString());
+                                pan28 = String.valueOf(panel28edit.getText());
+                            }
+//                        }
                     }
 
                 }

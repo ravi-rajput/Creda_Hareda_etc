@@ -732,6 +732,34 @@ android:maxLength="30"
             android:gravity="center"
             android:layout_marginTop="5dp"
             />
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#109F00"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="match_parent"
+                android:text="Scan for all Panel Numbers"
+                android:inputType="textCapCharacters"
+                android:hint="Panel One"
+                android:padding="5dp" />
+
+            <ImageButton
+                android:id="@+id/panelall"
+                android:background="@mipmap/arcode"
+                android:layout_width="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                />
+
+        </LinearLayout>
+
 
         <LinearLayout
 
