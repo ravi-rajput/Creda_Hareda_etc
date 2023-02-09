@@ -153,7 +153,7 @@ public class Material extends AppCompatActivity {
 
         farma_checkbox = findViewById(R.id.farma_checkbox);
         btnVideo = findViewById(R.id.btn_video);
-        if(sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")){
+        if(sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")){
             btnVideo.setVisibility(View.VISIBLE);
         }else{
             btnVideo.setVisibility(View.GONE);

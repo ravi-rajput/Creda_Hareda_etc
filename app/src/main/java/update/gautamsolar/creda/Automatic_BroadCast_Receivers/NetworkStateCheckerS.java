@@ -101,7 +101,7 @@ public class NetworkStateCheckerS extends BroadcastReceiver {
 
         Constants constants = new Constants();
         String apiName = "";
-        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
+        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")) {
             apiName = constants.SITE_SURVEY_API_HAREDA;
         } else {
             apiName = constants.SITE_SURVEY_API;
@@ -169,7 +169,7 @@ public class NetworkStateCheckerS extends BroadcastReceiver {
                 params.put("datetime", datetime);
 
 
-                if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")) {
+                if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")) {
                     params.put("bor_clean_status", radioCleanString);
                     params.put("pump_head", radioPumpHeadString);
                     params.put("customer_satify_status", radioSatisfyString);

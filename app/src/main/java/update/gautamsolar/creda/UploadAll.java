@@ -145,7 +145,7 @@ saral = findViewById(R.id.saral);
                 startActivity(i);
             }
         });
-        if(settings.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE3")) {
+        if(settings.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE3")||settings.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE4")) {
             hareda3InformaticRes.setVisibility(View.VISIBLE);
         }
             hareda3InformaticRes.setOnClickListener(new View.OnClickListener() {
