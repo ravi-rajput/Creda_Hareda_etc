@@ -128,6 +128,8 @@ class QuarterListActivity  : ComponentActivity() {
                             .putExtra("pumpHead",orders.pump_head)
                             .putExtra("gender",orders.gender)
                             .putExtra("category",orders.category)
+                            .putExtra("system_available_status",orders.system_available_status)
+                            .putExtra("remarks",orders.remarks)
                     )
                     Log.d("clicked", "itemClick")
                 })

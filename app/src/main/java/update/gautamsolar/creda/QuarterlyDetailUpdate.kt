@@ -59,16 +59,19 @@ class QuarterlyDetailUpdate : ComponentActivity() {
     private val mainViewModel: MainViewModel by viewModels()
     var controllerNo by mutableStateOf("")
     var RmsID by mutableStateOf("")
+    var remark by mutableStateOf("")
     var motorNo by mutableStateOf("")
     var lattitude by mutableStateOf("")
     var longitude by mutableStateOf("")
     var gender by mutableStateOf("")
     var catagory by mutableStateOf("")
+    var systemStatus by mutableStateOf("")
     var pumpHead by mutableStateOf("")
     private val PERMISSIONS_REQUEST_CODE = 10
     private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA,Manifest.permission.ACCESS_FINE_LOCATION)
     val radioOptions = listOf("Male", "Female")
     val radioCatagory = listOf("General", "OBC", "SC", "ST")
+    val radioSystemStatus = listOf("YES", "NO")
     val radioPumphead = listOf("30", "50", "70", "100")
     var img1:String="null"
     var img2:String="null"
@@ -81,9 +84,10 @@ class QuarterlyDetailUpdate : ComponentActivity() {
 
     private var shouldShowCamera: MutableState<Boolean> = mutableStateOf(false)
 
-    var pumpHeadSelected:Int = 0
-    var genderSelected:Int = 0
-    var cateSelected:Int = 0
+    var pumpHeadSelected:Int? = null
+    var genderSelected:Int? = null
+    var cateSelected:Int? = null
+    var SystemStatusSelected:Int? = null
     private  var photoBitmap: Bitmap?=null
     private  var photoBitmap2: Bitmap?=null
     private  var photoBitmap3: Bitmap?=null
@@ -110,6 +114,7 @@ class QuarterlyDetailUpdate : ComponentActivity() {
                     sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
                     controllerNo = intent.getStringExtra("controller_sr_no").toString()
                     RmsID = intent.getStringExtra("rms_id").toString()
+                     remark = intent.getStringExtra("remarks").toString()
                     motorNo = intent.getStringExtra("motor_sr_no").toString()
                     date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
 
@@ -119,14 +124,19 @@ class QuarterlyDetailUpdate : ComponentActivity() {
                         pumpHeadSelected = 1
                     }else if(intent.getStringExtra("pumpHead").toString().equals("70")){
                         pumpHeadSelected = 2
-                    }else{
+                    }else if(intent.getStringExtra("pumpHead").toString().equals("100")){
                         pumpHeadSelected = 3
                     }
 
                     if(intent.getStringExtra("gender").toString().equals("Male")){
                         genderSelected = 0
-                    }else{
+                    }else if(intent.getStringExtra("gender").toString().equals("Female")){
                         genderSelected = 1
+                    }
+                    if(intent.getStringExtra("system_available_status").toString().equals("YES")){
+                        SystemStatusSelected = 0
+                    }else if(intent.getStringExtra("system_available_status").toString().equals("NO")){
+                        SystemStatusSelected = 1
                     }
                     if(intent.getStringExtra("category").toString().equals("General")){
                         cateSelected = 0
@@ -134,7 +144,7 @@ class QuarterlyDetailUpdate : ComponentActivity() {
                         cateSelected = 1
                     }else if(intent.getStringExtra("category").toString().equals("SC")){
                         cateSelected = 2
-                    }else{
+                    }else if(intent.getStringExtra("category").toString().equals("ST")){
                         cateSelected = 3
                     }
                         val scroll = rememberScrollState(0)
@@ -165,11 +175,11 @@ class QuarterlyDetailUpdate : ComponentActivity() {
                         }
                     }
                     if (shouldShowCamera.value) {
-                        CameraView(
-                            outputDirectory = outputDirectory,
-                            executor = cameraExecutor,
-                            onImageCaptured = ::handleImageCapture
-                        ) { Log.e("kilo", "View error:", it) }
+                            CameraView(
+                                outputDirectory = outputDirectory,
+                                executor = cameraExecutor,
+                                onImageCaptured = ::handleImageCapture
+                            ) { Log.e("kilo", "View error:", it) }
                     }
                 }
             }
@@ -294,9 +304,24 @@ class QuarterlyDetailUpdate : ComponentActivity() {
     @Composable
     fun updateData() {
         getLocation()
-        val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[genderSelected]) }
-        val (selectedCate, onCateSelected) = remember { mutableStateOf(radioCatagory[cateSelected]) }
-        val (selectedPump, onPumpSelected) = remember { mutableStateOf(radioPumphead[pumpHeadSelected]) }
+        val (selectedOption, onOptionSelected) = remember {
+                mutableStateOf(
+                    if(genderSelected!=null) {
+                        radioOptions[genderSelected!!]
+                    }else{
+                        null
+                    }
+                )
+        }
+        val (selectedCate, onCateSelected) = remember { mutableStateOf( if(cateSelected!=null) {radioCatagory[cateSelected!!]}else{null}) }
+        val (selectedProductStatus, onSystemSelected) = remember { mutableStateOf( if(SystemStatusSelected!=null) { radioSystemStatus[SystemStatusSelected!!]}else{
+            null
+        }) }
+        val (selectedPump, onPumpSelected) = remember { mutableStateOf(
+            if(pumpHeadSelected!=null) { radioPumphead[pumpHeadSelected!!]}else{
+                null
+            }
+        ) }
 
         Row(horizontalArrangement = Arrangement.Center) {
             Card(
@@ -642,6 +667,90 @@ class QuarterlyDetailUpdate : ComponentActivity() {
             }
         }
 
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = "सिस्टम पाया गया या नही", modifier = Modifier.padding(10.dp))
+            Divider(
+                color = colorResource(id = R.color.black),
+                thickness = 0.5.dp,
+                modifier = Modifier.padding(20.dp, 0.dp, 20.dp, 0.dp)
+            )
+            radioSystemStatus.forEach { text ->
+                Row(
+                    Modifier
+                        // using modifier to add max
+                        // width to our radio button.
+                        .fillMaxWidth()
+                        // below method is use to add
+                        // selectable to our radio button.
+                        .selectable(
+                            // this method is called when
+                            // radio button is selected.
+                            selected = (text == selectedProductStatus),
+                            // below method is called on
+                            // clicking of radio button.
+                            onClick = {
+                                onCateSelected(text)
+                                systemStatus = text
+                            }
+                        )
+                        // below line is use to add
+                        // padding to radio button.
+                        .padding(horizontal = 16.dp)
+                ) {
+                    // below line is use to get context.
+                    val context = LocalContext.current
+
+                    // below line is use to
+                    // generate radio button
+                    RadioButton(
+                        // inside this method we are
+                        // adding selected with a option.
+                        selected = (text == selectedProductStatus),
+                        modifier = Modifier.padding(all = Dp(value = 8F)),
+                        onClick = {
+                            // inide on click method we are setting a
+                            // selected option of our radio buttons.
+                            onSystemSelected(text)
+                            systemStatus = text
+                            // after clicking a radio button
+                            // we are displaying a toast message.
+//                            Toast.makeText(context, text, Toast.LENGTH_LONG).show()
+                        }
+                    )
+                    // below line is use to add
+                    // text to our radio buttons.
+                    Text(
+                        text = text,
+                        modifier = Modifier
+                            .padding(start = 16.dp)
+                            .align(Alignment.CenterVertically)
+                    )
+                }
+            }
+        }
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth(1F)
+                .padding(15.dp, 10.dp, 15.dp, 0.dp)
+                .border(1.dp, colorResource(id = R.color.black), RoundedCornerShape(6.dp)),
+            value = remark,
+            onValueChange = {
+                remark = it
+            },
+            label = { Text(text = "कोई रिमार्क्स") },
+            textStyle = TextStyle(
+                fontSize = MaterialTheme.typography.subtitle1.fontSize
+            ),
+
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = colorResource(id = R.color.white),
+                cursorColor = Color.Black.copy(alpha = ContentAlpha.high)
+            )
+        )
+
 
     }
 
@@ -676,6 +785,7 @@ class QuarterlyDetailUpdate : ComponentActivity() {
                                 params.put("Controller_image_1", img3)
                                 params.put("controller_srno", controllerNo)
                                 params.put("controler_rms_id", RmsID)
+                                params.put("remarks", remark)
                                 params.put("motor_srno", motorNo)
                                 params.put("datetime", date)
                                 if (gender.equals("")) {
@@ -699,11 +809,19 @@ class QuarterlyDetailUpdate : ComponentActivity() {
                                 } else {
                                     params.put("category", catagory)
                                 }
+                                if (systemStatus.equals("")) {
+                                    params.put(
+                                        "system_available_status",
+                                        intent.getStringExtra("system_available_status").toString()
+                                    )
+                                } else {
+                                    params.put("system_available_status", systemStatus)
+                                }
                                 params.put("reg_no", intent.getStringExtra("reg_no").toString())
 //Log.d("RequestParams",img1+img2+"....."+pumpHead+"......"+
 //        controllerNo+"......"+"...."+RmsID+"...."+motorNo+"....."+gender+"....."+catagory+"...."+intent.getStringExtra("reg_no").toString())
                                 mainViewModel.postDetails(params)
-                            }, 2500)
+                            }, 500)
 
                         }
                     },

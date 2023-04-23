@@ -26,5 +26,7 @@ data class Data (
 	@Json(name="phase") val phase : String ?="",
 	@Json(name="gender") val gender : String ?="",
 	@Json(name="category") val category : String ?="",
-	@Json(name="saral_no") val saral_no : String ?=""
+	@Json(name="saral_no") val saral_no : String ?="",
+	@Json(name="system_available_status") val system_available_status : String ?="",
+	@Json(name="remarks") val remarks : String ?=""
 )
