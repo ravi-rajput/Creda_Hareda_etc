@@ -88,7 +88,6 @@ BenificiaryListitem extends Activity {
     ImageView SearchName, SearchLoctaion, SearchId, Searchcontact, Refresh;
     String eng_id, Engineer_Contact, customerlistapi, project;
     SharedPreferences sharedPreferences;
-    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -328,16 +327,15 @@ BenificiaryListitem extends Activity {
     public void all_complaints() {
 
         project = sharedPreferences.getString("project", "");
-        pd = new ProgressDialog(BenificiaryListitem.this);
-        pd.setMessage("Loading...");
-        pd.show();
+        pb.setMessage("Loading...");
+        pb.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, customerlistapi, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 try {
-                    pd.dismiss();
+                    pb.dismiss();
                     JSONArray jsonArray = new JSONArray(response);
                     Log.d("response_list",response);
                     list_models.clear();
@@ -452,6 +450,13 @@ BenificiaryListitem extends Activity {
                              credaModel.setPower_connection_status(jsonObject.optString("power_connection_status"));
                              credaModel.setPump_head(jsonObject.optString("pump_head"));
 
+                            credaModel.setPurlin(jsonObject.optString("structure_purlin"));
+                            credaModel.setRafter(jsonObject.optString("structure_rafter"));
+                            credaModel.setAll_panel(jsonObject.optString("farmer_allpanel"));
+                            credaModel.setPaani(jsonObject.optString("farmer_paani"));
+                            credaModel.setStructure_video(jsonObject.optString("structure_video"));
+                            credaModel.setStructure_status(jsonObject.optString("structure_statusplus"));
+
 
                             Log.d("foundation_ma",jsonObject.optString("reg_no")+jsonObject.optString("road_status")+
                                     jsonObject.optString("saria_status")+jsonObject.optString("rate_status"));
@@ -462,7 +467,7 @@ BenificiaryListitem extends Activity {
 
                         benifRecyclerview = new BenifRecyclerview(list_models, BenificiaryListitem.this);
                         mRecyclerView.setAdapter(benifRecyclerview);
-                        pd.dismiss();
+                        pb.dismiss();
 
                     } else if (project.equals("MP")) {
                         for (int i = 0; i < jsonArray.length(); i++) {
@@ -530,13 +535,13 @@ BenificiaryListitem extends Activity {
 
 
                     }
-                    pd.dismiss();
+                    pb.dismiss();
                     Toast.makeText(getApplicationContext(),"List Updated",Toast.LENGTH_LONG).show();
 
 
 
                 } catch (JSONException e) {
-                    pd.dismiss();
+                    pb.dismiss();
 //                            mRecyclerView.setVisibility(View.GONE);
 //                            intiimageview.setVisibility(View.VISIBLE);
                     e.printStackTrace();
@@ -547,7 +552,7 @@ BenificiaryListitem extends Activity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                pd.dismiss();
+                pb.dismiss();
 //                mRecyclerView.setVisibility(View.GONE);
 //                intiimageview.setVisibility(View.VISIBLE);
 
@@ -555,7 +560,7 @@ BenificiaryListitem extends Activity {
         }) {
             @Override
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                pd.dismiss();
+                pb.dismiss();
                 try {
                     Cache.Entry cacheEntry = HttpHeaderParser.parseCacheHeaders(response);
                     if (cacheEntry == null) {
@@ -583,7 +588,7 @@ BenificiaryListitem extends Activity {
                             HttpHeaderParser.parseCharset(response.headers));
                     return Response.success(new String(jsonString), cacheEntry);
                 } catch (UnsupportedEncodingException e) {
-                    pd.dismiss();
+                    pb.dismiss();
                     return Response.error(new ParseError(e));
                 }
             }
@@ -592,19 +597,17 @@ BenificiaryListitem extends Activity {
             protected void deliverResponse(String response) {
                 super.deliverResponse(response);
                 pb.dismiss();
-                pd.dismiss();
             }
 
             @Override
             public void deliverError(VolleyError error) {
                 super.deliverError(error);
                 pb.dismiss();
-                pd.dismiss();
             }
 
             @Override
             protected VolleyError parseNetworkError(VolleyError volleyError) {
-                pd.dismiss();
+                pb.dismiss();
                 return super.parseNetworkError(volleyError);
             }
 

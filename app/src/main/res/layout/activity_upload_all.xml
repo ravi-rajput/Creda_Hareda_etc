@@ -31,7 +31,20 @@
             android:visibility="gone"
             android:text="Informatic Resolution"/>
 
-<Button
+        <Button
+            android:id="@+id/structure_plus"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/primary"
+            android:textColor="@color/white"
+            android:layout_margin="20dp"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:text="Structure++"/>
+
+
+
+        <Button
     android:id="@+id/saral"
     android:layout_width="match_parent"
     android:layout_height="50dp"

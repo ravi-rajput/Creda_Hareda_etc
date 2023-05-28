@@ -19,7 +19,7 @@ public class CredaModel {
             site_format,aadhar_back,boaring,survay2,road_status,saria_status,rate_gitti_status,rmu_status,
             saralid,saralyear,installation_video,pic_date,site_lat_new,site_long_new,medaReg,peda_image1,peda_image2
             ,peda_image3,peda_image4,peda_image5,siteVideo,Consent_Letter_photo_farmer,Consent_Letter_photo,bor_clean_status
-            ,customer_satify_status,power_connection_status,pump_head;
+            ,customer_satify_status,power_connection_status,pump_head,purlin,rafter,all_panel,paani,structure_status,structure_video;
 
     public String getPump_head() {
         return pump_head;
@@ -691,5 +691,53 @@ public class CredaModel {
 
     public void setSaralyear(String saralyear) {
         this.saralyear = saralyear;
+    }
+
+    public String getPurlin() {
+        return purlin;
+    }
+
+    public void setPurlin(String purlin) {
+        this.purlin = purlin;
+    }
+
+    public String getRafter() {
+        return rafter;
+    }
+
+    public void setRafter(String rafter) {
+        this.rafter = rafter;
+    }
+
+    public String getAll_panel() {
+        return all_panel;
+    }
+
+    public void setAll_panel(String all_panel) {
+        this.all_panel = all_panel;
+    }
+
+    public String getPaani() {
+        return paani;
+    }
+
+    public void setPaani(String paani) {
+        this.paani = paani;
+    }
+
+    public String getStructure_status() {
+        return structure_status;
+    }
+
+    public void setStructure_status(String structure_status) {
+        this.structure_status = structure_status;
+    }
+
+    public String getStructure_video() {
+        return structure_video;
+    }
+
+    public void setStructure_video(String structure_video) {
+        this.structure_video = structure_video;
     }
 }

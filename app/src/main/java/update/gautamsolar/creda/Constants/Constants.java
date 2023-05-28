@@ -22,6 +22,6 @@ public class Constants {
     public static final String SITE_SURVEY_API_HAREDA = New_Root_URL + "sitedataupload_haredaphase3.php";
 
     public static final String SARAL_AP = New_Root_URL + "saral_upload_v1.php";
-
+    public static final String STRUCTURE = New_Root_URL + "structure_plus_upload_v1.php";
 
 }

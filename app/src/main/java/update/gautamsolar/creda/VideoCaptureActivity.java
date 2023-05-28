@@ -172,6 +172,8 @@ public class VideoCaptureActivity extends AppCompatActivity {
 
         if (getIntent().getStringExtra("route")!=null && getIntent().getStringExtra("route").equalsIgnoreCase("material")) {
             body4 = RequestBody.create(MediaType.parse("text/plain"),  "material");
+        }else if (getIntent().getStringExtra("route")!=null && getIntent().getStringExtra("route").equalsIgnoreCase("structure")) {
+            body4 = RequestBody.create(MediaType.parse("text/plain"),  "structure");
         }else{
             body4 = RequestBody.create(MediaType.parse("text/plain"), "other");
         }

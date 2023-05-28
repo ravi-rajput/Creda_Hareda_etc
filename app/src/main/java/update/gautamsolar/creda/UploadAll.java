@@ -110,7 +110,7 @@ CardView pit_card;
     private Location mCurrentLocation;
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates;
-    Button saral,hareda_update,hareda3InformaticRes;
+    Button saral,structure_plus,hareda_update,hareda3InformaticRes;
     private static UploadAll instance;
     @Override
     public void onBackPressed() {
@@ -126,6 +126,7 @@ CardView pit_card;
         instance = this;
         init();
 saral = findViewById(R.id.saral);
+        structure_plus = findViewById(R.id.structure_plus);
         foundation = findViewById(R.id.siteSurveyf);
         pit_submit = findViewById(R.id.pit_submit);
         hareda_update = findViewById(R.id.hareda_update);
@@ -157,21 +158,41 @@ saral = findViewById(R.id.saral);
             }
         });
 
-        saral.setOnClickListener(new View.OnClickListener() {
+        structure_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i= new Intent(UploadAll.this,SaralActivity.class);
+                Intent i= new Intent(UploadAll.this,StructureActivity.class);
                 i.putExtra("regnnumber",settings.getString("regnnumber", ""));
                 i.putExtra("benifname",settings.getString("benifname", ""));
                 i.putExtra("fathername",settings.getString("fname", ""));
                 i.putExtra("contact",settings.getString("contact", ""));
                 i.putExtra("village",settings.getString("village", ""));
                 i.putExtra("block",settings.getString("block", ""));
-                i.putExtra("saralid",settings.getString("saralid", ""));
-                i.putExtra("saralyear",settings.getString("saralyear", ""));
+                i.putExtra("image1",settings.getString("purlin_image", ""));
+                i.putExtra("image2",settings.getString("refter_image", ""));
+                i.putExtra("image3",settings.getString("allPanel_image", ""));
+                i.putExtra("image4",settings.getString("paani_image", ""));
+                i.putExtra("status",settings.getString("structureStatus", ""));
+                i.putExtra("video",settings.getString("structureVideo", ""));
                 startActivity(i);
+                finish();
             }
         });
+        saral.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i= new Intent(UploadAll.this,SaralActivity.class);
+                    i.putExtra("regnnumber",settings.getString("regnnumber", ""));
+                    i.putExtra("benifname",settings.getString("benifname", ""));
+                    i.putExtra("fathername",settings.getString("fname", ""));
+                    i.putExtra("contact",settings.getString("contact", ""));
+                    i.putExtra("village",settings.getString("village", ""));
+                    i.putExtra("block",settings.getString("block", ""));
+                    i.putExtra("saralid",settings.getString("saralid", ""));
+                    i.putExtra("saralyear",settings.getString("saralyear", ""));
+                    startActivity(i);
+                }
+            });
 
         if (project.equals("RAJASTHAN")) {
             getSupportActionBar().setTitle("Pump Installation RAJASTHAN");
@@ -366,6 +387,9 @@ saral = findViewById(R.id.saral);
             f_material.setVisibility(View.VISIBLE);
             RmuInstallation = findViewById(R.id.installrmubluetooth);
             saral.setVisibility(View.VISIBLE);
+            if(settings.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE4")){
+                structure_plus.setVisibility(View.VISIBLE);
+            }
             intent = getIntent();
             cregnnumber = settings.getString("regnnumber", "");
             pit_card.setVisibility(View.VISIBLE);

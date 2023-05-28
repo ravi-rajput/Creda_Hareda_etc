@@ -214,6 +214,7 @@
         <activity android:name="update.gautamsolar.creda.SiteSurvey" />
         <activity android:name="update.gautamsolar.creda.beneficiary_share" />
         <activity android:name="update.gautamsolar.creda.SaralActivity" />
+        <activity android:name="update.gautamsolar.creda.StructureActivity" />
         <activity android:name="update.gautamsolar.creda.VideoCaptureActivity"
             android:screenOrientation="portrait"/>
 
