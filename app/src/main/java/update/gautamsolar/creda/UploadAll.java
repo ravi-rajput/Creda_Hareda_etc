@@ -387,7 +387,7 @@ saral = findViewById(R.id.saral);
             f_material.setVisibility(View.VISIBLE);
             RmuInstallation = findViewById(R.id.installrmubluetooth);
             saral.setVisibility(View.VISIBLE);
-            if(settings.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE4")){
+            if(settings.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE3") || settings.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE4")){
                 structure_plus.setVisibility(View.VISIBLE);
             }
             intent = getIntent();
