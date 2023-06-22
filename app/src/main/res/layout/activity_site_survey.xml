@@ -429,88 +429,184 @@
                 android:layout_margin="5dp"/>
 
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="10"
-        android:layout_height="200dp">
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            app:cardCornerRadius="10dp"
-            android:layout_weight="5"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="60dp"
-            app:cardElevation="10dp"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="60dp"
+                android:layout_weight="5"
+                android:visibility="gone"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_view">
+
+                    <ImageView
+                        android:id="@+id/bankpassbookimagesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@mipmap/surveyclick"
+                        android:scaleType="fitXY" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/t3"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Beneficiary Bank n Passbook Pic"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textColor="#9f3342"-->
+                    <!--android:layout_margin="5dp"/>-->
+                    <!--<ImageView-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:src="@drawable/demo_iv"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentBottom="true"/>-->
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="60dp"
+                android:layout_weight="5"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:background="@drawable/card_view">
+
+                    <ImageView
+                        android:id="@+id/imagemarkedsitesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@mipmap/surveyclick"
+                        android:scaleType="fitXY" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/t4"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Tap to Click Image marked for Foundation"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textColor="#9f3342"-->
+                    <!--android:layout_margin="5dp"/>-->
+                    <!--<ImageView-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:src="@drawable/demo_iv"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentBottom="true"/>-->
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayoutChalanFarad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone"
-            android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/card_view">
+            android:weightSum="10">
 
-            <ImageView
-                android:id="@+id/bankpassbookimagesc"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@mipmap/surveyclick"
-                android:scaleType="fitXY" />
-            <!--<TextView-->
-            <!--android:id="@+id/t3"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Beneficiary Bank n Passbook Pic"-->
-            <!--android:textSize="15sp"-->
-            <!--android:textColor="#9f3342"-->
-            <!--android:layout_margin="5dp"/>-->
-            <!--<ImageView-->
-            <!--android:layout_width="25dp"-->
-            <!--android:layout_height="25dp"-->
-            <!--android:src="@drawable/demo_iv"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentBottom="true"/>-->
+            <LinearLayout
+                android:id="@+id/faradLayout"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_weight="5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/imgFaradText"
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="जमीन की फरद"
+                    android:textSize="15sp"
+                    android:textColor="#ffffff"
+                    android:background="#8B8B8B"
+                    android:layout_margin="5dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginBottom="60dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_view">
+
+                        <ImageView
+                            android:id="@+id/faradimages"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@mipmap/surveyclick"
+                            android:scaleType="fitXY" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/chalanLayout"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_weight="5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/imgChalanText"
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="चालान की फोटो"
+                    android:textSize="15sp"
+                    android:textColor="#ffffff"
+                    android:background="#8B8B8B"
+                    android:layout_margin="5dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginBottom="60dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_view">
+
+                        <ImageView
+                            android:id="@+id/chalanimages"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@mipmap/surveyclick"
+                            android:scaleType="fitXY" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
 
         </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            app:cardCornerRadius="10dp"
-            android:layout_weight="5"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="60dp"
-            app:cardElevation="10dp"
-            android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:background="@drawable/card_view">
-
-            <ImageView
-                android:id="@+id/imagemarkedsitesc"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@mipmap/surveyclick"
-                android:scaleType="fitXY" />
-            <!--<TextView-->
-            <!--android:id="@+id/t4"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Tap to Click Image marked for Foundation"-->
-            <!--android:textSize="15sp"-->
-            <!--android:textColor="#9f3342"-->
-            <!--android:layout_margin="5dp"/>-->
-            <!--<ImageView-->
-            <!--android:layout_width="25dp"-->
-            <!--android:layout_height="25dp"-->
-            <!--android:src="@drawable/demo_iv"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentBottom="true"/>-->
-
-        </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -579,8 +675,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-
-
         <LinearLayout
 
             android:layout_width="match_parent"
@@ -609,7 +703,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
-
         <LinearLayout
 
             android:layout_width="match_parent"
@@ -638,7 +731,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
-
         <LinearLayout
 
             android:layout_width="match_parent"
@@ -667,8 +759,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
-
-
         <LinearLayout
 android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
@@ -697,10 +787,6 @@ android:id="@+id/LinearLayout1"
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
-
-
-
-
 
         <LinearLayout
             android:layout_width="match_parent"

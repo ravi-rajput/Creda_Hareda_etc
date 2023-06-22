@@ -69,10 +69,7 @@ import update.gautamsolar.creda.Automatic_BroadCast_Receivers.Network_State_Pit;
 import update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkstateCheckerRMuNEw;
 import update.gautamsolar.creda.Constants.Constants;
 
-public class
-
-
-BenificiaryListitem extends Activity {
+public class BenificiaryListitem extends Activity {
     CredaModel credaModel;
     RecyclerView mRecyclerView;
     SearchView searchView;
@@ -325,7 +322,8 @@ BenificiaryListitem extends Activity {
     }
 
     public void all_complaints() {
-
+        list_models.clear();
+        mRecyclerView.setVisibility(View.GONE);
         project = sharedPreferences.getString("project", "");
         pb.setMessage("Loading...");
         pb.show();
@@ -333,12 +331,11 @@ BenificiaryListitem extends Activity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, customerlistapi, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                mRecyclerView.setVisibility(View.VISIBLE);
                 try {
                     pb.dismiss();
                     JSONArray jsonArray = new JSONArray(response);
                     Log.d("response_list",response);
-                    list_models.clear();
 
                     if (project.equals("RAJASTHAN")) {
                         for (int i = 0; i < jsonArray.length(); i++) {
@@ -456,6 +453,8 @@ BenificiaryListitem extends Activity {
                             credaModel.setPaani(jsonObject.optString("farmer_paani"));
                             credaModel.setStructure_video(jsonObject.optString("structure_video"));
                             credaModel.setStructure_status(jsonObject.optString("structure_statusplus"));
+                            credaModel.setFarad_photo(jsonObject.optString("farad_photo"));
+                            credaModel.setChalan_photo(jsonObject.optString("chalan_photo"));
 
 
                             Log.d("foundation_ma",jsonObject.optString("reg_no")+jsonObject.optString("road_status")+
@@ -536,7 +535,7 @@ BenificiaryListitem extends Activity {
 
                     }
                     pb.dismiss();
-                    Toast.makeText(getApplicationContext(),"List Updated",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"List Updated",Toast.LENGTH_SHORT).show();
 
 
 

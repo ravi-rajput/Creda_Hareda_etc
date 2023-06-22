@@ -507,6 +507,9 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
                     editor.putString("peda_image3",credaModel.getPeda_image3());
                     editor.putString("peda_image4",credaModel.getPeda_image4());
                     editor.putString("peda_image5",credaModel.getPeda_image5());
+                    editor.putString("farad_photo",credaModel.getFarad_photo());
+                    editor.putString("chalan_photo",credaModel.getChalan_photo());
+
 
                 editor.putString("site_video",credaModel.getSiteVideo());
                 editor.putString("Consent_Letter_photo_farmer",credaModel.getConsent_Letter_photo_farmer());

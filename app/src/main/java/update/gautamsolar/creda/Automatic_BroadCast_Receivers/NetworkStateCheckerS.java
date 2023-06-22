@@ -83,7 +83,7 @@ public class NetworkStateCheckerS extends BroadcastReceiver {
 
                     Surveyload(survey.foto1, survey.foto2, survey.foto3, survey.foto4,survey.foto5, survey.boredepth,
                             survey.boresize, survey.waterlevel, survey.borestatus, survey.exstmotorstring, survey.Lat,
-                            survey.Lon, survey.eng_id, survey.Regn, survey.Dati,survey.foto6,survey.foto7,survey.foto8,
+                            survey.Lon, survey.eng_id, survey.Regn, survey.Dati,survey.foto6,survey.foto7,survey.foto8,survey.foto9,survey.foto10,
                             survey.radioCleanString,survey.radioPumpHeadString,survey.radioSatisfyString,survey.radioLightString,survey.status);
 
 
@@ -97,7 +97,7 @@ public class NetworkStateCheckerS extends BroadcastReceiver {
 
     private void Surveyload(final String photo1, final String photo2, final String photo3, final String photo4, final String photo5, final String boredepth, final String boresize, final String waterlevel,
                             final String bore_status, final String existing_motor_string, final String lat, final String lon, final String eng_id,
-                            final String reg_no, final String datetime, final String photo6, final String photo7, final String photo8, String radioCleanString, String radioPumpHeadString, String radioSatisfyString, String radioLightString, String status) {
+                            final String reg_no, final String datetime, final String photo6, final String photo7, final String photo8,final String photo9,final String photo10, String radioCleanString, String radioPumpHeadString, String radioSatisfyString, String radioLightString, String status) {
 
         Constants constants = new Constants();
         String apiName = "";
@@ -177,6 +177,8 @@ public class NetworkStateCheckerS extends BroadcastReceiver {
                     params.put("photo2", photo2);
                     params.put("photo3", photo6);
                     params.put("photo4", photo7);
+                    params.put("farad_photo", photo9);
+                    params.put("chalan_photo", photo10);
                     params.put("Consent_Letter_photo", photo4);
                     params.put("Consent_Letter_photo_farmer", photo8);
                     params.put("block", boredepth);

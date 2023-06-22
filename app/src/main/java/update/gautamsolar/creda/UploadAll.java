@@ -82,7 +82,7 @@ CardView pit_card;
     String project, sregnnumber, sbenifname, sfname, scontact, svillage, sblock, spumpType, sinstallation_status, sbeneficiary_share, ssurvey_status, sfoundation_status,rmu_status;
     String water_level, bor_size, bor_depth, existing_moter_run, spump_type, sdispatch_status, spump_capacity,pit_status, sengineer_role, sKEYPHOTO1, sFKEYPHOTO6, sFKEYPHOTO7, sKEYPHOTO2, sKEYPHOTO3, sKEYPHOTO4, sKEYPHOTO5, sKEYPHOTO6, sKEYPHOTO7, sFKEYPHOTO1,
             sFKEYPHOTO2, sFKEYPHOTO3, sFKEYPHOTO4, sFKEYPHOTO5, sSKEYPHOTO1, sSKEYPHOTO2, sSKEYPHOTO3, sSKEYPHOTO4,sSKEYPHOTO5
-            ,sSKEYPHOTO6,sSKEYPHOTO7,sSKEYPHOTO8;
+            ,sSKEYPHOTO6,sSKEYPHOTO7,sSKEYPHOTO8,sSKEYPHOTO9,sSKEYPHOT10;
 
     String engineer_role,bor_status, cregnnumber,adhar_no,bank_name,bank_account_no,ifsc_code,pump_head,regnnumber, benifname, fname, contact, village, block, pumpType, installation_status, beneficiary_share, survey_status, foundation_status;
     int REQUEST_CHECK_SETTINGS = 100;
@@ -427,6 +427,8 @@ saral = findViewById(R.id.saral);
             sSKEYPHOTO6 = settings.getString("SKEYPHOTO6", "");
             sSKEYPHOTO7 = settings.getString("SKEYPHOTO7", "");
             sSKEYPHOTO8 = settings.getString("SKEYPHOTO8", "");
+            sSKEYPHOTO9 = settings.getString("farad_photo", "");
+            sSKEYPHOT10 = settings.getString("chalan_photo", "");
             water_level = settings.getString("water_level", "");
             bor_size = settings.getString("bor_size", "");
             bor_depth = settings.getString("bor_depth", "");
@@ -633,17 +635,21 @@ if(project.equals("PEDA")){
                             bundlesuvey.putString("aadhar_back", sSKEYPHOTO6);
                             bundlesuvey.putString("boaring_image", sSKEYPHOTO7);
                             bundlesuvey.putString("survay2", sSKEYPHOTO8);
+                            bundlesuvey.putString("farad_photo", sSKEYPHOTO9);
+                            bundlesuvey.putString("chalan_photo", sSKEYPHOT10);
                             bundlesuvey.putString("water_level", water_level);
                             bundlesuvey.putString("bor_size",bor_size );
                             bundlesuvey.putString("bor_depth", bor_depth);
                             bundlesuvey.putString("existing_moter_run", existing_moter_run);
                             intent.putExtras(bundlesuvey);
                             startActivity(intent);
+                            finish();
                         }
 
                     } catch (Exception e) {
                         intent = new Intent(getApplicationContext(), SiteSurvey.class);
                         startActivity(intent);
+                        finish();
                          e.printStackTrace();
                     }
 

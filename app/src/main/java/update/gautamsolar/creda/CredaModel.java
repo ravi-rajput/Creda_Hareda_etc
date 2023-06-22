@@ -19,7 +19,8 @@ public class CredaModel {
             site_format,aadhar_back,boaring,survay2,road_status,saria_status,rate_gitti_status,rmu_status,
             saralid,saralyear,installation_video,pic_date,site_lat_new,site_long_new,medaReg,peda_image1,peda_image2
             ,peda_image3,peda_image4,peda_image5,siteVideo,Consent_Letter_photo_farmer,Consent_Letter_photo,bor_clean_status
-            ,customer_satify_status,power_connection_status,pump_head,purlin,rafter,all_panel,paani,structure_status,structure_video;
+            ,customer_satify_status,power_connection_status,pump_head,purlin,rafter,all_panel,paani,structure_status,
+            structure_video,farad_photo,chalan_photo;
 
     public String getPump_head() {
         return pump_head;
@@ -739,5 +740,21 @@ public class CredaModel {
 
     public void setStructure_video(String structure_video) {
         this.structure_video = structure_video;
+    }
+
+    public String getFarad_photo() {
+        return farad_photo;
+    }
+
+    public void setFarad_photo(String farad_photo) {
+        this.farad_photo = farad_photo;
+    }
+
+    public String getChalan_photo() {
+        return chalan_photo;
+    }
+
+    public void setChalan_photo(String chalan_photo) {
+        this.chalan_photo = chalan_photo;
     }
 }
