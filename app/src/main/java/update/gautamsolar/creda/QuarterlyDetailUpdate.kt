@@ -9,8 +9,6 @@ import android.graphics.Matrix
 import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.Toast
@@ -33,7 +31,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -50,7 +47,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import kotlin.collections.HashMap
 import kotlin.concurrent.timerTask
 
 
@@ -76,6 +72,8 @@ class QuarterlyDetailUpdate : ComponentActivity() {
     var img1:String="null"
     var img2:String="null"
     var img3:String="null"
+    var img4:String="null"
+    var img5:String="null"
     var img:String=""
     private var gpsTracker: GpsTracker? = null
     private lateinit var outputDirectory: File
@@ -91,6 +89,8 @@ class QuarterlyDetailUpdate : ComponentActivity() {
     private  var photoBitmap: Bitmap?=null
     private  var photoBitmap2: Bitmap?=null
     private  var photoBitmap3: Bitmap?=null
+    private  var photoBitmap4: Bitmap?=null
+    private  var photoBitmap5: Bitmap?=null
     var date:String = ""
     private var shouldButton: MutableState<Boolean> = mutableStateOf(true)
 
@@ -405,6 +405,68 @@ class QuarterlyDetailUpdate : ComponentActivity() {
                 Column(horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Bottom) {
                     Text(text = "कंट्रोलर इमेज", fontSize = 13.sp, modifier = Modifier.padding(5.dp,10.dp,5.dp,0.dp),
+                        color = colorResource(id = R.color.black),
+                        fontWeight = FontWeight.Bold)
+
+                }
+            }
+        }
+
+
+        Row(horizontalArrangement = Arrangement.Center) {
+            Card(
+                modifier = Modifier
+                    .width(100.dp)
+                    .height(100.dp)
+                    .padding(5.dp)
+                    .clickable {
+                        img = "4"
+                        shouldShowCamera.value = true
+                    },
+                backgroundColor = colorResource(id = R.color.white),
+                elevation = 0.5.dp,
+                shape = RoundedCornerShape(corner = CornerSize(5.dp)),
+            ) {
+
+                Image(
+                    painter = rememberImagePainter(if(photoBitmap4!=null) photoBitmap4 else intent.getStringExtra("img4").toString()),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize(),
+                )
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Bottom) {
+                    Text(text = "फाइनल इमेज फाउंडेशन", fontSize = 13.sp,
+                        modifier = Modifier.padding(5.dp,10.dp,5.dp,0.dp),
+                        color = colorResource(id = R.color.black),
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+            Card(
+                modifier = Modifier
+                    .width(100.dp)
+                    .height(100.dp)
+                    .padding(5.dp)
+                    .clickable {
+                        img = "5"
+                        shouldShowCamera.value = true
+                    },
+                backgroundColor = colorResource(id = R.color.white),
+                elevation = 0.5.dp,
+                shape = RoundedCornerShape(corner = CornerSize(5.dp))
+            ) {
+
+
+                Image(
+                    painter = rememberImagePainter(if(photoBitmap5!=null) photoBitmap5 else intent.getStringExtra("img5").toString()),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize()
+                )
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Bottom) {
+                    Text(text = "water discharge", fontSize = 13.sp, modifier = Modifier.padding(5.dp,10.dp,5.dp,0.dp),
                         color = colorResource(id = R.color.black),
                         fontWeight = FontWeight.Bold)
 
@@ -783,6 +845,8 @@ class QuarterlyDetailUpdate : ComponentActivity() {
                                 params.put("quaterly_reportimage_1", img1)
                                 params.put("panel_image_1", img2)
                                 params.put("Controller_image_1", img3)
+                                params.put("Final_image_Foundation", img4)
+                                params.put("water_discharge", img5)
                                 params.put("controller_srno", controllerNo)
                                 params.put("controler_rms_id", RmsID)
                                 params.put("remarks", remark)
@@ -872,9 +936,17 @@ class QuarterlyDetailUpdate : ComponentActivity() {
          }else if(img.equals("2")){
             photoBitmap2 = bitmap
             img2 = mainViewModel.convertImageFileToBase64(printOnImage(bitmap))
-        }else{
+        }else if(img.equals("3")){
             photoBitmap3 = bitmap
              img3 = mainViewModel.convertImageFileToBase64(printOnImage(bitmap))
+            Log.d("bitmapcallinh","callingbitmal")
+        }else if(img.equals("4")){
+            photoBitmap4 = bitmap
+             img4 = mainViewModel.convertImageFileToBase64(printOnImage(bitmap))
+            Log.d("bitmapcallinh","callingbitmal")
+        }else if(img.equals("5")){
+            photoBitmap5 = bitmap
+             img5 = mainViewModel.convertImageFileToBase64(printOnImage(bitmap))
             Log.d("bitmapcallinh","callingbitmal")
         }
 
@@ -956,9 +1028,28 @@ class QuarterlyDetailUpdate : ComponentActivity() {
         paint.color = android.graphics.Color.BLACK
         paint.textSize = 100f
         paint.isAntiAlias = false
-        canvas.drawText("Lat - $lattitude", 5f, 75f, paint)
-        canvas.drawText("Long - $longitude", 5f, 170f, paint)
-        canvas.drawText("Date - $date", 5f, 275f, paint)
+        val innerPaint = Paint()
+        innerPaint.color = android.graphics.Color.parseColor("#61ECECEC")
+        innerPaint.isAntiAlias = false
+        canvas.drawRect(
+            1500f,
+            750f,
+            0f,
+           0f,
+            innerPaint
+        )
+        canvas.drawText("Saral Id - ${intent.getStringExtra("saral_no").toString()}", 5f, 75f, paint)
+        canvas.drawText("Farmer Name - ${intent.getStringExtra("name")}", 5f, 175f, paint)
+        canvas.drawText("District - ${intent.getStringExtra("dist").toString()}", 5f, 275f, paint)
+        canvas.drawText("Pump Capacity - ${intent.getStringExtra("pump_capacity").toString()}", 5f, 375f, paint)
+       if(intent.getStringExtra("phase").equals("HAREDA_PHASE1")){
+           canvas.drawText("Lat - ${intent.getStringExtra("lat_hareda")}", 5f, 475f, paint)
+           canvas.drawText("Long - ${intent.getStringExtra("long_hareda")}", 5f, 575f, paint)
+       }else {
+           canvas.drawText("Lat - $lattitude", 5f, 475f, paint)
+           canvas.drawText("Long - $longitude", 5f, 575f, paint)
+       }
+        canvas.drawText("Date - $date", 5f, 675f, paint)
         return result
 
     }

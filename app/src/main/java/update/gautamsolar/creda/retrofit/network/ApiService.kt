@@ -13,7 +13,7 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun getQuarterlyList(@FieldMap params: HashMap<String,String>): QuarterListModel
 
-    @POST("pumpall_api/quaterly_update_v1.php")
+    @POST("pumpall_api/quaterly_update_v2.php")
     @FormUrlEncoded
     suspend fun postDetails(@FieldMap params: HashMap<String,String>): QuarterListModel
 

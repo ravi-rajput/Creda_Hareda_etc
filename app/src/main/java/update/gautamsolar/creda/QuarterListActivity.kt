@@ -107,6 +107,7 @@ class QuarterListActivity  : ComponentActivity() {
             modifier = Modifier
                 .padding(horizontal = 1.dp, vertical = 8.dp)
                 .clickable(onClick = {
+                    Log.d("images",orders.Final_image_Foundation.toString()+"  ---  "+orders.water_discharge)
                     startActivity(
                         Intent(this@QuarterListActivity, QuarterlyDetailUpdate::class.java)
                             .putExtra("name", orders.fname)
@@ -116,6 +117,8 @@ class QuarterListActivity  : ComponentActivity() {
                             .putExtra("dist", orders.district)
                             .putExtra("village", orders.village)
                             .putExtra("phase", orders.phase)
+                            .putExtra("lat_hareda", orders.lat_hareda)
+                            .putExtra("long_hareda", orders.long_hareda)
                             .putExtra("pump_capacity", orders.pump_capacity)
                             .putExtra("contact", orders.contact_no)
                             .putExtra("saral_no",orders.saral_no)
@@ -123,6 +126,8 @@ class QuarterListActivity  : ComponentActivity() {
                             .putExtra("rms_id",orders.controler_rms_id)
                             .putExtra("motor_sr_no",orders.motor_srno)
                             .putExtra("img3",orders.controller_image_1)
+                            .putExtra("img4",orders.Final_image_Foundation)
+                            .putExtra("img5",orders.water_discharge)
                             .putExtra("img1",orders.quaterly_reportimage_1)
                             .putExtra("img2",orders.panel_image_1)
                             .putExtra("pumpHead",orders.pump_head)

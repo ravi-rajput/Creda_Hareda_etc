@@ -28,5 +28,9 @@ data class Data (
 	@Json(name="category") val category : String ?="",
 	@Json(name="saral_no") val saral_no : String ?="",
 	@Json(name="system_available_status") val system_available_status : String ?="",
-	@Json(name="remarks") val remarks : String ?=""
+	@Json(name="remarks") val remarks : String ?="",
+	@Json(name="lat_hareda") val lat_hareda : String ?="",
+	@Json(name="long_hareda") val long_hareda : String ?="",
+	@Json(name="Final_image_Foundation") val Final_image_Foundation : String ?="",
+	@Json(name="water_discharge") val water_discharge : String ?=""
 )
