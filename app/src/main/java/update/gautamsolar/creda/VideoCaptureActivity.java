@@ -164,7 +164,7 @@ public class VideoCaptureActivity extends AppCompatActivity {
         RequestBody body2 = RequestBody.create(MediaType.parse("text/plain"), eng_id);
         RequestBody body3 = null;
         RequestBody body4 = null;
-        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE4")) {
+        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase","").equalsIgnoreCase("GALO_PHASE1")) {
             body3 = RequestBody.create(MediaType.parse("text/plain"), sharedPreferences.getString("lead_phase", ""));
         }else{
             body3 = RequestBody.create(MediaType.parse("text/plain"), "");

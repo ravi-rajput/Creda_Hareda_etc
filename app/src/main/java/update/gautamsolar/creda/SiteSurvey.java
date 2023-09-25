@@ -314,7 +314,7 @@ public class SiteSurvey extends AppCompatActivity {
 //        if (site_lat_new.equals("null") || site_long_new.equals("null")) {
 //            Toast.makeText(this, "Site Survay Location is null", Toast.LENGTH_SHORT).show();
 //        }
-        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")) {
+        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1")) {
 
             linearLayoutChalanFarad.setVisibility(View.VISIBLE);
             isBore.setText("बोर हो रखा ह या नहीं?");
@@ -499,7 +499,7 @@ public class SiteSurvey extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")) {
+                if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1")) {
                     Intent i = new Intent(SiteSurvey.this, VideoCaptureActivity.class);
                     i.putExtra("regnnumber", regnnumber);
                     startActivity(i);
@@ -592,14 +592,14 @@ public class SiteSurvey extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.boremptysc) {
-                    if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")) {
+                    if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1")) {
                         radiogroupbor_string = "YES";
                     }else{
                         radiogroupbor_string = "empty";
                     }
 
                 } else if (checkedId == R.id.borusedsc) {
-                    if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")) {
+                    if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1")) {
                         radiogroupbor_string = "NO";
                     }else{
                         radiogroupbor_string = "not_used_for_three_month";
@@ -672,16 +672,16 @@ public class SiteSurvey extends AppCompatActivity {
                 final NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
                 if (activeNetwork != null) {
-                    if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") && !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4"))&&edittextexisting_motor.getText().toString().equals("")) {
+                    if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") && !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")&& !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1"))&&edittextexisting_motor.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Fill Motor Running or Not", Toast.LENGTH_LONG).show();
 
-                    } else if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4"))&&edittextbordepth.getText().toString().equals("")) {
+                    } else if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")|| !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1"))&&edittextbordepth.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Enter Bore Depth", Toast.LENGTH_LONG).show();
 
-                    } else if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4"))&&edittextborsize.getText().toString().equals("")) {
+                    } else if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")|| !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1"))&&edittextborsize.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Enter Bore Size ", Toast.LENGTH_LONG).show();
 
-                    } else if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4"))&&edittextwaterlevel.getText().toString().equals("")) {
+                    } else if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")|| !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1"))&&edittextwaterlevel.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Enter Water Level", Toast.LENGTH_LONG).show();
 
                     } else if (radiogroupbor.getCheckedRadioButtonId() == -1) {
@@ -695,16 +695,16 @@ public class SiteSurvey extends AppCompatActivity {
 
 
                 } else {
-                    if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") && !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4"))&&edittextexisting_motor.getText().toString().equals("")) {
+                    if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") && !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")&& !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1"))&&edittextexisting_motor.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Fill Motor Running or Not", Toast.LENGTH_LONG).show();
 
-                    } else if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4"))&&edittextbordepth.getText().toString().equals("")) {
+                    } else if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")|| !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1"))&&edittextbordepth.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Enter Bore Depth", Toast.LENGTH_LONG).show();
 
-                    } else if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4"))&&edittextborsize.getText().toString().equals("")) {
+                    } else if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1"))&&edittextborsize.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Enter Bore Size ", Toast.LENGTH_LONG).show();
 
-                    } else if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4"))&&edittextwaterlevel.getText().toString().equals("")) {
+                    } else if ((!sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")|| !sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1"))&&edittextwaterlevel.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Please Enter Water Level", Toast.LENGTH_LONG).show();
 
                     }  else if (radiogroupbor.getCheckedRadioButtonId() == -1) {
@@ -940,7 +940,7 @@ public class SiteSurvey extends AppCompatActivity {
         pb.show();
         Constants constants = new Constants();
         String apiName = "";
-        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")) {
+        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1")) {
             apiName = constants.SITE_SURVEY_API_HAREDA;
         } else {
             apiName = constants.SITE_SURVEY_API;
@@ -1022,7 +1022,7 @@ public class SiteSurvey extends AppCompatActivity {
                 params.put("lon", lon);
                 params.put("reg_no", regnnumber);
                 params.put("datetime", getDateTime());
-                if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")) {
+                if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1")) {
                     params.put("bor_clean_status", radioCleanString);
                     params.put("pump_head", radioPumpHeadString);
                     params.put("customer_satify_status", radioSatisfyString);
@@ -1402,7 +1402,7 @@ try {
 //    innerPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         innerPaint.setAntiAlias(true);
 
-        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")) {
+        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1")) {
 //            if (!TextUtils.isEmpty(site_lat_new) && (site_lat_new.length() > 4 && site_long_new.length() > 4)) {
 try {
     canvas.drawRect(180F, result.getHeight(), 0, result.getHeight() - 50, innerPaint);
