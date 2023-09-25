@@ -338,6 +338,7 @@ public class BenificiaryListitem extends Activity {
                     Log.d("response_list",response);
 
                     if (project.equals("RAJASTHAN")) {
+                        list_models.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             credaModel = new CredaModel();
@@ -375,11 +376,11 @@ public class BenificiaryListitem extends Activity {
                             list_models.add(credaModel);
 
                         }
-
                         benifRecyclerview = new BenifRecyclerview(list_models, BenificiaryListitem.this);
                         mRecyclerView.setAdapter(benifRecyclerview);
 
                     } else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")||project.equals("PEDA")||project.equals("MSEDCL")||project.equals("MEDA")) {
+                        list_models.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             credaModel = new CredaModel();
@@ -469,6 +470,7 @@ public class BenificiaryListitem extends Activity {
                         pb.dismiss();
 
                     } else if (project.equals("MP")) {
+                        list_models.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             credaModel = new CredaModel();
