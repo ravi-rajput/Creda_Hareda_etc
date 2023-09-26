@@ -80,7 +80,9 @@
 
 
         <activity android:name="update.gautamsolar.creda.Creda_MP.CMCButtons"></activity>
-       <activity android:name=".ImageResolution"></activity>
+        <activity android:name="update.gautamsolar.creda.ChalanActivity"></activity>
+        <activity android:name="update.gautamsolar.creda.RegisterChalanActivity"></activity>
+        <activity android:name=".ImageResolution"></activity>
         <activity android:name="update.gautamsolar.creda.QuarterListActivity"></activity>
         <activity android:name="update.gautamsolar.creda.QuarterlyDetailUpdate"></activity>
         <activity android:name="update.gautamsolar.creda.NewInstalationActivity"></activity>
