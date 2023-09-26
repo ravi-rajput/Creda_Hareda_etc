@@ -12,6 +12,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.preference.PreferenceManager;
+
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
@@ -25,6 +27,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,10 +83,11 @@ public class BenificiaryListitem extends Activity {
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     ProgressDialog pb;
     Constants constants;
+    Button check_chalan;
     public BenifRecyclerview benifRecyclerview;
     List<CredaModel> list_models;
     ImageView SearchName, SearchLoctaion, SearchId, Searchcontact, Refresh;
-    String eng_id, Engineer_Contact, customerlistapi, project;
+    String eng_id, Engineer_Contact, customerlistapi, project,role;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -117,12 +121,14 @@ public class BenificiaryListitem extends Activity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         eng_id = sharedPreferences.getString("eng_id", "");
+        role = sharedPreferences.getString("role", "");
 
         String datacount = sharedPreferences.getString("localdata", "");
         Engineer_Contact = sharedPreferences.getString("engcontact", "");
         checkAndRequestPermissions();
         searchView.onActionViewExpanded();
         Refresh = (ImageView) findViewById(R.id.refresh);
+        check_chalan = (Button) findViewById(R.id.chalan_check);
         intiimageview = (ImageView) findViewById(R.id.noInto);
         intiimageview.setVisibility(View.GONE);
         credaModel = new CredaModel();
@@ -145,15 +151,35 @@ public class BenificiaryListitem extends Activity {
         mRecyclerView.setVisibility(View.VISIBLE);
         intiimageview.setVisibility(View.GONE);
         list_models = new ArrayList<>();
-        all_complaints();
+        if(role.equals("CSE")||role.equals("USER")){
+            Intent intent = new Intent(BenificiaryListitem.this,ChalanActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            all_complaints();
+        }
 
+        check_chalan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BenificiaryListitem.this,ChalanActivity.class);
+                intent.putExtra("go_back","true");
+                startActivity(intent);
+            }
+        });
 
         Refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 customerlistapi = constants.CustomerList;
-                all_complaints();
+                if(role.equals("CSE")||role.equals("USER")){
+                    Intent intent = new Intent(BenificiaryListitem.this,ChalanActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    all_complaints();
+                }
 
 
 
@@ -656,6 +682,12 @@ public class BenificiaryListitem extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        all_complaints();
+        if(role.equals("CSE")||role.equals("USER")){
+            Intent intent = new Intent(BenificiaryListitem.this,ChalanActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            all_complaints();
+        }
     }
 }
