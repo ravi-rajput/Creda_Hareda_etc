@@ -482,6 +482,7 @@ public class BenificiaryListitem extends Activity {
                             credaModel.setStructure_status(jsonObject.optString("structure_statusplus"));
                             credaModel.setFarad_photo(jsonObject.optString("farad_photo"));
                             credaModel.setChalan_photo(jsonObject.optString("chalan_photo"));
+                             credaModel.setBore_check_image(jsonObject.optString("bore_check_image"));
 
 
                             Log.d("foundation_ma",jsonObject.optString("reg_no")+jsonObject.optString("road_status")+

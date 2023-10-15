@@ -40,6 +40,9 @@ public  class SurveyTable extends Model {
     @Column(name = "foto10")
     public String foto10;
 
+    @Column(name = "foto11")
+    public String foto11;
+
     @Column(name = "boredepth")
     public String boredepth;
 

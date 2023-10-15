@@ -59,6 +59,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.zxing.common.StringUtils;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -112,7 +113,7 @@ public class SiteSurvey extends AppCompatActivity {
     TextView img1Text, img5Text, img6Text, img7Text,isBore;
     LinearLayout hareda3Options, LinearLayout1,faradLayout,chalanLayout,linearLayoutChalanFarad;
     TextInputLayout boreDeptInput, boreSizeInput;
-    ImageView faradimages,chalanimages,passport_size_pic, adharImage, bankpassbookimage, imagemarkedsite, site_formate, aadhar_back, survay_image2, boaring_image;
+    ImageView faradimages,chalanimages,passport_size_pic, adharImage, bankpassbookimage, imagemarkedsite, site_formate,bore_cleaning_image, aadhar_back, survay_image2, boaring_image;
     EditText edittextwaterlevel, edittextbordepth, edittextborsize, edittextexisting_motor;
     String edittextwaterlevel_string, edittextbordepth_string, edittextborsize_string,
             radiogroupbor_string, edittextexisting_motor_string, radiocomplete_string, fathername, regnnumber, benifname, contact, block, village, survey_status;
@@ -126,7 +127,7 @@ public class SiteSurvey extends AppCompatActivity {
             borePump1, borePump2, borePump3, borePump4, satisfyYes, satisfyNo, lightyes, lightNo;
     ProgressDialog progressDialog;
     String Engineer_contact, reg_no, lat, lon;
-    String water_level, bor_size, bor_depth, existing_moter_run, eng_id, photo11, photo12, photo13, photo14, photo15, photo16, photo17, photo18, photo19, photo20, Engineer_Contact, localcounti;
+    String water_level, bor_size, bor_depth, existing_moter_run, eng_id, photo11, photo12, photo13, photo14, photo15, photo16, photo17, photo18, photo19, photo20, photo21, Engineer_Contact, localcounti;
     int Status_SiteSurvey;
     ProgressDialog pb;
     String img_no = "0";
@@ -221,6 +222,7 @@ public class SiteSurvey extends AppCompatActivity {
         photo18 = "noimage";
         photo19 = "noimage";
         photo20 = "noimage";
+        photo21 = "noimage";
         lat = "0";
         lon = "0";
 
@@ -233,6 +235,7 @@ public class SiteSurvey extends AppCompatActivity {
         bankpassbookimage = findViewById(R.id.bankpassbookimagesc);
         imagemarkedsite = findViewById(R.id.imagemarkedsitesc);
         site_formate = findViewById(R.id.site_formate);
+        bore_cleaning_image = findViewById(R.id.bore_cleaning_image);
         aadhar_back = findViewById(R.id.aadhar_back);
         boaring_image = findViewById(R.id.boaring_image);
         survay_image2 = findViewById(R.id.survey_image2);
@@ -304,7 +307,6 @@ public class SiteSurvey extends AppCompatActivity {
                     chalanimages.setBackgroundResource(R.mipmap.tickclick);
                 }
 
-
         Engineer_contact = SharedPrefManager.getInstance(this).getUserContact();
         Bundle bundle6 = getIntent().getExtras();
         reg_no = bundle6.getString("reg_no");
@@ -361,13 +363,16 @@ public class SiteSurvey extends AppCompatActivity {
             img6Text.setText("कंसेंट लेटर फोटो किसान के साथ");
             img7Text.setText("वीडियो बनाने के लिए क्लिक करे");
 
-            if (!sharedPreferences.getString("site_video", "").equals("null")) {
+            if (!TextUtils.isEmpty(sharedPreferences.getString("site_video", ""))) {
                 site_formate.setBackgroundResource(R.mipmap.tickclick);
             }
-            if (!sharedPreferences.getString("Consent_Letter_photo", "").equals("null")) {
+            if (!TextUtils.isEmpty(sharedPreferences.getString("bore_check_image", ""))) {
+                bore_cleaning_image.setBackgroundResource(R.mipmap.tickclick);
+            }
+            if (!TextUtils.isEmpty(sharedPreferences.getString("Consent_Letter_photo", ""))) {
                 imagemarkedsite.setBackgroundResource(R.mipmap.tickclick);
             }
-            if (!sharedPreferences.getString("Consent_Letter_photo_farmer", "").equals("null")) {
+            if (!TextUtils.isEmpty(sharedPreferences.getString("Consent_Letter_photo_farmer", ""))) {
                 survay_image2.setBackgroundResource(R.mipmap.tickclick);
             }
 
@@ -528,6 +533,7 @@ public class SiteSurvey extends AppCompatActivity {
                 img_no = "6";
             }
         });
+
         boaring_image.setOnClickListener(new View.OnClickListener() {
 
 
@@ -586,6 +592,19 @@ public class SiteSurvey extends AppCompatActivity {
                 }
 
                 img_no = "10";
+            }
+        });
+        bore_cleaning_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (CameraUtils.checkPermissions(getApplicationContext())) {
+                    captureImage1();
+                } else {
+                    requestCameraPermission1(MEDIA_TYPE_IMAGES);
+                }
+
+                img_no = "11";
             }
         });
         radiogroupbor.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -956,7 +975,6 @@ public class SiteSurvey extends AppCompatActivity {
                     String message = obj.getString("error");
                     if (message.equals("false")) {
 
-//
                         dialog.findViewById(R.id.clickmedismiss).setOnClickListener(new View.OnClickListener() {
                             @SuppressLint("ResourceAsColor")
                             public void onClick(View v) {
@@ -1034,6 +1052,7 @@ public class SiteSurvey extends AppCompatActivity {
                     params.put("Consent_Letter_photo_farmer", photo18);
                     params.put("farad_photo", photo19);
                     params.put("chalan_photo", photo20);
+                    params.put("bore_check_image", photo21);
                     params.put("block", edittextbordepth.getText().toString());
                     params.put("village", edittextborsize.getText().toString());
 
@@ -1266,6 +1285,9 @@ public class SiteSurvey extends AppCompatActivity {
             } else if (img_no.equals("10")) {
                 photo20 = imageTOString(result);
                 chalanimages.setImageBitmap(result);
+            } else if (img_no.equals("11")) {
+                photo21 = imageTOString(result);
+                bore_cleaning_image.setImageBitmap(result);
             }
 
 
@@ -1299,6 +1321,7 @@ public class SiteSurvey extends AppCompatActivity {
         survey.foto8 = String.valueOf(photo18);
         survey.foto9 = String.valueOf(photo19);
         survey.foto10 = String.valueOf(photo20);
+        survey.foto11 = String.valueOf(photo21);
         survey.eng_id = eng_id;
         survey.boredepth = edittextbordepth_string;
         survey.boresize = edittextborsize_string;

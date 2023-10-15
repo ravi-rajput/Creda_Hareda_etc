@@ -674,6 +674,37 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+   <TextView
+            android:id="@+id/img8Text"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="match_parent"
+            android:text="बोर क्लीनिंग अफिडेफिट"
+            android:textSize="15sp"
+            android:background="#8B8B8B"
+            android:textStyle="bold"
+            android:textColor="#ffffff"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="60dp"
+            app:cardElevation="10dp"
+            android:layout_height="150dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/card_view">
+
+                <ImageView
+                    android:id="@+id/bore_cleaning_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/surveyclick"
+                    android:scaleType="fitXY" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
 
