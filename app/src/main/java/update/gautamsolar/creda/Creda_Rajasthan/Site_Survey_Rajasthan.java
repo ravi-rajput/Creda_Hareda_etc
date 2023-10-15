@@ -52,7 +52,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -102,7 +102,7 @@ public class Site_Survey_Rajasthan extends AppCompatActivity {
     Dialog dialog, Localdialog;
     //public static final int MEDIA_TYPE_VIDEO = 190;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     private static String imageStoragePathS;
 
 
@@ -447,7 +447,10 @@ img_no="4";
 
         } else {
 
-            UploadAll.getInstance().init();
+            try {
+                UploadAll.getInstance().init();
+            }catch (Exception ae){
+            }
             double latti=UploadAll.latitude;
             double longi= UploadAll.longitude;
 
@@ -802,7 +805,10 @@ img_no="4";
     }
     public Bitmap print_img(Bitmap bitmap){
 
-        UploadAll.getInstance().init();
+        try {
+            UploadAll.getInstance().init();
+        }catch (Exception ae){
+        }
         double latti=UploadAll.latitude;
         double longi= UploadAll.longitude;
 

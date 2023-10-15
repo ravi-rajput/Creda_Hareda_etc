@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -40,7 +41,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -48,7 +49,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import update.gautamsolar.creda.Constants.Constants;
@@ -58,6 +62,7 @@ public class Material extends AppCompatActivity {
     /*static String panelnew;*/
     private static final int PERMISSION_REQUEST_CODE = 40;
     private static final int FIRST_REQUEST_CODE = 20;
+    private static final int ALL_REQUEST_CODE = 19;
     private static final int SECOND_REQUEST_CODE = 21;
     private static final int THIRD_REQUEST_CODE = 22;
     private static final int FOURTH_REQUEST_CODE = 23;
@@ -105,18 +110,18 @@ public class Material extends AppCompatActivity {
             rod_checkbox_string, pump_type, pump_capacity;
 
 
-    ImageButton panel1btn, panel2btn,
+    ImageButton panel1btn,panelall, panel2btn,
             panel3btn, panel4btn, panel5btn, panel6btn,
             panel7btn, panel8btn, panel9btn, panel10btn, panel11btn,
             panel12btn, panel13btn, panel14btn, panel15btn, panel16btn, panel17btn, panel18btn, panel19btn, panel20btn, panel21btn, panel22btn, panel23btn, panel24btn, panel25btn, panel26btn, panel27btn, panel28btn, btnPumpScan, btnMotorScan,
             ControllerbtnNumber, btnRmuNumber;
-    Button btnDisplay;
+    Button btnDisplay,btnVideo;
     ImageButton btnAdd;
     ProgressDialog progressDialog;
     TextView Beneficiary_textName, Beneficiary_txtRegNo;
     ProgressDialog pb;
     TextView Father, Contactid, Villageide, Pumpide, Contactide, Blockid, districtid, numberid;
-    EditText panel1edit, panel2edit,
+    EditText villageName,panel1edit, panel2edit,
             panel3edit, panel4edit, panel5edit,
             panel6edit, panel7edit, panel8edit, panel9edit,
             panel10edit, panel11edit, panel12edit, panel13edit,
@@ -129,7 +134,7 @@ public class Material extends AppCompatActivity {
             pannew15, pannew16, pannew17, pannew18, pannew19, pannew20, pannew21, pannew22, pannew23, pannew24, pannew25, pannew26, pannew27, pannew28, fathername, benifname, regnnumber,
             contact, block, village, dispatch_status, simno, rmuno, mobileno,
             controler_srno, controler_rms_id, pumpserialnew, motorserialnew, project;
-    private IntentIntegrator qrScan1, qrScan2, qrScan3, qrScan4, qrScan5, qrScan6,
+    private IntentIntegrator qrScan1,qrScanall, qrScan2, qrScan3, qrScan4, qrScan5, qrScan6,
             qrScan7, qrScan8, qrScan9, qrScan10, qrScan11, qrScan12, qrScan13, qrScan14, qrScan15, qrScan16, qrScan_17, qrScan_18, qrScan_19, qrScan_20, qrScan_21, qrScan_22, qrScan_23, qrScan_24, qrScan_25, qrScan_26, qrScan_27, qrScan_28,
             qrScan17, qrScan18, qrScan19, qrScan20;
     SharedPreferences sharedPreferences;
@@ -147,7 +152,25 @@ public class Material extends AppCompatActivity {
 
 
         farma_checkbox = findViewById(R.id.farma_checkbox);
+        btnVideo = findViewById(R.id.btn_video);
+        if(sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1")){
+            btnVideo.setVisibility(View.VISIBLE);
+        }else{
+            btnVideo.setVisibility(View.GONE);
+        }
+
+        btnVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Material.this, VideoCaptureActivity.class);
+                i.putExtra("regnnumber", regnnumber);
+                i.putExtra("route", "material");
+                startActivity(i);
+            }
+        });
+
         rod_checkbox = findViewById(R.id.rod_checkbox);
+        villageName = findViewById(R.id.villageName);
         dialog = new Dialog(Material.this); // Cont
         pb = new ProgressDialog(this, R.style.MyGravity);
         pb.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -204,6 +227,7 @@ public class Material extends AppCompatActivity {
 
 
         panel1btn = findViewById(R.id.panel1btn);
+        panelall = findViewById(R.id.panelall);
         panel2btn = findViewById(R.id.panel2btn);
         panel3btn = findViewById(R.id.panel3btn);
         panel4btn = findViewById(R.id.panel4btn);
@@ -269,6 +293,37 @@ public class Material extends AppCompatActivity {
         panel26edit = findViewById(R.id.panel26edit);
         panel27edit = findViewById(R.id.panel27edit);
         panel28edit = findViewById(R.id.panel28edit);
+
+       panelToServer(panel1edit);
+       panelToServer(panel2edit);
+       panelToServer(panel3edit);
+       panelToServer(panel4edit);
+       panelToServer(panel5edit);
+       panelToServer(panel6edit);
+       panelToServer(panel7edit);
+       panelToServer(panel8edit);
+       panelToServer(panel9edit);
+       panelToServer(panel10edit);
+       panelToServer(panel11edit);
+       panelToServer(panel12edit);
+       panelToServer(panel13edit);
+       panelToServer(panel14edit);
+       panelToServer(panel15edit);
+       panelToServer(panel16edit);
+       panelToServer(panel17edit);
+       panelToServer(panel18edit);
+       panelToServer(panel19edit);
+       panelToServer(panel20edit);
+       panelToServer(panel21edit);
+       panelToServer(panel22edit);
+       panelToServer(panel23edit);
+       panelToServer(panel24edit);
+       panelToServer(panel25edit);
+       panelToServer(panel26edit);
+       panelToServer(panel27edit);
+       panelToServer(panel28edit);
+
+
         pumpSerail = findViewById(R.id.pumpSerail);
         MotorSerial = findViewById(R.id.MotorSerial);
         RmuNumber = findViewById(R.id.RmuNumber);
@@ -276,6 +331,7 @@ public class Material extends AppCompatActivity {
 
         /*End of 16 Edit Text*/
         qrScan1 = new IntentIntegrator(this);
+        qrScanall = new IntentIntegrator(this);
         qrScan2 = new IntentIntegrator(this);
         qrScan3 = new IntentIntegrator(this);
         qrScan4 = new IntentIntegrator(this);
@@ -342,7 +398,7 @@ public class Material extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                rmuno = String.valueOf(s);
+                rmuno = String.valueOf(s).trim();
 
 
             }
@@ -529,16 +585,6 @@ public class Material extends AppCompatActivity {
             }
             if (pump_capacity.equals("05 HP") || pump_capacity.equals("5 HP") || pump_capacity.equals("5HP") || pump_capacity.equals("05HP")) {
 
-                panel7edit.setVisibility(View.GONE);
-                panel8edit.setVisibility(View.GONE);
-                panel9edit.setVisibility(View.GONE);
-                panel10edit.setVisibility(View.GONE);
-                panel11edit.setVisibility(View.GONE);
-                panel12edit.setVisibility(View.GONE);
-                panel13edit.setVisibility(View.GONE);
-                panel14edit.setVisibility(View.GONE);
-                panel15edit.setVisibility(View.GONE);
-                panel16edit.setVisibility(View.GONE);
                 panel17edit.setVisibility(View.GONE);
                 panel18edit.setVisibility(View.GONE);
                 panel19edit.setVisibility(View.GONE);
@@ -552,16 +598,6 @@ public class Material extends AppCompatActivity {
                 panel27edit.setVisibility(View.GONE);
                 panel28edit.setVisibility(View.GONE);
 
-                panel7btn.setVisibility(View.GONE);
-                panel8btn.setVisibility(View.GONE);
-                panel9btn.setVisibility(View.GONE);
-                panel10btn.setVisibility(View.GONE);
-                panel11btn.setVisibility(View.GONE);
-                panel12btn.setVisibility(View.GONE);
-                panel13btn.setVisibility(View.GONE);
-                panel14btn.setVisibility(View.GONE);
-                panel15btn.setVisibility(View.GONE);
-                panel16btn.setVisibility(View.GONE);
                 panel16btn.setVisibility(View.GONE);
                 panel17btn.setVisibility(View.GONE);
                 panel18btn.setVisibility(View.GONE);
@@ -577,6 +613,23 @@ public class Material extends AppCompatActivity {
                 panel28btn.setVisibility(View.GONE);
             }
 
+            if (pump_capacity.equals("7.5 HP") || pump_capacity.equals("7.5 HP") || pump_capacity.equals("7.5HP") || pump_capacity.equals("7.5HP")) {
+
+
+                panel23edit.setVisibility(View.GONE);
+                panel24edit.setVisibility(View.GONE);
+                panel25edit.setVisibility(View.GONE);
+                panel26edit.setVisibility(View.GONE);
+                panel27edit.setVisibility(View.GONE);
+                panel28edit.setVisibility(View.GONE);
+
+                panel23btn.setVisibility(View.GONE);
+                panel24btn.setVisibility(View.GONE);
+                panel25btn.setVisibility(View.GONE);
+                panel26btn.setVisibility(View.GONE);
+                panel27btn.setVisibility(View.GONE);
+                panel28btn.setVisibility(View.GONE);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -593,6 +646,13 @@ public class Material extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(qrScan1.createScanIntent(), FIRST_REQUEST_CODE);
+
+            }
+        });
+       panelall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(qrScanall.createScanIntent(), ALL_REQUEST_CODE);
 
             }
         });
@@ -1004,6 +1064,126 @@ public class Material extends AppCompatActivity {
                 }
             }
 
+        } if (requestCode == ALL_REQUEST_CODE) {
+            IntentResult result = IntentIntegrator.parseActivityResult(qrScanall.REQUEST_CODE, resultCode, data);
+            if (result != null) {
+                if (result.getContents() == null) {
+                   /* pumpSerail.setText( "kkkk" );
+                    PumpSerial= String.valueOf( pumpSerail.getText() );*/
+                    Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
+                } else {
+                    try {
+
+                        JSONObject obj = new JSONObject(result.getContents());
+
+                        panel1edit.setText(obj.getString("name") + " " + obj.getString("address"));
+                        pan1 = String.valueOf(panel1edit.getText());
+                        /*PumpSerial = pumpSerail.getText().toString();*/
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Log.d("arrayValues",result.getContents());
+                        String myArray[] = result.getContents().split("  ");
+                        Log.d("arraySize",""+myArray.length);
+                        List myList = new ArrayList();
+                        Collections.addAll(myList, myArray);
+                        Log.d("listSize",""+myList.size());
+                        Toast.makeText(this, String.valueOf(myList.size()), Toast.LENGTH_LONG).show();
+//                        if (result.getContents().length() < 19) {
+//                            Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
+//                        } else {
+                            if(myList.size()>=1) {
+                                panel1edit.setText(myList.get(0).toString());
+                                pan1 = String.valueOf(panel1edit.getText());
+                            } if(myList.size()>=2) {
+                                panel2edit.setText(myList.get(1).toString());
+                                pan2 = String.valueOf(panel2edit.getText());
+                            }if(myList.size()>=3) {
+                                panel3edit.setText(myList.get(2).toString());
+                                pan3 = String.valueOf(panel3edit.getText());
+                            }if(myList.size()>=4) {
+                                panel4edit.setText(myList.get(3).toString());
+                                pan4 = String.valueOf(panel4edit.getText());
+                            }if(myList.size()>=5) {
+                                panel5edit.setText(myList.get(4).toString());
+                                pan5 = String.valueOf(panel5edit.getText());
+                            }if(myList.size()>=6) {
+                                panel6edit.setText(myList.get(5).toString());
+                                pan6 = String.valueOf(panel6edit.getText());
+                            }if(myList.size()>=7) {
+                                panel7edit.setText(myList.get(6).toString());
+                                pan7 = String.valueOf(panel7edit.getText());
+                            }if(myList.size()>=8) {
+                                panel8edit.setText(myList.get(7).toString());
+                                pan8 = String.valueOf(panel8edit.getText());
+                            }if(myList.size()>=9) {
+                                panel9edit.setText(myList.get(8).toString());
+                                pan9 = String.valueOf(panel9edit.getText());
+                            }if(myList.size()>=10) {
+                                panel10edit.setText(myList.get(9).toString());
+                                pan10 = String.valueOf(panel10edit.getText());
+                            }if(myList.size()>=11) {
+                                panel11edit.setText(myList.get(10).toString());
+                                pan11 = String.valueOf(panel11edit.getText());
+                            }if(myList.size()>=12) {
+                                panel12edit.setText(myList.get(11).toString());
+                                pan12 = String.valueOf(panel12edit.getText());
+                            }if(myList.size()>=13) {
+                                panel13edit.setText(myList.get(12).toString());
+                                pan13 = String.valueOf(panel13edit.getText());
+                            }if(myList.size()>=14) {
+                                panel14edit.setText(myList.get(13).toString());
+                                pan14 = String.valueOf(panel14edit.getText());
+                            }if(myList.size()>=15) {
+                                panel15edit.setText(myList.get(14).toString());
+                                pan15 = String.valueOf(panel15edit.getText());
+                            }if(myList.size()>=16) {
+                                panel16edit.setText(myList.get(15).toString());
+                                pan16 = String.valueOf(panel16edit.getText());
+                            }if(myList.size()>=17) {
+                                panel17edit.setText(myList.get(16).toString());
+                                pan17 = String.valueOf(panel17edit.getText());
+                            }if(myList.size()>=18) {
+                                panel18edit.setText(myList.get(17).toString());
+                                pan18 = String.valueOf(panel18edit.getText());
+                            }if(myList.size()>=19) {
+                                panel19edit.setText(myList.get(18).toString());
+                                pan19 = String.valueOf(panel19edit.getText());
+                            }if(myList.size()>=20) {
+                                panel20edit.setText(myList.get(19).toString());
+                                pan20 = String.valueOf(panel20edit.getText());
+                            }if(myList.size()>=21) {
+                                panel21edit.setText(myList.get(20).toString());
+                                pan21 = String.valueOf(panel21edit.getText());
+                            }if(myList.size()>=22) {
+                                panel22edit.setText(myList.get(21).toString());
+                                pan22 = String.valueOf(panel22edit.getText());
+                            }if(myList.size()>=23) {
+                                panel23edit.setText(myList.get(22).toString());
+                                pan23 = String.valueOf(panel23edit.getText());
+                            }if(myList.size()>=24) {
+                                panel24edit.setText(myList.get(23).toString());
+                                pan24 = String.valueOf(panel24edit.getText());
+                            }if(myList.size()>=25) {
+                                panel25edit.setText(myList.get(24).toString());
+                                pan25 = String.valueOf(panel25edit.getText());
+                            }if(myList.size()>=26) {
+                                panel26edit.setText(myList.get(25).toString());
+                                pan26 = String.valueOf(panel26edit.getText());
+                            }if(myList.size()>=27) {
+                                panel27edit.setText(myList.get(26).toString());
+                                pan27 = String.valueOf(panel27edit.getText());
+                            }if(myList.size()>=28) {
+                                panel28edit.setText(myList.get(27).toString());
+                                pan28 = String.valueOf(panel28edit.getText());
+                            }
+//                        }
+                    }
+
+                }
+            }
+
         } else if (requestCode == SECOND_REQUEST_CODE) {
 
             IntentResult result = IntentIntegrator.parseActivityResult(qrScan2.REQUEST_CODE, resultCode, data);
@@ -1361,7 +1541,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel13edit.setText(result.getContents().toString());
+                            panel13edit.setText(result.getContents().toString().trim());
                             pan13 = String.valueOf(panel13edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1393,7 +1573,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel14edit.setText(result.getContents().toString());
+                            panel14edit.setText(result.getContents().toString().trim());
                             pan14 = String.valueOf(panel14edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1425,7 +1605,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel15edit.setText(result.getContents().toString());
+                            panel15edit.setText(result.getContents().toString().trim());
                             pan15 = String.valueOf(panel15edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1457,7 +1637,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel16edit.setText(result.getContents().toString());
+                            panel16edit.setText(result.getContents().toString().trim());
                             pan16 = String.valueOf(panel16edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1489,7 +1669,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel17edit.setText(result.getContents().toString());
+                            panel17edit.setText(result.getContents().toString().trim());
                             pan17 = String.valueOf(panel17edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1521,7 +1701,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel18edit.setText(result.getContents().toString());
+                            panel18edit.setText(result.getContents().toString().trim());
                             pan18 = String.valueOf(panel18edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1553,7 +1733,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel19edit.setText(result.getContents().toString());
+                            panel19edit.setText(result.getContents().toString().trim());
                             pan19 = String.valueOf(panel19edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1585,7 +1765,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel20edit.setText(result.getContents().toString());
+                            panel20edit.setText(result.getContents().toString().trim());
                             pan20 = String.valueOf(panel20edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1617,7 +1797,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel21edit.setText(result.getContents().toString());
+                            panel21edit.setText(result.getContents().toString().trim());
                             pan21 = String.valueOf(panel21edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1649,7 +1829,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel22edit.setText(result.getContents().toString());
+                            panel22edit.setText(result.getContents().toString().trim());
                             pan22 = String.valueOf(panel22edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1681,7 +1861,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel23edit.setText(result.getContents().toString());
+                            panel23edit.setText(result.getContents().toString().trim());
                             pan23 = String.valueOf(panel23edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1713,7 +1893,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel24edit.setText(result.getContents().toString());
+                            panel24edit.setText(result.getContents().toString().trim());
                             pan24 = String.valueOf(panel24edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1745,7 +1925,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel25edit.setText(result.getContents().toString());
+                            panel25edit.setText(result.getContents().toString().trim());
                             pan25 = String.valueOf(panel25edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1777,7 +1957,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel26edit.setText(result.getContents().toString());
+                            panel26edit.setText(result.getContents().toString().trim());
                             pan26 = String.valueOf(panel26edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1809,7 +1989,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel27edit.setText(result.getContents().toString());
+                            panel27edit.setText(result.getContents().toString().trim());
                             pan27 = String.valueOf(panel27edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1841,7 +2021,7 @@ public class Material extends AppCompatActivity {
                         if (result.getContents().length() < 19) {
                             Toast.makeText(this, "Length Below OR Above 19 or 20", Toast.LENGTH_LONG).show();
                         } else {
-                            panel28edit.setText(result.getContents().toString());
+                            panel28edit.setText(result.getContents().toString().trim());
                             pan28 = String.valueOf(panel28edit.getText());
                             Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                         }
@@ -1870,7 +2050,7 @@ public class Material extends AppCompatActivity {
                         e.printStackTrace();
 
 
-                        pumpSerail.setText(result.getContents().toString());
+                        pumpSerail.setText(result.getContents().toString().trim());
                         PumpSerial = pumpSerail.getText().toString();
                         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                     }
@@ -1898,7 +2078,7 @@ public class Material extends AppCompatActivity {
                         e.printStackTrace();
 
 
-                        MotorSerial.setText(result.getContents().toString());
+                        MotorSerial.setText(result.getContents().toString().trim());
 
                         motorSerial = MotorSerial.getText().toString();
                         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
@@ -1927,7 +2107,7 @@ public class Material extends AppCompatActivity {
                         e.printStackTrace();
 
 
-                        ControllerNumber.setText(result.getContents().toString());
+                        ControllerNumber.setText(result.getContents().toString().trim());
 
                         controllerNumber = ControllerNumber.getText().toString();
                         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
@@ -1956,7 +2136,7 @@ public class Material extends AppCompatActivity {
                         e.printStackTrace();
 
 
-                        RmuNumber.setText(result.getContents().toString());
+                        RmuNumber.setText(result.getContents().toString().trim());
 
                         rmuNumber = RmuNumber.getText().toString();
                         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
@@ -1976,7 +2156,7 @@ public class Material extends AppCompatActivity {
 
 
     public void loadalreadydata() {
-
+        pb.show();
         StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST, Constants.FETCH_MATERIAL_DISPATCH,
                 new Response.Listener<String>() {
 
@@ -1984,10 +2164,10 @@ public class Material extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-
+                            pb.dismiss();
                             JSONArray jsonArray = new JSONArray(response);
                             JSONObject jsonObject = jsonArray.getJSONObject(0);
-                            String Sim = jsonObject.getString("sim_no");
+                            String Sim = jsonObject.getString("sim_number");
 //                            String Mobile=jsonObject.getString("sim_mob_no");
                             pannew1 = jsonObject.getString("panel1");
                             pannew2 = jsonObject.getString("panel2");
@@ -2027,7 +2207,7 @@ public class Material extends AppCompatActivity {
                             accessories_checkbox_string = jsonObject.getString("accessories_status");
                             rod_checkbox_string = jsonObject.getString("rod");
                             farma_checkbox_string = jsonObject.getString("farma");
-
+                            villageName.setText(jsonObject.getString("village"));
 
                             panel1edit.setText(pannew1);
                             SimNumber.setText(Sim);
@@ -2326,7 +2506,7 @@ public class Material extends AppCompatActivity {
 
 
                         } catch (JSONException e) {
-
+                            pb.dismiss();
                             e.printStackTrace();
                         }
 
@@ -2335,7 +2515,7 @@ public class Material extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                pb.dismiss();
                 Toast.makeText(Material.this, "Error", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
 
@@ -2689,11 +2869,11 @@ public class Material extends AppCompatActivity {
 
                 params.put("radio_pipe", radio_pipe_string);
                 params.put("radio_cable", radio_cable_string);
-if(simno!=null && !simno.equals("")){
-    params.put("sim_no", simno);
-}else {
-    params.put("sim_no", SimNumber.getText().toString());
-}
+                if (simno != null && !simno.equals("")) {
+                    params.put("sim_no", simno);
+                } else {
+                    params.put("sim_no", SimNumber.getText().toString());
+                }
                 if (structure_checkbox.isChecked()) {
                     structure_checkbox_string = "Yes";
                     params.put("structure_checkbox_string", structure_checkbox_string);
@@ -2736,6 +2916,7 @@ if(simno!=null && !simno.equals("")){
                 params.put("reg_number", regnnumber);
                 params.put("eng_id", eng_id);
                 params.put("project", project);
+                params.put("village", villageName.getText().toString());
 //                params.put("sim_mob_no",mobileno);
                 return params;
             }
@@ -2748,5 +2929,190 @@ if(simno!=null && !simno.equals("")){
         MySingleton.getInstance(getApplicationContext()).addTorequestque(stringRequest);
     }
 
+public void panelToServer(EditText panel){
 
+    panel.addTextChangedListener(new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            panel.setTextColor(getResources().getColor(R.color.black));
+        }
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(String.valueOf(s).length()>=18){
+                if(!checkDuplicateLocal(panel,String.valueOf(s)))
+                   uploadPanels(String.valueOf(s),panel);
+                }
+        }
+    });
+}
+
+    public void uploadPanels(String panel_no, EditText panel) {
+        pb.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://gautamsolar.co.in/pumpall_api/check_panel.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                pb.dismiss();
+
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    //  Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                    Log.d("response_panel",response);
+                    int status = obj.getInt("status");
+                    String code = obj.getString("code");
+                    if (status == 0) {
+                        Toast.makeText(Material.this,code,Toast.LENGTH_SHORT).show();
+                        panel.setTextColor(getResources().getColor(R.color.primary_darker));
+                    }
+                    pb.dismiss();
+                } catch (JSONException e) {
+                    pb.dismiss();
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pb.dismiss();
+                Toast.makeText(Material.this,error.toString(),Toast.LENGTH_SHORT).show();
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("eng_id", eng_id);
+                params.put("panel", panel_no);
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setShouldCache(false);
+        MySingleton.getInstance(getApplicationContext()).addTorequestque(stringRequest);
+    }
+public Boolean checkDuplicateLocal(EditText panel,String panelNo){
+
+        if(panel.getId()!=panel1edit.getId()&&panelNo.equals(panel1edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel2edit.getId()&&panelNo.equals(panel2edit.getText().toString())){
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            return true;
+        }else if(panel.getId()!=panel3edit.getId()&&panelNo.equals(panel3edit.getText().toString())){
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            return true;
+        }else if(panel.getId()!=panel4edit.getId()&&panelNo.equals(panel4edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel5edit.getId()&&panelNo.equals(panel5edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel6edit.getId()&&panelNo.equals(panel6edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel7edit.getId()&&panelNo.equals(panel7edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel8edit.getId()&&panelNo.equals(panel8edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel9edit.getId()&&panelNo.equals(panel9edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel10edit.getId()&&panelNo.equals(panel10edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel11edit.getId()&&panelNo.equals(panel11edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel12edit.getId()&&panelNo.equals(panel12edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel13edit.getId()&&panelNo.equals(panel13edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel14edit.getId()&&panelNo.equals(panel14edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel15edit.getId()&&panelNo.equals(panel15edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel16edit.getId()&&panelNo.equals(panel16edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel17edit.getId()&&panelNo.equals(panel17edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel18edit.getId()&&panelNo.equals(panel18edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel19edit.getId()&&panelNo.equals(panel19edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel20edit.getId()&&panelNo.equals(panel20edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel21edit.getId()&&panelNo.equals(panel21edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel22edit.getId()&&panelNo.equals(panel22edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel23edit.getId()&&panelNo.equals(panel23edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel24edit.getId()&&panelNo.equals(panel24edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel25edit.getId()&&panelNo.equals(panel25edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel26edit.getId()&&panelNo.equals(panel26edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel27edit.getId()&&panelNo.equals(panel27edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else if(panel.getId()!=panel28edit.getId()&&panelNo.equals(panel28edit.getText().toString())){
+            panel.setTextColor(getResources().getColor(R.color.primary_darker));
+            Toast.makeText(Material.this,"Panel No Already Exist",Toast.LENGTH_SHORT).show();
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 }

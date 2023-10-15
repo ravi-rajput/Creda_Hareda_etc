@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 
 import java.util.ArrayList;
 import java.util.List;

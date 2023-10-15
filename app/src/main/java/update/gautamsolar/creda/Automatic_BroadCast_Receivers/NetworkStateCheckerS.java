@@ -32,7 +32,6 @@ import java.util.Map;
 
 import update.gautamsolar.creda.Constants.Constants;
 import update.gautamsolar.creda.MySingleton;
-import update.gautamsolar.creda.SiteSurvey;
 import update.gautamsolar.creda.Database.SurveyTable;
 
 public class NetworkStateCheckerS extends BroadcastReceiver {
@@ -84,7 +83,8 @@ public class NetworkStateCheckerS extends BroadcastReceiver {
 
                     Surveyload(survey.foto1, survey.foto2, survey.foto3, survey.foto4,survey.foto5, survey.boredepth,
                             survey.boresize, survey.waterlevel, survey.borestatus, survey.exstmotorstring, survey.Lat,
-                            survey.Lon, survey.eng_id, survey.Regn, survey.Dati,survey.foto6,survey.foto7,survey.foto8);
+                            survey.Lon, survey.eng_id, survey.Regn, survey.Dati,survey.foto6,survey.foto7,survey.foto8,survey.foto9,survey.foto10,survey.foto11,
+                            survey.radioCleanString,survey.radioPumpHeadString,survey.radioSatisfyString,survey.radioLightString,survey.status);
 
 
                 }
@@ -97,9 +97,16 @@ public class NetworkStateCheckerS extends BroadcastReceiver {
 
     private void Surveyload(final String photo1, final String photo2, final String photo3, final String photo4, final String photo5, final String boredepth, final String boresize, final String waterlevel,
                             final String bore_status, final String existing_motor_string, final String lat, final String lon, final String eng_id,
-                            final String reg_no, final String datetime, final String photo6, final String photo7, final String photo8) {
+                            final String reg_no, final String datetime, final String photo6, final String photo7, final String photo8,final String photo9,final String photo10,final String photo11, String radioCleanString, String radioPumpHeadString, String radioSatisfyString, String radioLightString, String status) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.SITE_SURVEY_API,
+        Constants constants = new Constants();
+        String apiName = "";
+        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1")) {
+            apiName = constants.SITE_SURVEY_API_HAREDA;
+        } else {
+            apiName = constants.SITE_SURVEY_API;
+        }
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, apiName,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -142,23 +149,53 @@ public class NetworkStateCheckerS extends BroadcastReceiver {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("photo1", photo1);
-                params.put("photo2", photo2);
-                params.put("photo3", photo3);
-                params.put("photo4", photo4);
+//                params.put("photo2", photo2);
+//                params.put("photo3", photo3);
+//                params.put("photo4", photo4);
                 params.put("photo5", photo5);
-                params.put("photo6", photo6);
-                params.put("photo7", photo7);
-                params.put("photo8", photo8);
-                params.put("boredepth", boredepth);
-                params.put("boredsize", boresize);
+                params.put("status", status);
+//                params.put("photo6", photo6);
+//                params.put("photo7", photo7);
+//                params.put("photo8", photo8);
+//                params.put("boredepth", boredepth);
+//                params.put("boredsize", boresize);
                 params.put("borewaterlevel", waterlevel);
                 params.put("radioborestatus", bore_status);
-                params.put("edittextexisting_motor_string", existing_motor_string);
+//                params.put("edittextexisting_motor_string", existing_motor_string);
                 params.put("lat", lat);
                 params.put("lon", lon);
                 params.put("eng_id", eng_id);
                 params.put("reg_no", reg_no);
                 params.put("datetime", datetime);
+
+
+                if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1")) {
+                    params.put("bor_clean_status", radioCleanString);
+                    params.put("pump_head", radioPumpHeadString);
+                    params.put("customer_satify_status", radioSatisfyString);
+                    params.put("power_connection_status", radioLightString);
+                    params.put("photo2", photo2);
+                    params.put("photo3", photo6);
+                    params.put("photo4", photo7);
+                    params.put("bore_check_image", photo11);
+                    params.put("farad_photo", photo9);
+                    params.put("chalan_photo", photo10);
+                    params.put("Consent_Letter_photo", photo4);
+                    params.put("Consent_Letter_photo_farmer", photo8);
+                    params.put("block", boredepth);
+                    params.put("village", boresize);
+
+                } else {
+                    params.put("photo2", photo2);
+                    params.put("photo4", photo4);
+                    params.put("photo6", photo6);
+                    params.put("photo7", photo7);
+                    params.put("photo8", photo8);
+                    params.put("boredepth", boredepth);
+                    params.put("boredsize", boresize);
+                    params.put("edittextexisting_motor_string", existing_motor_string);
+                }
+
                 return params;
             }
         };

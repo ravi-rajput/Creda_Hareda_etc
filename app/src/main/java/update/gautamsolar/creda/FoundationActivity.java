@@ -19,18 +19,22 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,7 +60,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -70,11 +74,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import update.gautamsolar.creda.Constants.Constants;
 import update.gautamsolar.creda.Database.CreadaDatabase;
@@ -97,7 +103,7 @@ public class FoundationActivity extends AppCompatActivity {
     public static final int MEDIA_TYPE_IMAGEF = 155;
 
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     private static String imageStoragePathF;
 
     private Button btnfoundation_upload;
@@ -130,12 +136,27 @@ public class FoundationActivity extends AppCompatActivity {
     ProgressDialog pb;
     CredaModel credaModel;
     SharedPreferences sharedPreferences;
+    String strDate="2021-08-12";
+    String pic_date,project;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foundation);
+        LocalDate startDate = LocalDate.of(2021, 9, 1); //start date
+        long start = startDate.toEpochDay();
+        System.out.println(start);
+
+        LocalDate endDate = LocalDate.of(2021, 9, 30); //start date
+
+        long end = endDate.toEpochDay();
+        System.out.println(start);
+
+        long randomEpochDay = ThreadLocalRandom.current().longs(start, end).findAny().getAsLong();
+        Log.d("randomDate",LocalDate.ofEpochDay(randomEpochDay).toString());
+        strDate = LocalDate.ofEpochDay(randomEpochDay).toString();
 
         /*openHelper = new DatabaseHelper( this );*/
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -144,6 +165,8 @@ public class FoundationActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Engineer_Contact = sharedPreferences.getString("engcontact", "");
         eng_id = sharedPreferences.getString("eng_id", "");
+        project = sharedPreferences.getString("project", "");
+
         //   Toast.makeText(getApplicationContext(),eng_id,Toast.LENGTH_LONG).show();
         constants = new Constants();
         foundation_api = constants.FOUNDATION_API;
@@ -217,6 +240,11 @@ public class FoundationActivity extends AppCompatActivity {
         KEYPHOTO3 = bundlef.getString("fondimg3");
         KEYPHOTO4 = bundlef.getString("fondimg4");
         KEYPHOTO5 = bundlef.getString("fondimg5");
+        if(project.equals("MSEDCL")||project.equals("MEDA")||project.equals("PEDA")||sharedPreferences.getString("lead_phase","").equals("HAREDA_PHASE2")){
+            pic_date = getDateTime();
+        }else {
+            pic_date = bundlef.getString("pic_date");
+        }
         if (!KEYPHOTO1.equals("null")) {
             imagefound_one.setBackgroundResource(R.mipmap.tickclick);
         }
@@ -429,7 +457,8 @@ public class FoundationActivity extends AppCompatActivity {
 
         } else {
 
-            UploadAll.getInstance().init();
+             UploadAll uploadAll = new UploadAll();
+            uploadAll.getInstance().init();
             double latti = UploadAll.latitude;
             double longi = UploadAll.longitude;
 
@@ -457,7 +486,7 @@ public class FoundationActivity extends AppCompatActivity {
         Log.d("eng_id", eng_id);
         Log.d("foundation_status", foundation_status);
         Log.d("regnnumber", regnnumber);
-        Log.d("getDateTime", getDateTime());
+        Log.d("getDateTime", pic_date);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, foundation_api, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -529,7 +558,7 @@ public class FoundationActivity extends AppCompatActivity {
                 params.put("eng_id", eng_id);
                 params.put("Status", foundation_status);
                 params.put("reg_no", regnnumber);
-                params.put("datetime", getDateTime());
+                params.put("datetime", pic_date);
                 return params;
             }
         };
@@ -732,7 +761,7 @@ public class FoundationActivity extends AppCompatActivity {
         creadaDatabase.Lon = lon;
         creadaDatabase.eng_id = eng_id;
         creadaDatabase.Regn = regnnumber;
-        creadaDatabase.Dati = getDateTime();
+        creadaDatabase.Dati = pic_date;
         try {
             creadaDatabase.save();
         } catch (Exception ae) {
@@ -756,14 +785,19 @@ public class FoundationActivity extends AppCompatActivity {
     }
 
     public Bitmap print_img(Bitmap bitmap) {
+String lat ="0.0";
+String lng = "0.0";
+try {
+     UploadAll uploadAll = new UploadAll();
+            uploadAll.getInstance().init();
+    double latti = UploadAll.latitude;
+    double longi = UploadAll.longitude;
 
-        UploadAll.getInstance().init();
-        double latti = UploadAll.latitude;
-        double longi = UploadAll.longitude;
-
-        String lat = String.valueOf(latti);
-        String lng = String.valueOf(longi);
-
+    lat = String.valueOf(latti);
+    lng = String.valueOf(longi);
+}catch (Exception ae){
+    Log.d("locatich exception",ae.toString());
+}
         File f = new File(imageStoragePathF);
 
         int inWidth = bitmap.getWidth();
@@ -806,17 +840,17 @@ public class FoundationActivity extends AppCompatActivity {
         paint.setColor(Color.BLACK);
 
 //    paint.setStyle(Paint.Style.STROKE);
-        paint.setTextSize(15);
+        paint.setTextSize(12);
         paint.setAntiAlias(true);
 
         Paint innerPaint = new Paint();
         innerPaint.setColor(Color.parseColor("#61ECECEC"));
 //    innerPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-        innerPaint.setAntiAlias(true);
+        innerPaint.setAntiAlias(false);
         canvas.drawRect(180F, 50F, 0, 0, innerPaint);
         canvas.drawText("Lat - " + lat, 5, 15, paint);
         canvas.drawText("Long - " + lng, 5, 30, paint);
-        canvas.drawText("Date - " + getDateTime(), 5, 45, paint);
+        canvas.drawText("Date - " + pic_date, 5, 45, paint);
         return result;
     }
 

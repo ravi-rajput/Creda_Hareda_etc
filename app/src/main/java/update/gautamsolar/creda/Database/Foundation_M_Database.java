@@ -4,7 +4,7 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "PIT_Table")
+@Table(name = "Foundation_Table")
 public class Foundation_M_Database extends Model{
 
     @Column(name = "eng_id")

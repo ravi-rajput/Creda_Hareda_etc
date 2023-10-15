@@ -1,24 +1,32 @@
 package update.gautamsolar.creda;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Benifviewholder> implements Filterable, View.OnClickListener {
 
@@ -333,9 +341,45 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
 
         }
 
-        else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")) {
-
+        else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")||project.equals("PEDA")||project.equals("MSEDCL")||project.equals("MEDA")) {
             final CredaModel credaModel = filterList.get(position);
+
+            if(project.equals("HAREDA")){
+                holder.upload.setVisibility(View.VISIBLE);
+                holder.download.setVisibility(View.VISIBLE);
+                holder.upload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                       Intent i = new Intent(v.getContext(),VideoCaptureActivity.class);
+                        i.putExtra("regnnumber",credaModel.getRegistrationno());
+                        v.getContext().startActivity(i);
+                    }
+                });
+                holder.download.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(credaModel.getInstallation_video().equals("null")||credaModel.getInstallation_video().equals("")){
+                            Toast.makeText(mCtx, "Video Not Found Please Upload", Toast.LENGTH_SHORT).show();
+                        }else{
+                        Uri uri= Uri.parse( credaModel.getInstallation_video());
+                        DownloadManager downloadManager = (DownloadManager)v.getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+                        DownloadManager.Request request = new DownloadManager.Request(uri);
+                        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI |
+                                DownloadManager.Request.NETWORK_MOBILE);
+
+                        request.setTitle("Video Downloading..");
+                        request.setDescription("video download for "+credaModel.getBenifname());
+
+                        request.allowScanningByMediaScanner();
+                        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
+                       request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,credaModel.getRegistrationno()+".mp4");
+                        request.setMimeType("*/*");
+                        downloadManager.enqueue(request);
+                    }}
+                });
+            }
+
 
             //binding the data with the viewholder views
             holder.Benifname.setText(credaModel.getBenifname());
@@ -348,6 +392,18 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
             holder.block.setText(credaModel.getBlock());
             holder.OLD_RMU.setText(credaModel.getOld_rmu_id());
             holder.sceme.setText(credaModel.getPhase());
+            if(TextUtils.isEmpty(credaModel.getMedaReg())){
+                holder.benifIdLayout.setVisibility(View.GONE);
+            }else{
+                holder.benifIdLayout.setVisibility(View.VISIBLE);
+            }
+            holder.meda_reg.setText(credaModel.getMedaReg());
+            holder.meda_reg.setSelected(true);
+            holder.meda_reg.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            holder.meda_reg.setSingleLine(true);
+            holder.Regnnumber.setSelected(true);
+            holder.Regnnumber.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            holder.Regnnumber.setSingleLine(true);
 
             holder.Next.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -432,8 +488,37 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
                     editor.putString("rate",credaModel.getRate_gitti_status());
                     editor.putString("road",credaModel.getRoad_status());
                     editor.putString("saria",credaModel.getSaria_status());
-editor.putString("saralid",credaModel.getSaralid());
-editor.putString("saralyear",credaModel.getSaralyear());
+                    editor.putString("saralid",credaModel.getSaralid());
+                    editor.putString("saralyear",credaModel.getSaralyear());
+
+                    editor.putString("refter_image",credaModel.getRafter());
+                    editor.putString("purlin_image",credaModel.getPurlin());
+                    editor.putString("allPanel_image",credaModel.getAll_panel());
+                    editor.putString("paani_image",credaModel.getPaani());
+                    editor.putString("structureStatus",credaModel.getStructure_status());
+                    editor.putString("structureVideo",credaModel.getStructure_video());
+
+                    editor.putString("pic_date",credaModel.getPic_date());
+                    editor.putString("lead_phase",credaModel.getPhase());
+                    editor.putString("site_lat_new",credaModel.getSite_lat_new());
+                    editor.putString("site_long_new",credaModel.getSite_long_new());
+                    editor.putString("peda_image1",credaModel.getPeda_image1());
+                    editor.putString("peda_image2",credaModel.getPeda_image2());
+                    editor.putString("peda_image3",credaModel.getPeda_image3());
+                    editor.putString("peda_image4",credaModel.getPeda_image4());
+                    editor.putString("peda_image5",credaModel.getPeda_image5());
+                    editor.putString("farad_photo",credaModel.getFarad_photo());
+                    editor.putString("chalan_photo",credaModel.getChalan_photo());
+                    editor.putString("bore_check_image",credaModel.getBore_check_image());
+
+
+                editor.putString("site_video",credaModel.getSiteVideo());
+                editor.putString("Consent_Letter_photo_farmer",credaModel.getConsent_Letter_photo_farmer());
+                editor.putString("Consent_Letter_photo",credaModel.getConsent_Letter_photo());
+                editor.putString("bor_clean_status",credaModel.getBor_clean_status());
+                editor.putString("customer_satify_status",credaModel.getCustomer_satify_status());
+                editor.putString("power_connection_status",credaModel.getPower_connection_status());
+                editor.putString("pump_head",credaModel.getPump_head());
 
 
 
@@ -467,7 +552,8 @@ editor.putString("saralyear",credaModel.getSaralyear());
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
                         if (row.getBenifname().toLowerCase().contains(charString.toLowerCase()) || row.getContact().contains(charSequence)
-                                || row.getRegistrationno().contains(charSequence) || row.getDistrict().contains(charSequence)) {
+                                || row.getRegistrationno().contains(charSequence) || row.getDistrict().contains(charSequence)
+                                || row.getMedaReg().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row);
                         }
                     }
@@ -503,8 +589,11 @@ editor.putString("saralyear",credaModel.getSaralyear());
 
     class Benifviewholder extends RecyclerView.ViewHolder {
 
-        TextView OLD_RMU, Benifname, Regnnumber, Fname, contactno, village, pumptype, district, block,sceme;
+        TextView OLD_RMU, Benifname, Regnnumber, Fname,meda_reg, contactno, village,
+                pumptype, district, block,sceme;
         RelativeLayout Next;
+        ImageView upload,download;
+        LinearLayout benifIdLayout;
 
         public Benifviewholder(View itemView) {
             super(itemView);
@@ -520,6 +609,10 @@ editor.putString("saralyear",credaModel.getSaralyear());
             block = itemView.findViewById(R.id.blockid);
             Next = itemView.findViewById(R.id.item);
             sceme=itemView.findViewById(R.id.sceme);
+            upload = itemView.findViewById(R.id.upload);
+            download=itemView.findViewById(R.id.download);
+            meda_reg=itemView.findViewById(R.id.meda_reg);
+            benifIdLayout = itemView.findViewById(R.id.benifId);
 
         }
 

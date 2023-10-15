@@ -16,7 +16,123 @@ public class CredaModel {
             inst_image2, inst_image3, inst_image4, inst_image5, inst_image6, inst_image7, fname,
             contact, village, pumptype, district, block, registrationno, benifname, foundation_status,
             installetion_status, sitesurvey, pump_capacity, dipatch_status,phase,rmu_number,pit_status,
-            site_format,aadhar_back,boaring,survay2,road_status,saria_status,rate_gitti_status,rmu_status,saralid,saralyear;
+            site_format,aadhar_back,boaring,survay2,road_status,saria_status,rate_gitti_status,rmu_status,
+            saralid,saralyear,installation_video,pic_date,site_lat_new,site_long_new,medaReg,peda_image1,peda_image2
+            ,peda_image3,peda_image4,peda_image5,siteVideo,Consent_Letter_photo_farmer,Consent_Letter_photo,bor_clean_status
+            ,customer_satify_status,power_connection_status,pump_head,purlin,rafter,all_panel,paani,structure_status,
+            structure_video,farad_photo,chalan_photo,bore_check_image;
+
+    public String getPump_head() {
+        return pump_head;
+    }
+
+    public void setPump_head(String pump_head) {
+        this.pump_head = pump_head;
+    }
+
+    public String getMedaReg() {
+        return (medaReg==null) ? "" : medaReg;
+    }
+
+    public void setMedaReg(String medaReg) {
+        this.medaReg = medaReg;
+    }
+
+    public String getInstallation_video() {
+        return installation_video;
+    }
+
+    public void setInstallation_video(String installation_video) {
+        this.installation_video = installation_video;
+    }
+
+    public String getPeda_image1() {
+        return peda_image1;
+    }
+
+    public void setPeda_image1(String peda_image1) {
+        this.peda_image1 = peda_image1;
+    }
+
+    public String getPeda_image2() {
+        return peda_image2;
+    }
+
+    public void setPeda_image2(String peda_image2) {
+        this.peda_image2 = peda_image2;
+    }
+
+    public String getPeda_image3() {
+        return peda_image3;
+    }
+
+    public void setPeda_image3(String peda_image3) {
+        this.peda_image3 = peda_image3;
+    }
+
+    public String getPeda_image4() {
+        return peda_image4;
+    }
+
+    public void setPeda_image4(String peda_image4) {
+        this.peda_image4 = peda_image4;
+    }
+
+    public String getPeda_image5() {
+        return peda_image5;
+    }
+
+    public void setPeda_image5(String peda_image5) {
+        this.peda_image5 = peda_image5;
+    }
+
+    public String getSiteVideo() {
+        return siteVideo;
+    }
+
+    public void setSiteVideo(String siteVideo) {
+        this.siteVideo = siteVideo;
+    }
+
+    public String getConsent_Letter_photo_farmer() {
+        return Consent_Letter_photo_farmer;
+    }
+
+    public void setConsent_Letter_photo_farmer(String consent_Letter_photo_farmer) {
+        Consent_Letter_photo_farmer = consent_Letter_photo_farmer;
+    }
+
+    public String getConsent_Letter_photo() {
+        return Consent_Letter_photo;
+    }
+
+    public void setConsent_Letter_photo(String consent_Letter_photo) {
+        Consent_Letter_photo = consent_Letter_photo;
+    }
+
+    public String getBor_clean_status() {
+        return bor_clean_status;
+    }
+
+    public void setBor_clean_status(String bor_clean_status) {
+        this.bor_clean_status = bor_clean_status;
+    }
+
+    public String getCustomer_satify_status() {
+        return customer_satify_status;
+    }
+
+    public void setCustomer_satify_status(String customer_satify_status) {
+        this.customer_satify_status = customer_satify_status;
+    }
+
+    public String getPower_connection_status() {
+        return power_connection_status;
+    }
+
+    public void setPower_connection_status(String power_connection_status) {
+        this.power_connection_status = power_connection_status;
+    }
 
     public String getFname() {
         return fname;
@@ -96,6 +212,30 @@ public class CredaModel {
 
     public void setInstalletion_status(String installetion_status) {
         this.installetion_status = installetion_status;
+    }
+
+    public String getSite_lat_new() {
+        return site_lat_new;
+    }
+
+    public void setSite_lat_new(String site_lat_new) {
+        this.site_lat_new = site_lat_new;
+    }
+
+    public String getSite_long_new() {
+        return site_long_new;
+    }
+
+    public void setSite_long_new(String site_long_new) {
+        this.site_long_new = site_long_new;
+    }
+
+    public String getPic_date() {
+        return pic_date;
+    }
+
+    public void setPic_date(String pic_date) {
+        this.pic_date = pic_date;
     }
 
     public String getSitesurvey() {
@@ -552,5 +692,77 @@ public class CredaModel {
 
     public void setSaralyear(String saralyear) {
         this.saralyear = saralyear;
+    }
+
+    public String getPurlin() {
+        return purlin;
+    }
+
+    public void setPurlin(String purlin) {
+        this.purlin = purlin;
+    }
+
+    public String getRafter() {
+        return rafter;
+    }
+
+    public void setRafter(String rafter) {
+        this.rafter = rafter;
+    }
+
+    public String getAll_panel() {
+        return all_panel;
+    }
+
+    public void setAll_panel(String all_panel) {
+        this.all_panel = all_panel;
+    }
+
+    public String getPaani() {
+        return paani;
+    }
+
+    public void setPaani(String paani) {
+        this.paani = paani;
+    }
+
+    public String getStructure_status() {
+        return structure_status;
+    }
+
+    public void setStructure_status(String structure_status) {
+        this.structure_status = structure_status;
+    }
+
+    public String getStructure_video() {
+        return structure_video;
+    }
+
+    public void setStructure_video(String structure_video) {
+        this.structure_video = structure_video;
+    }
+
+    public String getFarad_photo() {
+        return farad_photo;
+    }
+
+    public void setFarad_photo(String farad_photo) {
+        this.farad_photo = farad_photo;
+    }
+
+    public String getChalan_photo() {
+        return chalan_photo;
+    }
+
+    public void setChalan_photo(String chalan_photo) {
+        this.chalan_photo = chalan_photo;
+    }
+
+    public String getBore_check_image() {
+        return bore_check_image;
+    }
+
+    public void setBore_check_image(String bore_check_image) {
+        this.bore_check_image = bore_check_image;
     }
 }

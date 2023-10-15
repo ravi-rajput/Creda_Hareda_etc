@@ -240,6 +240,7 @@
             android:weightSum="10"
             android:layout_height="30dp">
             <TextView
+                android:id="@+id/img1Text"
                 android:layout_width="0dp"
                 android:textAlignment="center"
                 android:layout_height="match_parent"
@@ -267,6 +268,7 @@
         android:weightSum="10"
         android:layout_height="200dp">
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardImage1"
             android:layout_width="0dp"
             app:cardCornerRadius="10dp"
             android:layout_weight="5"
@@ -360,7 +362,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Aadharcard Image Back"
+                    android:textColor="#ffffff"
+                    android:text="आधार कार्ड की पीछे की फोटो"
                     android:background="#A0A0A0"></TextView>
 
                 <ImageView
@@ -381,7 +384,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Boaring Image with customer"
+                    android:text="कस्टमर के साथ बोरिंग की फोटो"
+                    android:textColor="#ffffff"
                     android:background="#A0A0A0"></TextView>
 
                 <ImageView
@@ -402,6 +406,7 @@
             android:weightSum="10"
             android:layout_height="30dp">
             <TextView
+                android:id="@+id/img5Text"
                 android:layout_width="0dp"
                 android:textAlignment="center"
                 android:layout_height="match_parent"
@@ -418,101 +423,201 @@
                 android:layout_weight="5"
                 android:text="@string/Old_rmu"
                 android:textSize="15sp"
+                android:visibility="gone"
                 android:textColor="#ffffff"
                 android:background="#8B8B8B"
                 android:layout_margin="5dp"/>
 
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="10"
-        android:layout_height="200dp">
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            app:cardCornerRadius="10dp"
-            android:layout_weight="5"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="60dp"
-            app:cardElevation="10dp"
-            android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/card_view">
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
 
-            <ImageView
-                android:id="@+id/bankpassbookimagesc"
-                android:layout_width="match_parent"
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@mipmap/surveyclick"
-                android:scaleType="fitXY" />
-            <!--<TextView-->
-            <!--android:id="@+id/t3"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Beneficiary Bank n Passbook Pic"-->
-            <!--android:textSize="15sp"-->
-            <!--android:textColor="#9f3342"-->
-            <!--android:layout_margin="5dp"/>-->
-            <!--<ImageView-->
-            <!--android:layout_width="25dp"-->
-            <!--android:layout_height="25dp"-->
-            <!--android:src="@drawable/demo_iv"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentBottom="true"/>-->
+                android:layout_margin="10dp"
+                android:layout_marginBottom="60dp"
+                android:layout_weight="5"
+                android:visibility="gone"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_view">
+
+                    <ImageView
+                        android:id="@+id/bankpassbookimagesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@mipmap/surveyclick"
+                        android:scaleType="fitXY" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/t3"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Beneficiary Bank n Passbook Pic"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textColor="#9f3342"-->
+                    <!--android:layout_margin="5dp"/>-->
+                    <!--<ImageView-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:src="@drawable/demo_iv"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentBottom="true"/>-->
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="60dp"
+                android:layout_weight="5"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:background="@drawable/card_view">
+
+                    <ImageView
+                        android:id="@+id/imagemarkedsitesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@mipmap/surveyclick"
+                        android:scaleType="fitXY" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/t4"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Tap to Click Image marked for Foundation"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textColor="#9f3342"-->
+                    <!--android:layout_margin="5dp"/>-->
+                    <!--<ImageView-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:src="@drawable/demo_iv"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentBottom="true"/>-->
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            app:cardCornerRadius="10dp"
-            android:layout_weight="5"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="60dp"
-            app:cardElevation="10dp"
-            android:layout_height="match_parent">
         <LinearLayout
+            android:id="@+id/linearLayoutChalanFarad"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:weightSum="10">
 
-            android:background="@drawable/card_view">
+            <LinearLayout
+                android:id="@+id/faradLayout"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_weight="5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/imgFaradText"
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="जमीन की फरद"
+                    android:textSize="15sp"
+                    android:textColor="#ffffff"
+                    android:background="#8B8B8B"
+                    android:layout_margin="5dp"/>
 
-            <ImageView
-                android:id="@+id/imagemarkedsitesc"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@mipmap/surveyclick"
-                android:scaleType="fitXY" />
-            <!--<TextView-->
-            <!--android:id="@+id/t4"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Tap to Click Image marked for Foundation"-->
-            <!--android:textSize="15sp"-->
-            <!--android:textColor="#9f3342"-->
-            <!--android:layout_margin="5dp"/>-->
-            <!--<ImageView-->
-            <!--android:layout_width="25dp"-->
-            <!--android:layout_height="25dp"-->
-            <!--android:src="@drawable/demo_iv"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentBottom="true"/>-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginBottom="60dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_view">
+
+                        <ImageView
+                            android:id="@+id/faradimages"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@mipmap/surveyclick"
+                            android:scaleType="fitXY" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/chalanLayout"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_weight="5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/imgChalanText"
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="चालान की फोटो"
+                    android:textSize="15sp"
+                    android:textColor="#ffffff"
+                    android:background="#8B8B8B"
+                    android:layout_margin="5dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginBottom="60dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_view">
+
+                        <ImageView
+                            android:id="@+id/chalanimages"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@mipmap/surveyclick"
+                            android:scaleType="fitXY" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
 
         </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/img6Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Site Marked Pic 2 Image"
+                android:textColor="@color/white"
+                android:text="साइट मार्केड फोटो 2"
                 android:background="#999999"/>
 
             <ImageView
@@ -525,10 +630,11 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/img7Text"
             android:layout_width="match_parent"
             android:textAlignment="center"
             android:layout_height="match_parent"
-            android:text="Site Format"
+            android:text="साइट फॉर्मेट"
             android:textSize="15sp"
             android:background="#8B8B8B"
             android:textStyle="bold"
@@ -568,8 +674,37 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+   <TextView
+            android:id="@+id/img8Text"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="match_parent"
+            android:text="बोर क्लीनिंग अफिडेफिट"
+            android:textSize="15sp"
+            android:background="#8B8B8B"
+            android:textStyle="bold"
+            android:textColor="#ffffff"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="60dp"
+            app:cardElevation="10dp"
+            android:layout_height="150dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/card_view">
 
+                <ImageView
+                    android:id="@+id/bore_cleaning_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/surveyclick"
+                    android:scaleType="fitXY" />
 
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
 
@@ -586,24 +721,19 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="#000000">
                 <EditText
-
                     android:id="@+id/edittextwaterlevelsc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Water Level (In Feet)"
-
+                    android:hint="पानी का लेवल डालिये (फ़ीट में)"
                     android:inputType="number"
                     android:maxLines="1"
                     android:textColorHint="#000000"
                     android:textSize="15dp"
-
-
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
-
         <LinearLayout
 
             android:layout_width="match_parent"
@@ -614,6 +744,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/boreDeptInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="#000000">
@@ -622,9 +753,6 @@
                     android:id="@+id/edittextbordepthsc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Bore Depth (In Feet) "
-                    android:inputType="number"
-
                     android:maxLines="1"
                     android:textColorHint="#000000"
                     android:textSize="15dp"
@@ -634,7 +762,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
-
         <LinearLayout
 
             android:layout_width="match_parent"
@@ -645,6 +772,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/boreSizeInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="#000000">
@@ -653,9 +781,6 @@
                     android:id="@+id/edittextborsizesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Bore Size (In Inch) "
-                    android:inputType="number"
-
                     android:maxLines="1"
                     android:textColorHint="#000000"
                     android:textSize="15dp"
@@ -665,10 +790,8 @@
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
-
-
         <LinearLayout
-
+android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -686,8 +809,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Existing Motor Running "
-
-
                     android:maxLines="1"
                     android:textColorHint="#000000"
                     android:textSize="15dp"
@@ -698,28 +819,19 @@
 
         </LinearLayout>
 
-
-
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="10dp"
-
-            >
+            android:layout_margin="10dp">
             <TextView
+                android:id="@+id/isBore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/is_bore_empty"
-
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_marginTop="15dp"
                 android:textColor="@color/primary"
-
-
                 />
 
             <RadioGroup
@@ -729,9 +841,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal"
-                android:layout_gravity="center"
-
-                >
+                android:layout_gravity="center">
 
                 <RadioButton
                     android:id="@+id/boremptysc"
@@ -739,17 +849,163 @@
                     android:layout_height="wrap_content"
                     android:text="Yes" />
 
-
                 <RadioButton
                     android:id="@+id/borusedsc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No" />
 
+            </RadioGroup>
+    <LinearLayout
+        android:id="@+id/hareda3Options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="बोर क्लीन"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary"
+                />
 
+            <RadioGroup
+                android:id="@+id/radiogroupclean"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <RadioButton
+                    android:id="@+id/borecleanyes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/borecleanno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
 
             </RadioGroup>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="पंप हेड ऑप्शन्स"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary"
+                />
+
+            <RadioGroup
+                android:id="@+id/radiogrouppumpHead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <RadioButton
+                    android:id="@+id/borePump1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <RadioButton
+                    android:id="@+id/borePump2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+               <RadioButton
+                    android:id="@+id/borePump3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     />
+
+               <RadioButton
+                    android:id="@+id/borePump4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="कस्टमर पाइप के डिलीवरी इंच से संतुस्ट है या नहीं?"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary"
+                />
+
+            <RadioGroup
+                android:id="@+id/radiogroupsatisfy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <RadioButton
+                    android:id="@+id/satisfyYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/satisfyNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="जहा पंप लगना है वहां कोई लाइट कनेक्शन"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary"
+                />
+
+            <RadioGroup
+                android:id="@+id/radiogroupLightConnection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <RadioButton
+                    android:id="@+id/lightyes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/lightno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
+
+            </RadioGroup>
+    </LinearLayout>
 
 
         </LinearLayout>

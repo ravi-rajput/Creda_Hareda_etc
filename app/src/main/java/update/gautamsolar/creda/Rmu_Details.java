@@ -44,7 +44,7 @@ import com.android.volley.toolbox.StringRequest;
 import update.gautamsolar.creda.Constants.Constants;
 import update.gautamsolar.creda.Database.RMU_Table;
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -76,7 +76,7 @@ public class Rmu_Details extends AppCompatActivity {
     String lon;
     static final int REQUEST_LOCATION = 60;
 
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     private static final int PICK_IMAGE_REQUEST_SITE1 = 163;
     LocationManager locationManager;
     boolean isGPSEnabled = false;

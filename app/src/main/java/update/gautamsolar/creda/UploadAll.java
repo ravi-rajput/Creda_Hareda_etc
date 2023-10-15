@@ -43,7 +43,7 @@ import update.gautamsolar.creda.Creda_Rajasthan.Installation_Rajasthan;
 import update.gautamsolar.creda.Creda_Rajasthan.Material_Dispatch_Rajasthan;
 import update.gautamsolar.creda.Creda_Rajasthan.Site_Survey_Rajasthan;
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -65,13 +65,14 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 
 public class UploadAll extends AppCompatActivity {
 
 
-    LinearLayout CMCButton,foundation, mtrDetail, farmerPhoto, sitesurvey, RmuInstallation,pit_submit,f_material;
+    LinearLayout new_installation,CMCButton,foundation, mtrDetail, farmerPhoto, sitesurvey, RmuInstallation,pit_submit,f_material;
     Intent intent;
     TextView textViewname, textViewrole, textViewproject, textViewdist, textViewcontact;
     CredaModel credaModel;
@@ -81,7 +82,7 @@ CardView pit_card;
     String project, sregnnumber, sbenifname, sfname, scontact, svillage, sblock, spumpType, sinstallation_status, sbeneficiary_share, ssurvey_status, sfoundation_status,rmu_status;
     String water_level, bor_size, bor_depth, existing_moter_run, spump_type, sdispatch_status, spump_capacity,pit_status, sengineer_role, sKEYPHOTO1, sFKEYPHOTO6, sFKEYPHOTO7, sKEYPHOTO2, sKEYPHOTO3, sKEYPHOTO4, sKEYPHOTO5, sKEYPHOTO6, sKEYPHOTO7, sFKEYPHOTO1,
             sFKEYPHOTO2, sFKEYPHOTO3, sFKEYPHOTO4, sFKEYPHOTO5, sSKEYPHOTO1, sSKEYPHOTO2, sSKEYPHOTO3, sSKEYPHOTO4,sSKEYPHOTO5
-            ,sSKEYPHOTO6,sSKEYPHOTO7,sSKEYPHOTO8;
+            ,sSKEYPHOTO6,sSKEYPHOTO7,sSKEYPHOTO8,sSKEYPHOTO9,sSKEYPHOT10;
 
     String engineer_role,bor_status, cregnnumber,adhar_no,bank_name,bank_account_no,ifsc_code,pump_head,regnnumber, benifname, fname, contact, village, block, pumpType, installation_status, beneficiary_share, survey_status, foundation_status;
     int REQUEST_CHECK_SETTINGS = 100;
@@ -109,7 +110,7 @@ CardView pit_card;
     private Location mCurrentLocation;
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates;
-    Button saral;
+    Button saral,structure_plus,hareda_update,hareda3InformaticRes;
     private static UploadAll instance;
     @Override
     public void onBackPressed() {
@@ -125,8 +126,12 @@ CardView pit_card;
         instance = this;
         init();
 saral = findViewById(R.id.saral);
+        structure_plus = findViewById(R.id.structure_plus);
         foundation = findViewById(R.id.siteSurveyf);
         pit_submit = findViewById(R.id.pit_submit);
+        hareda_update = findViewById(R.id.hareda_update);
+        hareda3InformaticRes = findViewById(R.id.hareda3InformaticRes);
+        new_installation = findViewById(R.id.new_installation);
         mtrDetail = findViewById(R.id.mtrDetail);
         pit_card=findViewById(R.id.pit_card);
         f_material=findViewById(R.id.f_material);
@@ -135,21 +140,59 @@ saral = findViewById(R.id.saral);
         CMCButton=findViewById(R.id.cmcbutton);
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         project = settings.getString("project", "");
-        saral.setOnClickListener(new View.OnClickListener() {
+        hareda_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(UploadAll.this,QuarterListActivity.class);
+                startActivity(i);
+            }
+        });
+        if(settings.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE3")||settings.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE4")||settings.getString("lead_phase","").equalsIgnoreCase("GALO_PHASE1")) {
+            hareda3InformaticRes.setVisibility(View.VISIBLE);
+        }
+            hareda3InformaticRes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(UploadAll.this,ImageResolution.class);
+                startActivity(i);
+            }
+        });
+
+        structure_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i= new Intent(UploadAll.this,SaralActivity.class);
+                Intent i= new Intent(UploadAll.this,StructureActivity.class);
                 i.putExtra("regnnumber",settings.getString("regnnumber", ""));
                 i.putExtra("benifname",settings.getString("benifname", ""));
                 i.putExtra("fathername",settings.getString("fname", ""));
                 i.putExtra("contact",settings.getString("contact", ""));
                 i.putExtra("village",settings.getString("village", ""));
                 i.putExtra("block",settings.getString("block", ""));
-                i.putExtra("saralid",settings.getString("saralid", ""));
-                i.putExtra("saralyear",settings.getString("saralyear", ""));
+                i.putExtra("image1",settings.getString("purlin_image", ""));
+                i.putExtra("image2",settings.getString("refter_image", ""));
+                i.putExtra("image3",settings.getString("allPanel_image", ""));
+                i.putExtra("image4",settings.getString("paani_image", ""));
+                i.putExtra("status",settings.getString("structureStatus", ""));
+                i.putExtra("video",settings.getString("structureVideo", ""));
                 startActivity(i);
+                finish();
             }
         });
+        saral.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i= new Intent(UploadAll.this,SaralActivity.class);
+                    i.putExtra("regnnumber",settings.getString("regnnumber", ""));
+                    i.putExtra("benifname",settings.getString("benifname", ""));
+                    i.putExtra("fathername",settings.getString("fname", ""));
+                    i.putExtra("contact",settings.getString("contact", ""));
+                    i.putExtra("village",settings.getString("village", ""));
+                    i.putExtra("block",settings.getString("block", ""));
+                    i.putExtra("saralid",settings.getString("saralid", ""));
+                    i.putExtra("saralyear",settings.getString("saralyear", ""));
+                    startActivity(i);
+                }
+            });
 
         if (project.equals("RAJASTHAN")) {
             getSupportActionBar().setTitle("Pump Installation RAJASTHAN");
@@ -337,13 +380,16 @@ saral = findViewById(R.id.saral);
 
         }
 
-        else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")) {
-            getSupportActionBar().setTitle("Pump Installation Chattisgarh");
+        else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")||project.equals("PEDA")||project.equals("MSEDCL")||project.equals("MEDA")) {
+            getSupportActionBar().setTitle("Pump Installation");
             sitesurvey = findViewById(R.id.sitesurvey);
             farmerPhoto = findViewById(R.id.farmerPhoto);
             f_material.setVisibility(View.VISIBLE);
             RmuInstallation = findViewById(R.id.installrmubluetooth);
             saral.setVisibility(View.VISIBLE);
+            if(settings.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE3") || settings.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE4") || settings.getString("lead_phase","").equalsIgnoreCase("GALO_PHASE1")){
+                structure_plus.setVisibility(View.VISIBLE);
+            }
             intent = getIntent();
             cregnnumber = settings.getString("regnnumber", "");
             pit_card.setVisibility(View.VISIBLE);
@@ -381,6 +427,8 @@ saral = findViewById(R.id.saral);
             sSKEYPHOTO6 = settings.getString("SKEYPHOTO6", "");
             sSKEYPHOTO7 = settings.getString("SKEYPHOTO7", "");
             sSKEYPHOTO8 = settings.getString("SKEYPHOTO8", "");
+            sSKEYPHOTO9 = settings.getString("farad_photo", "");
+            sSKEYPHOT10 = settings.getString("chalan_photo", "");
             water_level = settings.getString("water_level", "");
             bor_size = settings.getString("bor_size", "");
             bor_depth = settings.getString("bor_depth", "");
@@ -409,6 +457,28 @@ f_material.setOnClickListener(new View.OnClickListener() {
     }
 });
 
+if(project.equals("PEDA")){
+    new_installation.setVisibility(View.VISIBLE);
+}else{
+    new_installation.setVisibility(View.GONE);
+}
+
+            new_installation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i= new Intent(UploadAll.this,NewInstalationActivity.class);
+                    i.putExtra("reg_no",settings.getString("regnnumber", ""));
+                    i.putExtra("name",settings.getString("benifname", ""));
+                    i.putExtra("fname",settings.getString("fname", ""));
+                    i.putExtra("contact",settings.getString("contact", ""));
+                    i.putExtra("village",settings.getString("village", ""));
+                    i.putExtra("block",settings.getString("block", ""));
+                    i.putExtra("saralid",settings.getString("saralid", ""));
+                    i.putExtra("saralyear",settings.getString("saralyear", ""));
+                    startActivity(i);
+                }
+            });
+
             pit_submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -419,17 +489,13 @@ f_material.setOnClickListener(new View.OnClickListener() {
 
                     } else {
                         intent = new Intent(getApplicationContext(), Activity_Pit.class);
-                        Bundle bundlef = new Bundle();
-                        bundlef.putString("benifname", sbenifname);
-                        bundlef.putString("regnnumber", cregnnumber);
-                        bundlef.putString("fathername", sfname);
-                        bundlef.putString("fondimg1", sFKEYPHOTO1);
-                        bundlef.putString("contact", scontact);
-                        bundlef.putString("block", sblock);
-                        bundlef.putString("village", svillage);
-                        bundlef.putString("foundation_status", sfoundation_status);
+                        intent.putExtra("name", sbenifname);
+                        intent.putExtra("fname", sfname);
+                        intent.putExtra("reg_no", cregnnumber);
+                        intent.putExtra("block", sblock);
+                        intent.putExtra("village", svillage);
+                        intent.putExtra("contact", scontact);
 
-                        intent.putExtras(bundlef);
                         startActivity(intent);
                     }
 
@@ -463,6 +529,7 @@ f_material.setOnClickListener(new View.OnClickListener() {
                         bundleUploadB.putString("instimg6", sKEYPHOTO6);
                         bundleUploadB.putString("instimg7", sKEYPHOTO7);
                         bundleUploadB.putString("fondimg5", sFKEYPHOTO5);
+                        bundleUploadB.putString("pic_date", settings.getString("pic_date", ""));
                         intent.putExtras(bundleUploadB);
                         startActivity(intent);
                     }
@@ -497,6 +564,8 @@ f_material.setOnClickListener(new View.OnClickListener() {
                         bundlef.putString("fondimg3", sFKEYPHOTO3);
                         bundlef.putString("fondimg4", sFKEYPHOTO4);
                         bundlef.putString("fondimg5", sFKEYPHOTO5);
+                        bundlef.putString("pic_date", settings.getString("pic_date", ""));
+
 
                         intent.putExtras(bundlef);
                         startActivity(intent);
@@ -566,17 +635,21 @@ f_material.setOnClickListener(new View.OnClickListener() {
                             bundlesuvey.putString("aadhar_back", sSKEYPHOTO6);
                             bundlesuvey.putString("boaring_image", sSKEYPHOTO7);
                             bundlesuvey.putString("survay2", sSKEYPHOTO8);
+                            bundlesuvey.putString("farad_photo", sSKEYPHOTO9);
+                            bundlesuvey.putString("chalan_photo", sSKEYPHOT10);
                             bundlesuvey.putString("water_level", water_level);
                             bundlesuvey.putString("bor_size",bor_size );
                             bundlesuvey.putString("bor_depth", bor_depth);
                             bundlesuvey.putString("existing_moter_run", existing_moter_run);
                             intent.putExtras(bundlesuvey);
                             startActivity(intent);
+                            finish();
                         }
 
                     } catch (Exception e) {
                         intent = new Intent(getApplicationContext(), SiteSurvey.class);
                         startActivity(intent);
+                        finish();
                          e.printStackTrace();
                     }
 
@@ -870,6 +943,7 @@ f_material.setOnClickListener(new View.OnClickListener() {
                         SharedPreferences.Editor editor = settings.edit();
                         editor.putString("login_status", "0");
                         editor.commit();
+                        clearApplicationData();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
@@ -886,6 +960,36 @@ f_material.setOnClickListener(new View.OnClickListener() {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void clearApplicationData() {
+        File cacheDirectory = getCacheDir();
+        File applicationDirectory = new File(cacheDirectory.getParent());
+        if (applicationDirectory.exists()) {
+            String[] fileNames = applicationDirectory.list();
+            for (String fileName : fileNames) {
+                if (!fileName.equals("lib")) {
+                    deleteFile(new File(applicationDirectory, fileName));
+                }
+            }
+        }
+    }
+    public static boolean deleteFile(File file) {
+        boolean deletedAll = true;
+        if (file != null) {
+            if (file.isDirectory()) {
+                String[] children = file.list();
+                for (int i = 0; i < children.length; i++) {
+                    deletedAll = deleteFile(new File(file, children[i])) && deletedAll;
+                }
+            } else {
+                deletedAll = file.delete();
+            }
+        }
+
+        return deletedAll;
+    }
+
+
     public static UploadAll getInstance() {
         return instance;
     }

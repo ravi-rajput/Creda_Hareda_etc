@@ -14,7 +14,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import android.util.Log;
 
-import com.gautamsolar.creda.BuildConfig;
+import update.gautamsolar.creda.BuildConfig;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -125,9 +125,9 @@ public class CameraUtils {
                     + "IMG_" + timeStamp + "." + SiteSurvey.IMAGE_EXTENSION);
         }
 
-        else if (type == UploadBenificieryPic.MEDIA_TYPE_VIDEO) {
+        else if (type == VideoCaptureActivity.MEDIA_TYPE_VIDEO) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "VID_" + timeStamp + "." + UploadBenificieryPic.VIDEO_EXTENSION);
+                    + "VID_" + timeStamp + "." + VideoCaptureActivity.VIDEO_EXTENSION);
         } else {
             return null;
         }

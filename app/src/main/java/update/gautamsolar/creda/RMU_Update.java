@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import update.gautamsolar.creda.BluetoothSPP.DeviceList;
 import update.gautamsolar.creda.BluetoothSPP.Device_Update_list;
 
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 
 public class RMU_Update extends AppCompatActivity {
     LinearLayout CheckRmuData,Updatermudata;

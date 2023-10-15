@@ -23,16 +23,20 @@ import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -53,7 +57,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -65,12 +69,16 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import update.gautamsolar.creda.Constants.Constants;
 import update.gautamsolar.creda.Database.InstalltionTable;
@@ -86,7 +94,7 @@ String img_no;
     public static final int MEDIA_TYPE_VIDEO = 310;
     //public static final int MEDIA_TYPE_VIDEO = 190;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     private static String imageStoragePath;
     Dialog dialog, Localdialog;
     LocationManager locationManager;
@@ -110,11 +118,14 @@ String img_no;
     Constants constants;
     private static String storage_video;
     ProgressDialog progressDialog;
-    String Engineer_contact, reg_no, lat, lon, radioinscomplete_string, regnnumber, benifname, fathername, contact, block, village, installation_status;
+    String Engineer_contact, reg_no, lat, lon, radioinscomplete_string, regnnumber,
+            benifname, fathername, contact,
+            block, village, installation_status,site_lat_new,site_long_new;
     RadioGroup radioinscomplete;
     RadioButton inscomplete, insuncomplete;
 
-
+    String strDate="2022-2-7";
+    String pic_date,project;
     //1 means data is synced and 0 means data is not synced
     public static final int NAME_SYNCED_WITH_SERVERI = 1;
     public static final int NAME_NOT_SYNCED_WITH_SERVERI = 0;
@@ -130,17 +141,37 @@ String img_no;
     SharedPreferences sharedPreferences;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_benificiery_pic);
+        LocalDate startDate = LocalDate.of(2021, 12, 1); //start date
+        long start = startDate.toEpochDay();
+        System.out.println(start);
+
+        LocalDate endDate = LocalDate.of(2022, 2, 8); //start date
+
+        long end = endDate.toEpochDay();
+        System.out.println(start);
+
+        long randomEpochDay = ThreadLocalRandom.current().longs(start, end).findAny().getAsLong();
+        Log.d("randomDate",LocalDate.ofEpochDay(randomEpochDay).toString());
+        strDate = LocalDate.ofEpochDay(randomEpochDay).toString();
+
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Engineer_Contact = sharedPreferences.getString("engcontact", "");
         constants = new Constants();
         installation_api = constants.INSTALLATION_API;
         eng_id = sharedPreferences.getString("eng_id", "");
+        project = sharedPreferences.getString("project", "");
 
-
+        site_lat_new=sharedPreferences.getString("site_lat_new","");
+        site_long_new=sharedPreferences.getString("site_long_new","");
+       if(site_lat_new.equals("null")||site_long_new.equals("null")){
+           Toast.makeText(this,"Site Survay Location is null",Toast.LENGTH_SHORT).show();
+       }
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
@@ -212,6 +243,15 @@ String img_no;
         KEYPHOTO6 = bundleUploadB.getString("instimg6");
         KEYPHOTO7 = bundleUploadB.getString("instimg7");
         KEYPHOTO8 = bundleUploadB.getString("fondimg5");
+        if(project.equals("MSEDCL")||project.equals("MEDA")||project.equals("PEDA")){
+            pic_date = getDateTime();
+        }else if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2"))
+        {
+           pic_date =  strDate;
+        }
+        else {
+            pic_date = bundleUploadB.getString("pic_date");
+        }
         if (!KEYPHOTO1.equals("null")) {
             imageinst_one.setBackgroundResource(R.mipmap.tickclick);
         }
@@ -510,6 +550,7 @@ img_no="1";
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -585,7 +626,8 @@ img_no="1";
 
         } else {
 
-            UploadAll.getInstance().init();
+             UploadAll uploadAll = new UploadAll();
+            uploadAll.getInstance().init();
             double latti=UploadAll.latitude;
             double longi= UploadAll.longitude;
 
@@ -751,7 +793,7 @@ img_no="1";
                 params.put("lat", lat);
                 params.put("lon", lon);
                 params.put("reg_no", regnnumber);
-                params.put("datetime", getDateTime());
+                params.put("datetime", pic_date);
 
 
                 return params;
@@ -893,6 +935,7 @@ img_no="1";
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void previewCapturedImage1() {
         try {
             // hide video preview
@@ -901,28 +944,28 @@ img_no="1";
 
             bitmap1 = CameraUtils.optimizeBitmap(BITMAP_SAMPLE_SIZE, imageStoragePath);
            Bitmap result=print_img(bitmap1);
-if(img_no.equals("1")){
+if(!TextUtils.isEmpty(img_no)&&img_no.equals("1")){
     photo11=imageTOString(result);
     imageinst_one.setImageBitmap(result);
-}else if(img_no.equals("2")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("2")){
     photo12=imageTOString(result);
     imageinst_two.setImageBitmap(result);
-}else if(img_no.equals("3")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("3")){
     photo13=imageTOString(result);
     imageinst_three.setImageBitmap(result);
-}else if(img_no.equals("4")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("4")){
     photo14=imageTOString(result);
     imageinst_four.setImageBitmap(result);
-}else if(img_no.equals("5")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("5")){
     photo15=imageTOString(result);
     imageinst_five.setImageBitmap(result);
-}else if(img_no.equals("6")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("6")){
     photo16=imageTOString(result);
     imageinst_six.setImageBitmap(result);
-}else if(img_no.equals("7")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("7")){
     photo17=imageTOString(result);
     imageinst_seven.setImageBitmap(result);
-}else if(img_no.equals("8")){
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("8")){
     photo18=imageTOString(result);
     imageinst_eight.setImageBitmap(result);
 }
@@ -997,7 +1040,7 @@ if(img_no.equals("1")){
         installi.Lat = lat;
         installi.Lon = lon;
         installi.Regn = regnnumber;
-        installi.Dati = getDateTime();
+        installi.Dati = pic_date;
         try{
         installi.save();}catch (Exception ae){
 
@@ -1019,17 +1062,17 @@ if(img_no.equals("1")){
 
     }
 public Bitmap print_img(Bitmap bitmap){
-
     String lat = "0.0",lng="0.0";
     try {
-        UploadAll.getInstance().init();
+         UploadAll uploadAll = new UploadAll();
+            uploadAll.getInstance().init();
         double latti = UploadAll.latitude;
         double longi = UploadAll.longitude;
         lat = String.valueOf(latti);
         lng = String.valueOf(longi);
 
     }catch (Exception ae){
-
+       Log.d("lattilongitude",ae.toString());
     }
 
     File f = new File(imageStoragePath);
@@ -1072,20 +1115,44 @@ public Bitmap print_img(Bitmap bitmap){
     canvas.drawBitmap(rotatedBitmap, 0, 0, null);
     Paint paint = new Paint();
     paint.setColor(Color.BLACK);
-
 //    paint.setStyle(Paint.Style.STROKE);
-    paint.setTextSize(15);
-    paint.setAntiAlias(true);
+    paint.setTextSize(12);
+    paint.setAntiAlias(false);
 
     Paint innerPaint = new Paint();
     innerPaint.setColor(Color.parseColor("#61ECECEC"));
 //    innerPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
     innerPaint.setAntiAlias(true);
-    canvas.drawRect(180F, 50F, 0, 0, innerPaint);
-    canvas.drawText("Lat - "+lat,5, 15, paint);
-    canvas.drawText("Long - "+lng,5, 30, paint);
-    canvas.drawText("Date - "+getDateTime(),5, 45, paint);
-return result;
+    if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2")||
+            sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase","").equalsIgnoreCase("GALO_PHASE1")){
+        if(!TextUtils.isEmpty(site_lat_new)&&(site_lat_new.length()>4&&site_long_new.length()>4)) {
+
+            canvas.drawRect(180F, result.getHeight(), 0, result.getHeight()-50, innerPaint);
+            canvas.drawText("Lat - " + replaceLastItem(site_lat_new,Integer.parseInt(img_no)), 5, result.getHeight()-40, paint);
+            canvas.drawText("Long - " + replaceLastItem(site_long_new,Integer.parseInt(img_no)), 5, result.getHeight()-25, paint);
+            canvas.drawText("Name - " + benifname, 5, result.getHeight()-10, paint);
+        }
+    }else if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("PEDA_PHASE1")){
+        if(!TextUtils.isEmpty(site_lat_new)&&(site_lat_new.length()>4&&site_long_new.length()>4)) {
+            canvas.drawRect(180F, result.getHeight(), 0, result.getHeight() - 50, innerPaint);
+            canvas.drawText("Lat - " + site_lat_new, 5, result.getHeight()-40, paint);
+            canvas.drawText("Long - " + site_long_new, 5, result.getHeight()-25, paint);
+
+        }
+    }
+    else {
+        canvas.drawRect(180F, result.getHeight(), 0, result.getHeight()-50, innerPaint);
+        canvas.drawText("Lat - "+lat,5, result.getHeight()-40, paint);
+        canvas.drawText("Long - "+lng,5, result.getHeight()-25, paint);
+        canvas.drawText("Date - "+pic_date,5, result.getHeight()-10, paint);
     }
 
+return result;
+    }
+public String replaceLastItem(String value , int increase){
+    int number = Integer.parseInt(value.substring(value.length() - 1));
+    String substring = value.substring(0, value.length() - 1); // AB
+    String replaced = substring + String.valueOf(number+increase);
+    return replaced;
+}
 }

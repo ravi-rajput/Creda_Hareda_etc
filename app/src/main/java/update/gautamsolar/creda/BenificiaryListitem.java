@@ -12,6 +12,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.preference.PreferenceManager;
+
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
@@ -25,6 +27,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,12 +42,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,10 +72,7 @@ import update.gautamsolar.creda.Automatic_BroadCast_Receivers.Network_State_Pit;
 import update.gautamsolar.creda.Automatic_BroadCast_Receivers.NetworkstateCheckerRMuNEw;
 import update.gautamsolar.creda.Constants.Constants;
 
-public class
-
-
-BenificiaryListitem extends Activity {
+public class BenificiaryListitem extends Activity {
     CredaModel credaModel;
     RecyclerView mRecyclerView;
     SearchView searchView;
@@ -82,12 +83,12 @@ BenificiaryListitem extends Activity {
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     ProgressDialog pb;
     Constants constants;
+    Button check_chalan;
     public BenifRecyclerview benifRecyclerview;
     List<CredaModel> list_models;
     ImageView SearchName, SearchLoctaion, SearchId, Searchcontact, Refresh;
-    String eng_id, Engineer_Contact, customerlistapi, project;
+    String eng_id, Engineer_Contact, customerlistapi, project,role;
     SharedPreferences sharedPreferences;
-    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,12 +121,14 @@ BenificiaryListitem extends Activity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         eng_id = sharedPreferences.getString("eng_id", "");
+        role = sharedPreferences.getString("role", "");
 
         String datacount = sharedPreferences.getString("localdata", "");
         Engineer_Contact = sharedPreferences.getString("engcontact", "");
         checkAndRequestPermissions();
         searchView.onActionViewExpanded();
         Refresh = (ImageView) findViewById(R.id.refresh);
+        check_chalan = (Button) findViewById(R.id.chalan_check);
         intiimageview = (ImageView) findViewById(R.id.noInto);
         intiimageview.setVisibility(View.GONE);
         credaModel = new CredaModel();
@@ -148,15 +151,35 @@ BenificiaryListitem extends Activity {
         mRecyclerView.setVisibility(View.VISIBLE);
         intiimageview.setVisibility(View.GONE);
         list_models = new ArrayList<>();
-        all_complaints();
+        if(role.equals("CSE")||role.equals("USER")){
+            Intent intent = new Intent(BenificiaryListitem.this,ChalanActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            all_complaints();
+        }
 
+        check_chalan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BenificiaryListitem.this,ChalanActivity.class);
+                intent.putExtra("go_back","true");
+                startActivity(intent);
+            }
+        });
 
         Refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 customerlistapi = constants.CustomerList;
-                all_complaints();
+                if(role.equals("CSE")||role.equals("USER")){
+                    Intent intent = new Intent(BenificiaryListitem.this,ChalanActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    all_complaints();
+                }
 
 
 
@@ -283,6 +306,7 @@ BenificiaryListitem extends Activity {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("login_status", "0");
                 editor.commit();
+                clearApplicationData();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -295,26 +319,52 @@ BenificiaryListitem extends Activity {
 
 
     }
+    public void clearApplicationData() {
+        File cacheDirectory = getCacheDir();
+        File applicationDirectory = new File(cacheDirectory.getParent());
+        if (applicationDirectory.exists()) {
+            String[] fileNames = applicationDirectory.list();
+            for (String fileName : fileNames) {
+                if (!fileName.equals("lib")) {
+                    deleteFile(new File(applicationDirectory, fileName));
+                }
+            }
+        }
+    }
+    public static boolean deleteFile(File file) {
+        boolean deletedAll = true;
+        if (file != null) {
+            if (file.isDirectory()) {
+                String[] children = file.list();
+                for (int i = 0; i < children.length; i++) {
+                    deletedAll = deleteFile(new File(file, children[i])) && deletedAll;
+                }
+            } else {
+                deletedAll = file.delete();
+            }
+        }
+
+        return deletedAll;
+    }
 
     public void all_complaints() {
-
+        list_models.clear();
+        mRecyclerView.setVisibility(View.GONE);
         project = sharedPreferences.getString("project", "");
-        pd = new ProgressDialog(BenificiaryListitem.this);
-        pd.setMessage("Loading");
-        pd.show();
+        pb.setMessage("Loading...");
+        pb.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, customerlistapi, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
-
+                mRecyclerView.setVisibility(View.VISIBLE);
                 try {
-                    pd.dismiss();
+                    pb.dismiss();
                     JSONArray jsonArray = new JSONArray(response);
                     Log.d("response_list",response);
-                    list_models.clear();
 
                     if (project.equals("RAJASTHAN")) {
+                        list_models.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             credaModel = new CredaModel();
@@ -349,15 +399,14 @@ BenificiaryListitem extends Activity {
                             credaModel.setBor_depth(jsonObject.getString("bor_depth"));
                             credaModel.setPhase(jsonObject.getString("phase"));
                             credaModel.setRmu_number(jsonObject.getString("new_controler_rms_id"));
-
                             list_models.add(credaModel);
 
                         }
-
                         benifRecyclerview = new BenifRecyclerview(list_models, BenificiaryListitem.this);
                         mRecyclerView.setAdapter(benifRecyclerview);
 
-                    } else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")) {
+                    } else if (project.equals("CREDA")||project.equals("HAREDA")||project.equals("MSKPY")||project.equals("PEDA")||project.equals("MSEDCL")||project.equals("MEDA")) {
+                        list_models.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             credaModel = new CredaModel();
@@ -379,6 +428,7 @@ BenificiaryListitem extends Activity {
                             credaModel.setSidemark_image(jsonObject.optString("sidemark_image"));
                             credaModel.setPassbook_image(jsonObject.optString("bankpassbook_image"));
                             credaModel.setBenifname(jsonObject.optString("fname"));
+                            credaModel.setBore_Status(jsonObject.getString("bor_status"));
                             credaModel.setFname(jsonObject.getString("fathername"));
                             credaModel.setFoundation_status(jsonObject.getString("foundation_status"));
                             credaModel.setContact(jsonObject.getString("contact_no"));
@@ -406,6 +456,34 @@ BenificiaryListitem extends Activity {
                             credaModel.setRate_gitti_status(jsonObject.optString("rate_status"));
                             credaModel.setSaralid(jsonObject.getString("saralid"));
                             credaModel.setSaralyear(jsonObject.getString("saralyear"));
+                            credaModel.setInstallation_video(jsonObject.getString("installation_video"));
+                            credaModel.setPic_date(jsonObject.optString("invoice_image_date"));
+                            credaModel.setSite_lat_new(jsonObject.optString("site_lat_new"));
+                            credaModel.setSite_long_new(jsonObject.optString("site_long_new"));
+                            credaModel.setMedaReg(jsonObject.optString("meda_reg"));
+                            credaModel.setPeda_image1(jsonObject.optString("peda_image1"));
+                            credaModel.setPeda_image2(jsonObject.optString("peda_image2"));
+                            credaModel.setPeda_image3(jsonObject.optString("peda_image3"));
+                            credaModel.setPeda_image4(jsonObject.optString("peda_image4"));
+                            credaModel.setPeda_image5(jsonObject.optString("peda_image5"));
+                             credaModel.setSiteVideo(jsonObject.optString("site_video"));
+                             credaModel.setConsent_Letter_photo_farmer(jsonObject.optString("Consent_Letter_photo_farmer"));
+                             credaModel.setConsent_Letter_photo(jsonObject.optString("Consent_Letter_photo"));
+                             credaModel.setBor_clean_status(jsonObject.optString("bor_clean_status"));
+                             credaModel.setCustomer_satify_status(jsonObject.optString("customer_satify_status"));
+                             credaModel.setPower_connection_status(jsonObject.optString("power_connection_status"));
+                             credaModel.setPump_head(jsonObject.optString("pump_head"));
+
+                            credaModel.setPurlin(jsonObject.optString("structure_purlin"));
+                            credaModel.setRafter(jsonObject.optString("structure_rafter"));
+                            credaModel.setAll_panel(jsonObject.optString("farmer_allpanel"));
+                            credaModel.setPaani(jsonObject.optString("farmer_paani"));
+                            credaModel.setStructure_video(jsonObject.optString("structure_video"));
+                            credaModel.setStructure_status(jsonObject.optString("structure_statusplus"));
+                            credaModel.setFarad_photo(jsonObject.optString("farad_photo"));
+                            credaModel.setChalan_photo(jsonObject.optString("chalan_photo"));
+                             credaModel.setBore_check_image(jsonObject.optString("bore_check_image"));
+
 
                             Log.d("foundation_ma",jsonObject.optString("reg_no")+jsonObject.optString("road_status")+
                                     jsonObject.optString("saria_status")+jsonObject.optString("rate_status"));
@@ -416,9 +494,10 @@ BenificiaryListitem extends Activity {
 
                         benifRecyclerview = new BenifRecyclerview(list_models, BenificiaryListitem.this);
                         mRecyclerView.setAdapter(benifRecyclerview);
-
+                        pb.dismiss();
 
                     } else if (project.equals("MP")) {
+                        list_models.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             credaModel = new CredaModel();
@@ -484,16 +563,15 @@ BenificiaryListitem extends Activity {
 
 
                     }
-                    Toast.makeText(getApplicationContext(),"List Updated",Toast.LENGTH_LONG).show();
+                    pb.dismiss();
+                    Toast.makeText(getApplicationContext(),"List Updated",Toast.LENGTH_SHORT).show();
 
 
 
                 } catch (JSONException e) {
-                    pd.dismiss();
+                    pb.dismiss();
 //                            mRecyclerView.setVisibility(View.GONE);
 //                            intiimageview.setVisibility(View.VISIBLE);
-
-
                     e.printStackTrace();
                 }
 
@@ -502,7 +580,7 @@ BenificiaryListitem extends Activity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                pd.dismiss();
+                pb.dismiss();
 //                mRecyclerView.setVisibility(View.GONE);
 //                intiimageview.setVisibility(View.VISIBLE);
 
@@ -510,9 +588,7 @@ BenificiaryListitem extends Activity {
         }) {
             @Override
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                pd.dismiss();
-
-
+                pb.dismiss();
                 try {
                     Cache.Entry cacheEntry = HttpHeaderParser.parseCacheHeaders(response);
                     if (cacheEntry == null) {
@@ -540,6 +616,7 @@ BenificiaryListitem extends Activity {
                             HttpHeaderParser.parseCharset(response.headers));
                     return Response.success(new String(jsonString), cacheEntry);
                 } catch (UnsupportedEncodingException e) {
+                    pb.dismiss();
                     return Response.error(new ParseError(e));
                 }
             }
@@ -547,15 +624,18 @@ BenificiaryListitem extends Activity {
             @Override
             protected void deliverResponse(String response) {
                 super.deliverResponse(response);
+                pb.dismiss();
             }
 
             @Override
             public void deliverError(VolleyError error) {
                 super.deliverError(error);
+                pb.dismiss();
             }
 
             @Override
             protected VolleyError parseNetworkError(VolleyError volleyError) {
+                pb.dismiss();
                 return super.parseNetworkError(volleyError);
             }
 
@@ -600,5 +680,15 @@ BenificiaryListitem extends Activity {
         return true;
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(role.equals("CSE")||role.equals("USER")){
+            Intent intent = new Intent(BenificiaryListitem.this,ChalanActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            all_complaints();
+        }
+    }
 }

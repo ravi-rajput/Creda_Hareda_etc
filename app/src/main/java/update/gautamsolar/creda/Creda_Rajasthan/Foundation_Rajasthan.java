@@ -52,7 +52,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -97,7 +97,7 @@ public class Foundation_Rajasthan extends AppCompatActivity {
     public static final int MEDIA_TYPE_IMAGEF = 155;
     //public static final int MEDIA_TYPE_VIDEO = 190;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-    public static final int BITMAP_SAMPLE_SIZE = 8;
+    public static final int BITMAP_SAMPLE_SIZE = 4;
     private static String imageStoragePathF;
 
     private Button btnfoundation_upload;
@@ -395,7 +395,10 @@ String img_no;
 
         } else {
 
-            UploadAll.getInstance().init();
+            try {
+                UploadAll.getInstance().init();
+            }catch (Exception ae){
+            }
             double latti=UploadAll.latitude;
             double longi= UploadAll.longitude;
 
@@ -679,7 +682,10 @@ String img_no;
 
     public Bitmap print_img(Bitmap bitmap){
 
-        UploadAll.getInstance().init();
+        try {
+            UploadAll.getInstance().init();
+        }catch (Exception ae){
+        }
         double latti=UploadAll.latitude;
         double longi= UploadAll.longitude;
 

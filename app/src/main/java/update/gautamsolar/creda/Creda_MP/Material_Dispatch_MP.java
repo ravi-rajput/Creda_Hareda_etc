@@ -38,7 +38,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.gautamsolar.creda.R;
+import update.gautamsolar.creda.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -897,7 +897,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else
-                        {panel1edit.setText( result.getContents().toString() );
+                        {panel1edit.setText( result.getContents().toString().trim().trim() );
                             pan1 = String.valueOf( panel1edit.getText() );
                         }
                     }
@@ -924,7 +924,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
 
-                            panel2edit.setText( result.getContents().toString() );
+                            panel2edit.setText( result.getContents().toString().trim().trim() );
                             pan2 = String.valueOf( panel2edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -953,7 +953,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
 
-                            panel3edit.setText( result.getContents().toString() );
+                            panel3edit.setText( result.getContents().toString().trim().trim() );
                             pan3 = String.valueOf( panel3edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -983,7 +983,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         } else {
 
 
-                            panel4edit.setText( result.getContents().toString() );
+                            panel4edit.setText( result.getContents().toString().trim().trim() );
                             pan4 = String.valueOf( panel4edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1014,7 +1014,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
 
-                            panel5edit.setText( result.getContents().toString() );
+                            panel5edit.setText( result.getContents().toString().trim().trim() );
                             pan5 = String.valueOf( panel5edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1047,7 +1047,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
 
-                            panel6edit.setText( result.getContents().toString() );
+                            panel6edit.setText( result.getContents().toString().trim() );
                             pan6 = String.valueOf( panel6edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1080,7 +1080,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
 
-                            panel7edit.setText( result.getContents().toString() );
+                            panel7edit.setText( result.getContents().toString().trim() );
                             pan7 = String.valueOf( panel7edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1112,7 +1112,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
 
-                            panel8edit.setText( result.getContents().toString() );
+                            panel8edit.setText( result.getContents().toString().trim() );
                             pan8 = String.valueOf( panel8edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1145,7 +1145,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel9edit.setText( result.getContents().toString() );
+                            panel9edit.setText( result.getContents().toString().trim() );
                             pan9 = String.valueOf( panel9edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1178,7 +1178,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel10edit.setText( result.getContents().toString() );
+                            panel10edit.setText( result.getContents().toString().trim() );
                             pan10 = String.valueOf( panel10edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1210,7 +1210,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel11edit.setText( result.getContents().toString() );
+                            panel11edit.setText( result.getContents().toString().trim() );
                             pan11 = String.valueOf( panel11edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1243,7 +1243,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel12edit.setText( result.getContents().toString() );
+                            panel12edit.setText( result.getContents().toString().trim() );
                             pan12 = String.valueOf( panel12edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1276,7 +1276,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel13edit.setText( result.getContents().toString() );
+                            panel13edit.setText( result.getContents().toString().trim() );
                             pan13 = String.valueOf( panel13edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1309,7 +1309,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel14edit.setText( result.getContents().toString() );
+                            panel14edit.setText( result.getContents().toString().trim() );
                             pan14 = String.valueOf( panel14edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1342,7 +1342,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel15edit.setText( result.getContents().toString() );
+                            panel15edit.setText( result.getContents().toString().trim() );
                             pan15 = String.valueOf( panel15edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1375,7 +1375,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel16edit.setText( result.getContents().toString() );
+                            panel16edit.setText( result.getContents().toString().trim() );
                             pan16 = String.valueOf( panel16edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1407,7 +1407,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel17edit.setText( result.getContents().toString() );
+                            panel17edit.setText( result.getContents().toString().trim() );
                             pan17 = String.valueOf( panel17edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1440,7 +1440,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel18edit.setText( result.getContents().toString() );
+                            panel18edit.setText( result.getContents().toString().trim() );
                             pan18 = String.valueOf( panel18edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1473,7 +1473,7 @@ panel22btn =  findViewById(R.id.panel22btnMP);
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel19edit.setText( result.getContents().toString() );
+                            panel19edit.setText( result.getContents().toString().trim() );
                             pan19 = String.valueOf( panel19edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1506,7 +1506,7 @@ else if(requestCode==TWENTYREQUEST_CODE  ){
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel20edit.setText( result.getContents().toString() );
+                            panel20edit.setText( result.getContents().toString().trim() );
                             pan20 = String.valueOf( panel20edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1540,7 +1540,7 @@ else if(requestCode==TWENTYONEREQUEST_CODE  ){
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel21edit.setText( result.getContents().toString() );
+                            panel21edit.setText( result.getContents().toString().trim() );
                             pan21 = String.valueOf( panel21edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1574,7 +1574,7 @@ else if(requestCode==TWENTYTWOREQUEST_CODE  ){
                         if (result.getContents().length() != 19) {
                             Toast.makeText( this, "Length Below OR Above 19", Toast.LENGTH_LONG ).show();
                         } else {
-                            panel22edit.setText( result.getContents().toString() );
+                            panel22edit.setText( result.getContents().toString().trim() );
                             pan22 = String.valueOf( panel22edit.getText() );
                             Toast.makeText( this, result.getContents(), Toast.LENGTH_LONG ).show();
                         }
@@ -1605,7 +1605,7 @@ else if(requestCode==TWENTYTWOREQUEST_CODE  ){
                         e.printStackTrace();
 
 
-                        pumpSerail.setText(result.getContents().toString());
+                        pumpSerail.setText(result.getContents().toString().trim());
                         PumpSerial = pumpSerail.getText().toString();
                         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                     }
@@ -1635,7 +1635,7 @@ else if(requestCode==TWENTYTWOREQUEST_CODE  ){
                         e.printStackTrace();
 
 
-                        MotorSerial.setText(result.getContents().toString());
+                        MotorSerial.setText(result.getContents().toString().trim());
 
                         motorSerial = MotorSerial.getText().toString();
                         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
@@ -1666,7 +1666,7 @@ else if(requestCode==TWENTYTWOREQUEST_CODE  ){
                         e.printStackTrace();
 
 
-                        ControllerNumber.setText(result.getContents().toString());
+                        ControllerNumber.setText(result.getContents().toString().trim());
 
                         controllerNumber = ControllerNumber.getText().toString();
                         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
@@ -1697,7 +1697,7 @@ else if(requestCode==TWENTYTWOREQUEST_CODE  ){
                         e.printStackTrace();
 
 
-                        RmuNumber.setText(result.getContents().toString());
+                        RmuNumber.setText(result.getContents().toString().trim());
 
                         rmuNumber = RmuNumber.getText().toString();
                         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
