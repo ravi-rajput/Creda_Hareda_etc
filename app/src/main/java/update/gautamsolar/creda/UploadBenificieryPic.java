@@ -108,9 +108,9 @@ String img_no;
     private static final int PERMISSION_REQUEST_CODE11 = 115;
     private static final int IMAGE_CAPTURE11 = 111, IMAGE_CAPTURE12 = 112,
             IMAGE_CAPTURE13 = 113, IMAGE_CAPTURE14 = 114, IMAGE_CAPTURE15 = 303, IMAGE_CAPTURE16 = 304, IMAGE_CAPTURE17 = 305,IMAGE_CAPTURE18 = 306;
-    ImageView imageinst_one, imageinst_two, imageinst_three, imageinst_four, imageinst_five, imageinst_six, imageinst_seven,imageinst_eight, play;
+    ImageView imageinst_one, imageinst_two, imageinst_three, imageinst_four, imageinst_five, imageinst_six, imageinst_seven,imageinst_eight,imageinst_nine, play;
     Bitmap bitmap1 = null, bitmap2 = null, bitmap3 = null, bitmap4 = null, bitmap5 = null, bitmap6 = null, bitmap7 = null,bitmap8 = null;
-    String KEYPHOTO1, KEYPHOTO2, KEYPHOTO3, KEYPHOTO4, KEYPHOTO5, KEYPHOTO6, KEYPHOTO7,KEYPHOTO8, ICOMPLETE_STATUS_STRING;
+    String KEYPHOTO1, KEYPHOTO2, KEYPHOTO3, KEYPHOTO4, KEYPHOTO5, KEYPHOTO6, KEYPHOTO7,KEYPHOTO8,KEYPHOTO9, ICOMPLETE_STATUS_STRING;
 
     TextView Fatheri, Contactidi, Villageidei, Pumpidei, Contactidei, Blockidi, districtidi,numberidi;
     int Status_installation;
@@ -136,7 +136,7 @@ String img_no;
     private BroadcastReceiver broadcastReceiveri;
 
     //adapterobject for list view
-    String eng_id, installation_api, photo11, photo12, photo13, photo14, photo15, photo16, photo17,photo18, Engineer_Contact;
+    String eng_id, installation_api, photo11, photo12, photo13, photo14, photo15, photo16, photo17,photo18,photo19, Engineer_Contact;
     ProgressDialog pb;
     SharedPreferences sharedPreferences;
 
@@ -220,6 +220,7 @@ String img_no;
         imageinst_six = findViewById(R.id.imageinst_six);
         imageinst_seven = findViewById(R.id.imageinst_seven);
         imageinst_eight = findViewById(R.id.imageinst_eight);
+        imageinst_nine = findViewById(R.id.imageinst_nine);
         Fatheri = (TextView) findViewById(R.id.fatheride);
         Contactidi = (TextView) findViewById(R.id.contactide);
         Villageidei = (TextView) findViewById(R.id.villageide);
@@ -243,6 +244,7 @@ String img_no;
         KEYPHOTO6 = bundleUploadB.getString("instimg6");
         KEYPHOTO7 = bundleUploadB.getString("instimg7");
         KEYPHOTO8 = bundleUploadB.getString("fondimg5");
+        KEYPHOTO9 = bundleUploadB.getString("instimg9");
         if(project.equals("MSEDCL")||project.equals("MEDA")||project.equals("PEDA")){
             pic_date = getDateTime();
         }else if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2"))
@@ -252,30 +254,33 @@ String img_no;
         else {
             pic_date = bundleUploadB.getString("pic_date");
         }
-        if (!KEYPHOTO1.equals("null")) {
+        if (!TextUtils.isEmpty(KEYPHOTO1) && !KEYPHOTO1.equals("null")) {
             imageinst_one.setBackgroundResource(R.mipmap.tickclick);
         }
-        if (!KEYPHOTO2.equals("null")) {
+        if (!TextUtils.isEmpty(KEYPHOTO2) && !KEYPHOTO2.equals("null")) {
             imageinst_two.setBackgroundResource(R.mipmap.tickclick);
 
         }
-        if (!KEYPHOTO3.equals("null")) {
+        if (!TextUtils.isEmpty(KEYPHOTO3) && !KEYPHOTO3.equals("null")) {
             imageinst_three.setBackgroundResource(R.mipmap.tickclick);
         }
-        if (!KEYPHOTO4.equals("null")) {
+        if (!TextUtils.isEmpty(KEYPHOTO4) && !KEYPHOTO4.equals("null")) {
             imageinst_four.setBackgroundResource(R.mipmap.tickclick);
         }
-        if (!KEYPHOTO5.equals("null")) {
+        if (!TextUtils.isEmpty(KEYPHOTO5) && !KEYPHOTO5.equals("null")) {
             imageinst_five.setBackgroundResource(R.mipmap.tickclick);
         }
-        if (!KEYPHOTO6.equals("null")) {
+        if (!TextUtils.isEmpty(KEYPHOTO6) && !KEYPHOTO6.equals("null")) {
             imageinst_six.setBackgroundResource(R.mipmap.tickclick);
         }
-        if (!KEYPHOTO7.equals("null")) {
+        if (!TextUtils.isEmpty(KEYPHOTO7) && !KEYPHOTO7.equals("null")) {
             imageinst_seven.setBackgroundResource(R.mipmap.tickclick);
         }
-        if (!KEYPHOTO8.equals("null")) {
+        if (!TextUtils.isEmpty(KEYPHOTO8) && !KEYPHOTO8.equals("null")) {
             imageinst_eight.setBackgroundResource(R.mipmap.tickclick);
+        }
+        if (!TextUtils.isEmpty(KEYPHOTO9) && !KEYPHOTO9.equals("null")) {
+            imageinst_nine.setBackgroundResource(R.mipmap.tickclick);
         }
 
 
@@ -296,6 +301,7 @@ String img_no;
         photo16 = "noimage";
         photo17 = "noimage";
         photo18 = "noimage";
+        photo19 = "noimage";
 lat="0";
 lon="0";
 
@@ -399,6 +405,19 @@ img_no="1";
 
             }
         });
+        imageinst_nine.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (CameraUtils.checkPermissions(getApplicationContext())) {
+                        captureImage1();
+                    } else {
+                        requestCameraPermission1(MEDIA_TYPE_IMAGE);
+                    }
+                    img_no="9";
+
+                }
+            });
 
         btninst_upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -789,6 +808,7 @@ img_no="1";
                 params.put("photo6", photo16);
                 params.put("photo7", photo17);
                 params.put("photo8", photo18);
+                params.put("photo9", photo19);
                 params.put("eng_id", eng_id);
                 params.put("lat", lat);
                 params.put("lon", lon);
@@ -968,9 +988,10 @@ if(!TextUtils.isEmpty(img_no)&&img_no.equals("1")){
 }else if(!TextUtils.isEmpty(img_no)&&img_no.equals("8")){
     photo18=imageTOString(result);
     imageinst_eight.setImageBitmap(result);
+}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("9")){
+    photo19=imageTOString(result);
+    imageinst_nine.setImageBitmap(result);
 }
-
-
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -1036,6 +1057,7 @@ if(!TextUtils.isEmpty(img_no)&&img_no.equals("1")){
         installi.foto6 = String.valueOf(photo16);
         installi.foto7 = String.valueOf(photo17);
         installi.foto8 = String.valueOf(photo18);
+        installi.foto9 = String.valueOf(photo19);
         installi.eng_id = eng_id;
         installi.Lat = lat;
         installi.Lon = lon;

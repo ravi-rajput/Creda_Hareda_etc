@@ -13,7 +13,7 @@ public class CredaModel {
             account_number, ifsc_code, existing_motor_run, bor_size, water_level, bor_depth, old_rmu_id, new_rmu_id,
             sim_number, Device_id, passbook_image, adhar_image, benificiary_image, sidemark_image, found_image1,
             found_image2, found_image3, found_image4, found_image5, found_image6, found_imiage7, inst_image1,
-            inst_image2, inst_image3, inst_image4, inst_image5, inst_image6, inst_image7, fname,
+            inst_image2, inst_image3, inst_image4, inst_image5, inst_image6, inst_image7,inst_image9, fname,
             contact, village, pumptype, district, block, registrationno, benifname, foundation_status,
             installetion_status, sitesurvey, pump_capacity, dipatch_status,phase,rmu_number,pit_status,
             site_format,aadhar_back,boaring,survay2,road_status,saria_status,rate_gitti_status,rmu_status,
@@ -764,5 +764,13 @@ public class CredaModel {
 
     public void setBore_check_image(String bore_check_image) {
         this.bore_check_image = bore_check_image;
+    }
+
+    public String getInst_image9() {
+        return inst_image9;
+    }
+
+    public void setInst_image9(String inst_image9) {
+        this.inst_image9 = inst_image9;
     }
 }
