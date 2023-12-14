@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,7 +18,6 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
-import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -33,19 +31,16 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.exifinterface.media.ExifInterface;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -57,20 +52,15 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import update.gautamsolar.creda.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -79,7 +69,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
-
 import update.gautamsolar.creda.Constants.Constants;
 import update.gautamsolar.creda.Database.InstalltionTable;
 
@@ -90,50 +79,32 @@ public class UploadBenificieryPic extends AppCompatActivity {
     public static final String VIDEO_EXTENSION = "mp4";
     public static final int MEDIA_TYPE_IMAGE = 189;
     static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 309;
-String img_no;
+    String img_no;
     public static final int MEDIA_TYPE_VIDEO = 310;
-    //public static final int MEDIA_TYPE_VIDEO = 190;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
     public static final int BITMAP_SAMPLE_SIZE = 4;
     private static String imageStoragePath;
     Dialog dialog, Localdialog;
     LocationManager locationManager;
     boolean isGPSEnabled = false;
-    int Status_video;
-    //private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
     VideoView video;
-    TextView status_installation, status_video;
     static final int REQUEST_LOCATION = 15;
-    private Button btninst_upload, uploadvideo;
+    private Button btninst_upload;
     private static final int PERMISSION_REQUEST_CODE11 = 115;
-    private static final int IMAGE_CAPTURE11 = 111, IMAGE_CAPTURE12 = 112,
-            IMAGE_CAPTURE13 = 113, IMAGE_CAPTURE14 = 114, IMAGE_CAPTURE15 = 303, IMAGE_CAPTURE16 = 304, IMAGE_CAPTURE17 = 305,IMAGE_CAPTURE18 = 306;
-    ImageView imageinst_one, imageinst_two, imageinst_three, imageinst_four, imageinst_five, imageinst_six, imageinst_seven,imageinst_eight,imageinst_nine, play;
-    Bitmap bitmap1 = null, bitmap2 = null, bitmap3 = null, bitmap4 = null, bitmap5 = null, bitmap6 = null, bitmap7 = null,bitmap8 = null;
-    String KEYPHOTO1, KEYPHOTO2, KEYPHOTO3, KEYPHOTO4, KEYPHOTO5, KEYPHOTO6, KEYPHOTO7,KEYPHOTO8,KEYPHOTO9, ICOMPLETE_STATUS_STRING;
-
-    TextView Fatheri, Contactidi, Villageidei, Pumpidei, Contactidei, Blockidi, districtidi,numberidi;
-    int Status_installation;
-    String url1 = null, url2 = null, url3 = null, url4 = null, url5 = null, url6 = null, url7 = null;
+    private static final int IMAGE_CAPTURE11 = 111;
+    ImageView imageinst_one, imageinst_two, imageinst_three, imageinst_four, imageinst_five, imageinst_six, imageinst_seven,imageinst_eight,imageinst_nine;
+    Bitmap bitmap1 = null;
+    String KEYPHOTO1, KEYPHOTO2, KEYPHOTO3, KEYPHOTO4, KEYPHOTO5, KEYPHOTO6, KEYPHOTO7,KEYPHOTO8,KEYPHOTO9;
+    TextView Fatheri, Contactidi, Villageidei, Pumpidei, Contactidei, Blockidi,numberidi;
     Constants constants;
     private static String storage_video;
-    ProgressDialog progressDialog;
-    String Engineer_contact, reg_no, lat, lon, radioinscomplete_string, regnnumber,
+    String Engineer_contact, lat, lon, regnnumber,
             benifname, fathername, contact,
-            block, village, installation_status,site_lat_new,site_long_new;
-    RadioGroup radioinscomplete;
-    RadioButton inscomplete, insuncomplete;
+            block, village,site_lat_new = "",site_long_new = "";
 
     String strDate="2022-2-7";
     String pic_date,project;
-    //1 means data is synced and 0 means data is not synced
-    public static final int NAME_SYNCED_WITH_SERVERI = 1;
-    public static final int NAME_NOT_SYNCED_WITH_SERVERI = 0;
-    //a broadcast to know weather the data is synced or not
     public static final String DATA_SAVED_BROADCASTI = "net.simplifiedcoding.datasavedi";
-
-    //Broadcast receiver to know the sync status
-    private BroadcastReceiver broadcastReceiveri;
 
     //adapterobject for list view
     String eng_id, installation_api, photo11, photo12, photo13, photo14, photo15, photo16, photo17,photo18,photo19, Engineer_Contact;
@@ -142,6 +113,7 @@ String img_no;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,7 +135,7 @@ String img_no;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Engineer_Contact = sharedPreferences.getString("engcontact", "");
         constants = new Constants();
-        installation_api = constants.INSTALLATION_API;
+        installation_api = Constants.INSTALLATION_API;
         eng_id = sharedPreferences.getString("eng_id", "");
         project = sharedPreferences.getString("project", "");
 
@@ -314,7 +286,7 @@ lon="0";
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGE);
                 }
-img_no="1";
+                img_no="1";
             }
         });
         imageinst_two.setOnClickListener(new View.OnClickListener() {
@@ -552,6 +524,7 @@ img_no="1";
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE11:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -569,20 +542,15 @@ img_no="1";
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
         if (requestCode == IMAGE_CAPTURE11) {
             if (resultCode == RESULT_OK) {
-                // Refreshing the gallery
-                CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
 
-                // successfully captured the image
-                // display it in image view
-                previewCapturedImage1();
+                CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
+                previewCapturedImage1(true);
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled Image capture
                 Toast.makeText(getApplicationContext(),
@@ -594,7 +562,8 @@ img_no="1";
                         "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
                         .show();
             }
-        }else if (requestCode == 2) {
+        }
+        else if (requestCode == 2) {
             try{
             Uri selectedImage = data.getData();
             String[] filePath = {MediaStore.Images.Media.DATA};
@@ -609,7 +578,7 @@ img_no="1";
 
             // successfully captured the image
             // display it in image view
-            previewCapturedImage1();
+            previewCapturedImage1(false);
         }catch (Exception ae){
             ae.getStackTrace();
         }
@@ -644,9 +613,7 @@ img_no="1";
 
 
         } else {
-
-             UploadAll uploadAll = new UploadAll();
-            uploadAll.getInstance().init();
+            UploadAll.getInstance().init();
             double latti=UploadAll.latitude;
             double longi= UploadAll.longitude;
 
@@ -837,8 +804,7 @@ img_no="1";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         byte[] imageBytes = outputStream.toByteArray();
-        String encodeImage1 = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodeImage1;
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
     }
 
@@ -955,15 +921,20 @@ img_no="1";
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void previewCapturedImage1() {
+    private void previewCapturedImage1(boolean print_image) {
         try {
             // hide video preview
-
+            Bitmap result;
             imageinst_one.setVisibility(View.VISIBLE);
 
             bitmap1 = CameraUtils.optimizeBitmap(BITMAP_SAMPLE_SIZE, imageStoragePath);
-           Bitmap result=print_img(bitmap1);
+
+            if(print_image) {
+                result = print_img(bitmap1);
+            }else{
+                result = bitmap1;
+            }
+
 if(!TextUtils.isEmpty(img_no)&&img_no.equals("1")){
     photo11=imageTOString(result);
     imageinst_one.setImageBitmap(result);
@@ -993,6 +964,7 @@ if(!TextUtils.isEmpty(img_no)&&img_no.equals("1")){
     imageinst_nine.setImageBitmap(result);
 }
         } catch (NullPointerException e) {
+            Log.d("imageCatch","is here");
             e.printStackTrace();
         }
     }
