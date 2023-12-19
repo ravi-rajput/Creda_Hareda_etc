@@ -521,6 +521,8 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
                 editor.putString("customer_satify_status",credaModel.getCustomer_satify_status());
                 editor.putString("power_connection_status",credaModel.getPower_connection_status());
                 editor.putString("pump_head",credaModel.getPump_head());
+                editor.putString("atr_report",credaModel.getATR_REPORT());
+                editor.putString("jcr_report",credaModel.getJcr_image());
 
 
 

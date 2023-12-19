@@ -484,6 +484,8 @@ public class BenificiaryListitem extends Activity {
                             credaModel.setFarad_photo(jsonObject.optString("farad_photo"));
                             credaModel.setChalan_photo(jsonObject.optString("chalan_photo"));
                              credaModel.setBore_check_image(jsonObject.optString("bore_check_image"));
+                            credaModel.setATR_REPORT(jsonObject.optString("ATR_REPORT"));
+                            credaModel.setJcr_image(jsonObject.optString("jcr_image"));
 
 
                             Log.d("foundation_ma",jsonObject.optString("reg_no")+jsonObject.optString("road_status")+

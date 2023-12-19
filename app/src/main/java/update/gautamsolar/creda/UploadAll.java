@@ -1152,16 +1152,18 @@ if(project.equals("PEDA")){
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CHECK_SETTINGS) {
 
             if (resultCode == RESULT_OK) {
                 Log.e(TAG, "User agreed to make required location settings changes.");
                 // Nothing to do. startLocationupdates() gets called in onResume again.
-            }else {
+            } else {
 
                 Log.e(TAG, "User chose not to make required location settings changes.");
                 mRequestingLocationUpdates = false;
-            }}
+            }
+        }
     }
 
     private void openSettings() {

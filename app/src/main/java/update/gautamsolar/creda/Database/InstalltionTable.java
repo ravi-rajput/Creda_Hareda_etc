@@ -37,6 +37,9 @@ public  class InstalltionTable extends Model {
     @Column(name = "foto9")
     public String foto9;
 
+    @Column(name = "foto10")
+    public String foto10;
+
     @Column(name = "Lat")
     public String Lat;
 

@@ -20,7 +20,7 @@ public class CredaModel {
             saralid,saralyear,installation_video,pic_date,site_lat_new,site_long_new,medaReg,peda_image1,peda_image2
             ,peda_image3,peda_image4,peda_image5,siteVideo,Consent_Letter_photo_farmer,Consent_Letter_photo,bor_clean_status
             ,customer_satify_status,power_connection_status,pump_head,purlin,rafter,all_panel,paani,structure_status,
-            structure_video,farad_photo,chalan_photo,bore_check_image;
+            structure_video,farad_photo,chalan_photo,bore_check_image,jcr_image,ATR_REPORT;
 
     public String getPump_head() {
         return pump_head;
@@ -772,5 +772,21 @@ public class CredaModel {
 
     public void setInst_image9(String inst_image9) {
         this.inst_image9 = inst_image9;
+    }
+
+    public String getJcr_image() {
+        return jcr_image;
+    }
+
+    public void setJcr_image(String jcr_image) {
+        this.jcr_image = jcr_image;
+    }
+
+    public String getATR_REPORT() {
+        return ATR_REPORT;
+    }
+
+    public void setATR_REPORT(String ATR_REPORT) {
+        this.ATR_REPORT = ATR_REPORT;
     }
 }
