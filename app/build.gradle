@@ -7,14 +7,14 @@ plugins {
     id 'kotlin-kapt'
 }
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     dexOptions {
         javaMaxHeapSize "8g"
     }
     defaultConfig {
         applicationId "update.gautamsolar.creda"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 6
         versionName "7.3"
         multiDexEnabled true
@@ -63,14 +63,14 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.2'
     implementation 'com.jakewharton:butterknife:8.6.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
     implementation 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.android.volley:volley:1.2.1'
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
