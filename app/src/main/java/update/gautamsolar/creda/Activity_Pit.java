@@ -117,7 +117,7 @@ pb.setCancelable(false);
         block = bundlef.getString("block");
         contact = bundlef.getString("contact");
         KEYPHOTO1 = bundlef.getString("fondimg1");
-        if (!KEYPHOTO1.equals("null")) {
+        if (!TextUtils.isEmpty(KEYPHOTO1) && !KEYPHOTO1.equals("null")) {
             imagefound_one.setBackgroundResource(R.mipmap.tickclick);
         }
 

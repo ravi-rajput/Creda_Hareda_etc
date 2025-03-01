@@ -7,16 +7,16 @@ plugins {
     id 'kotlin-kapt'
 }
 android {
-    compileSdkVersion 31
+    compileSdkVersion 34
     dexOptions {
         javaMaxHeapSize "8g"
     }
     defaultConfig {
         applicationId "update.gautamsolar.creda"
         minSdkVersion 21
-        targetSdkVersion 31
-        versionCode 6
-        versionName "6.9"
+        targetSdkVersion 34
+        versionCode 7
+        versionName "7.4"
         multiDexEnabled true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         lintOptions {
@@ -47,6 +47,10 @@ android {
         kotlinCompilerExtensionVersion compose_version
         kotlinCompilerVersion '1.5.10'
     }
+    packagingOptions {
+        exclude 'META-INF/AL2.0'  // Exclude the AL2.0 license file
+        exclude 'META-INF/LGPL2.1' // Exclude the LGPL2.1 license file (if present)
+    }
 }
 
 dependencies {
@@ -54,7 +58,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
@@ -63,14 +67,14 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.2'
     implementation 'com.jakewharton:butterknife:8.6.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
     implementation 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.android.volley:volley:1.2.1'
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'

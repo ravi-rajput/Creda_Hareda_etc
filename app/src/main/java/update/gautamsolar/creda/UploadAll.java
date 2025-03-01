@@ -80,7 +80,7 @@ public class UploadAll extends AppCompatActivity {
 CardView pit_card;
     SharedPreferences settings;
     String project, sregnnumber, sbenifname, sfname, scontact, svillage, sblock, spumpType, sinstallation_status, sbeneficiary_share, ssurvey_status, sfoundation_status,rmu_status;
-    String water_level, bor_size, bor_depth, existing_moter_run, spump_type, sdispatch_status, spump_capacity,pit_status, sengineer_role, sKEYPHOTO1, sFKEYPHOTO6, sFKEYPHOTO7, sKEYPHOTO2, sKEYPHOTO3, sKEYPHOTO4, sKEYPHOTO5, sKEYPHOTO6, sKEYPHOTO7, sFKEYPHOTO1,
+    String water_level, bor_size, bor_depth, existing_moter_run, spump_type, sdispatch_status, spump_capacity,pit_status, sengineer_role, sKEYPHOTO1, sFKEYPHOTO6, sFKEYPHOTO7, sKEYPHOTO2, sKEYPHOTO3, sKEYPHOTO4, sKEYPHOTO5, sKEYPHOTO6, sKEYPHOTO7,sKEYPHOTO9, sFKEYPHOTO1,
             sFKEYPHOTO2, sFKEYPHOTO3, sFKEYPHOTO4, sFKEYPHOTO5, sSKEYPHOTO1, sSKEYPHOTO2, sSKEYPHOTO3, sSKEYPHOTO4,sSKEYPHOTO5
             ,sSKEYPHOTO6,sSKEYPHOTO7,sSKEYPHOTO8,sSKEYPHOTO9,sSKEYPHOT10;
 
@@ -414,6 +414,7 @@ saral = findViewById(R.id.saral);
             sKEYPHOTO5 = settings.getString("KEYPHOTO5", "");
             sKEYPHOTO6 = settings.getString("KEYPHOTO6", "");
             sKEYPHOTO7 = settings.getString("KEYPHOTO7", "");
+            sKEYPHOTO9 = settings.getString("KEYPHOTO9", "");
             sFKEYPHOTO1 = settings.getString("FKEYPHOTO1", "");
             sFKEYPHOTO2 = settings.getString("FKEYPHOTO2", "");
             sFKEYPHOTO3 = settings.getString("FKEYPHOTO3", "");
@@ -528,6 +529,7 @@ if(project.equals("PEDA")){
                         bundleUploadB.putString("instimg5", sKEYPHOTO5);
                         bundleUploadB.putString("instimg6", sKEYPHOTO6);
                         bundleUploadB.putString("instimg7", sKEYPHOTO7);
+                        bundleUploadB.putString("instimg9", sKEYPHOTO9);
                         bundleUploadB.putString("fondimg5", sFKEYPHOTO5);
                         bundleUploadB.putString("pic_date", settings.getString("pic_date", ""));
                         intent.putExtras(bundleUploadB);
@@ -687,6 +689,7 @@ if(project.equals("PEDA")){
             sKEYPHOTO5 = settings.getString("KEYPHOTO5", "");
             sKEYPHOTO6 = settings.getString("KEYPHOTO6", "");
             sKEYPHOTO7 = settings.getString("KEYPHOTO7", "");
+            sKEYPHOTO9 = settings.getString("KEYPHOTO9", "");
             sFKEYPHOTO1 = settings.getString("FKEYPHOTO1", "");
             sFKEYPHOTO2 = settings.getString("FKEYPHOTO2", "");
             sFKEYPHOTO3 = settings.getString("FKEYPHOTO3", "");
@@ -1149,16 +1152,18 @@ if(project.equals("PEDA")){
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CHECK_SETTINGS) {
 
             if (resultCode == RESULT_OK) {
                 Log.e(TAG, "User agreed to make required location settings changes.");
                 // Nothing to do. startLocationupdates() gets called in onResume again.
-            }else {
+            } else {
 
                 Log.e(TAG, "User chose not to make required location settings changes.");
                 mRequestingLocationUpdates = false;
-            }}
+            }
+        }
     }
 
     private void openSettings() {

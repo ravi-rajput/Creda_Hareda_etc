@@ -10,10 +10,12 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,6 +52,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -1020,6 +1023,7 @@ public class Material extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -1031,6 +1035,7 @@ public class Material extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -1083,11 +1088,10 @@ public class Material extends AppCompatActivity {
 
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Log.d("arrayValues",result.getContents());
-                        String myArray[] = result.getContents().split("  ");
-                        Log.d("arraySize",""+myArray.length);
+                        String myArray[] = result.getContents().split(" ");
+                        String[] newArray = removeBlankOrSpace(myArray);
                         List myList = new ArrayList();
-                        Collections.addAll(myList, myArray);
+                        Collections.addAll(myList, newArray);
                         Log.d("listSize",""+myList.size());
                         Toast.makeText(this, String.valueOf(myList.size()), Toast.LENGTH_LONG).show();
 //                        if (result.getContents().length() < 19) {
@@ -3114,5 +3118,12 @@ public Boolean checkDuplicateLocal(EditText panel,String panelNo){
             return false;
         }
 
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private static String[] removeBlankOrSpace(String[] array) {
+        // Use streams to filter out blank or space items
+        return Arrays.stream(array)
+                .filter(s -> !s.trim().isEmpty())
+                .toArray(String[]::new);
     }
 }

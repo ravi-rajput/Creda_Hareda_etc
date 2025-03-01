@@ -37,7 +37,7 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
     String sregnnumber, sbenifname, sfname, scontact, svillage, sblock, spumpType, sinstallation_status, sbeneficiary_share, ssurvey_status, sfoundation_status;
     String spump_type, sdispatch_status, spump_capacity, sengineer_role, sKEYPHOTO1, sKEYPHOTO2, sKEYPHOTO3, sKEYPHOTO4, sKEYPHOTO5, sKEYPHOTO6, sKEYPHOTO7, sFKEYPHOTO1, sFKEYPHOTO2, sFKEYPHOTO3, sFKEYPHOTO4, sFKEYPHOTO5, sSKEYPHOTO1, sSKEYPHOTO2, sSKEYPHOTO3, sSKEYPHOTO4;
     String water_level,bor_size,bor_depth,existing_moter_run,old_rmu, regnnumber, benifname, fname, contact, village, block, pumpType, installation_status, beneficiary_share, survey_status, foundation_status;
-    String pump_type, dispatch_status, pump_capacity, engineer_role, KEYPHOTO1, KEYPHOTO2, KEYPHOTO3, KEYPHOTO4, KEYPHOTO5, KEYPHOTO6, KEYPHOTO7, FKEYPHOTO1,
+    String pump_type, dispatch_status, pump_capacity, engineer_role, KEYPHOTO1, KEYPHOTO2, KEYPHOTO3, KEYPHOTO4, KEYPHOTO5, KEYPHOTO6, KEYPHOTO7, KEYPHOTO9, FKEYPHOTO1,
             FKEYPHOTO2, FKEYPHOTO3, FKEYPHOTO4, FKEYPHOTO5, FKEYPHOTO6, FKEYPHOTO7, SKEYPHOTO1, SKEYPHOTO2,
             SKEYPHOTO3, SKEYPHOTO4,rmu_status;
 
@@ -434,6 +434,7 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
                     KEYPHOTO5 = credaModel.getInst_image5();
                     KEYPHOTO6 = credaModel.getInst_image6();
                     KEYPHOTO7 = credaModel.getInst_image7();
+                    KEYPHOTO9 = credaModel.getInst_image9();
                     FKEYPHOTO1 = credaModel.getFound_image1();
                     FKEYPHOTO2 = credaModel.getFound_image2();
                     FKEYPHOTO3 = credaModel.getFound_image3();
@@ -466,6 +467,7 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
                     editor.putString("KEYPHOTO5", KEYPHOTO5);
                     editor.putString("KEYPHOTO6", KEYPHOTO6);
                     editor.putString("KEYPHOTO7", KEYPHOTO7);
+                    editor.putString("KEYPHOTO9", KEYPHOTO9);
                     editor.putString("FKEYPHOTO1", FKEYPHOTO1);
                     editor.putString("FKEYPHOTO2", FKEYPHOTO2);
                     editor.putString("FKEYPHOTO3", FKEYPHOTO3);
@@ -519,6 +521,8 @@ public class BenifRecyclerview extends RecyclerView.Adapter<BenifRecyclerview.Be
                 editor.putString("customer_satify_status",credaModel.getCustomer_satify_status());
                 editor.putString("power_connection_status",credaModel.getPower_connection_status());
                 editor.putString("pump_head",credaModel.getPump_head());
+                editor.putString("atr_report",credaModel.getATR_REPORT());
+                editor.putString("jcr_report",credaModel.getJcr_image());
 
 
 

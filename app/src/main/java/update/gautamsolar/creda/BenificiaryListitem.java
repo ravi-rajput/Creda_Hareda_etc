@@ -417,6 +417,7 @@ public class BenificiaryListitem extends Activity {
                             credaModel.setInst_image5(jsonObject.optString("inst_image5"));
                             credaModel.setInst_image6(jsonObject.optString("inst_image6"));
                             credaModel.setInst_image7(jsonObject.optString("inst_image7"));
+                            credaModel.setInst_image9(jsonObject.optString("inst_image9"));
                             credaModel.setFound_image1(jsonObject.optString("foun_image1"));
                             credaModel.setFound_image2(jsonObject.optString("foun_image2"));
                             credaModel.setFound_image3(jsonObject.optString("foun_image3"));
@@ -483,6 +484,8 @@ public class BenificiaryListitem extends Activity {
                             credaModel.setFarad_photo(jsonObject.optString("farad_photo"));
                             credaModel.setChalan_photo(jsonObject.optString("chalan_photo"));
                              credaModel.setBore_check_image(jsonObject.optString("bore_check_image"));
+                            credaModel.setATR_REPORT(jsonObject.optString("ATR_REPORT"));
+                            credaModel.setJcr_image(jsonObject.optString("jcr_image"));
 
 
                             Log.d("foundation_ma",jsonObject.optString("reg_no")+jsonObject.optString("road_status")+
@@ -508,6 +511,7 @@ public class BenificiaryListitem extends Activity {
                             credaModel.setInst_image5(jsonObject.optString("inst_image5"));
                             credaModel.setInst_image6(jsonObject.optString("inst_image6"));
                             credaModel.setInst_image7(jsonObject.optString("inst_image7"));
+                            credaModel.setInst_image9(jsonObject.optString("inst_image9"));
                             credaModel.setFound_image1(jsonObject.optString("foun_image1"));
                             credaModel.setFound_image2(jsonObject.optString("foun_image2"));
                             credaModel.setFound_image3(jsonObject.optString("foun_image3"));

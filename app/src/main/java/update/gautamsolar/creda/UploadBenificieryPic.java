@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,7 +18,6 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
-import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -28,20 +26,21 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.exifinterface.media.ExifInterface;
 
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -57,11 +56,12 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import update.gautamsolar.creda.R;
+import com.bumptech.glide.Glide;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,8 +69,6 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -90,58 +88,41 @@ public class UploadBenificieryPic extends AppCompatActivity {
     public static final String VIDEO_EXTENSION = "mp4";
     public static final int MEDIA_TYPE_IMAGE = 189;
     static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 309;
-String img_no;
+    String img_no;
     public static final int MEDIA_TYPE_VIDEO = 310;
-    //public static final int MEDIA_TYPE_VIDEO = 190;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
     public static final int BITMAP_SAMPLE_SIZE = 4;
     private static String imageStoragePath;
     Dialog dialog, Localdialog;
     LocationManager locationManager;
     boolean isGPSEnabled = false;
-    int Status_video;
-    //private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
     VideoView video;
-    TextView status_installation, status_video;
     static final int REQUEST_LOCATION = 15;
-    private Button btninst_upload, uploadvideo;
+    private Button btninst_upload;
     private static final int PERMISSION_REQUEST_CODE11 = 115;
-    private static final int IMAGE_CAPTURE11 = 111, IMAGE_CAPTURE12 = 112,
-            IMAGE_CAPTURE13 = 113, IMAGE_CAPTURE14 = 114, IMAGE_CAPTURE15 = 303, IMAGE_CAPTURE16 = 304, IMAGE_CAPTURE17 = 305,IMAGE_CAPTURE18 = 306;
-    ImageView imageinst_one, imageinst_two, imageinst_three, imageinst_four, imageinst_five, imageinst_six, imageinst_seven,imageinst_eight, play;
-    Bitmap bitmap1 = null, bitmap2 = null, bitmap3 = null, bitmap4 = null, bitmap5 = null, bitmap6 = null, bitmap7 = null,bitmap8 = null;
-    String KEYPHOTO1, KEYPHOTO2, KEYPHOTO3, KEYPHOTO4, KEYPHOTO5, KEYPHOTO6, KEYPHOTO7,KEYPHOTO8, ICOMPLETE_STATUS_STRING;
-
-    TextView Fatheri, Contactidi, Villageidei, Pumpidei, Contactidei, Blockidi, districtidi,numberidi;
-    int Status_installation;
-    String url1 = null, url2 = null, url3 = null, url4 = null, url5 = null, url6 = null, url7 = null;
+    private static final int IMAGE_CAPTURE11 = 111;
+    ImageView imageinst_one, imageinst_two, imageinst_three, imageinst_four, imageinst_five, imageinst_six, imageinst_seven, imageinst_eight, imageinst_nine, imageinst_ten;
+    Bitmap bitmap1 = null;
+    String KEYPHOTO1, KEYPHOTO2, KEYPHOTO3, KEYPHOTO4, KEYPHOTO5, KEYPHOTO6, KEYPHOTO7, KEYPHOTO8, KEYPHOTO9, KEYPHOT10;
+    TextView Fatheri, Contactidi, Villageidei, Pumpidei, Contactidei, Blockidi, numberidi;
     Constants constants;
     private static String storage_video;
-    ProgressDialog progressDialog;
-    String Engineer_contact, reg_no, lat, lon, radioinscomplete_string, regnnumber,
+    String Engineer_contact, lat, lon, regnnumber,
             benifname, fathername, contact,
-            block, village, installation_status,site_lat_new,site_long_new;
-    RadioGroup radioinscomplete;
-    RadioButton inscomplete, insuncomplete;
+            block, village, site_lat_new = "", site_long_new = "";
 
-    String strDate="2022-2-7";
-    String pic_date,project;
-    //1 means data is synced and 0 means data is not synced
-    public static final int NAME_SYNCED_WITH_SERVERI = 1;
-    public static final int NAME_NOT_SYNCED_WITH_SERVERI = 0;
-    //a broadcast to know weather the data is synced or not
+    String strDate = "2022-2-7";
+    String pic_date, project;
     public static final String DATA_SAVED_BROADCASTI = "net.simplifiedcoding.datasavedi";
 
-    //Broadcast receiver to know the sync status
-    private BroadcastReceiver broadcastReceiveri;
-
     //adapterobject for list view
-    String eng_id, installation_api, photo11, photo12, photo13, photo14, photo15, photo16, photo17,photo18, Engineer_Contact;
+    String eng_id, installation_api, photo11, photo12, photo13, photo14, photo15, photo16, photo17, photo18, photo19, photo20, Engineer_Contact;
     ProgressDialog pb;
     SharedPreferences sharedPreferences;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,22 +137,22 @@ String img_no;
         System.out.println(start);
 
         long randomEpochDay = ThreadLocalRandom.current().longs(start, end).findAny().getAsLong();
-        Log.d("randomDate",LocalDate.ofEpochDay(randomEpochDay).toString());
+        Log.d("randomDate", LocalDate.ofEpochDay(randomEpochDay).toString());
         strDate = LocalDate.ofEpochDay(randomEpochDay).toString();
 
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Engineer_Contact = sharedPreferences.getString("engcontact", "");
         constants = new Constants();
-        installation_api = constants.INSTALLATION_API;
+        installation_api = Constants.INSTALLATION_API;
         eng_id = sharedPreferences.getString("eng_id", "");
         project = sharedPreferences.getString("project", "");
 
-        site_lat_new=sharedPreferences.getString("site_lat_new","");
-        site_long_new=sharedPreferences.getString("site_long_new","");
-       if(site_lat_new.equals("null")||site_long_new.equals("null")){
-           Toast.makeText(this,"Site Survay Location is null",Toast.LENGTH_SHORT).show();
-       }
+        site_lat_new = sharedPreferences.getString("site_lat_new", "");
+        site_long_new = sharedPreferences.getString("site_long_new", "");
+        if (site_lat_new.equals("null") || site_long_new.equals("null")) {
+            Toast.makeText(this, "Site Survay Location is null", Toast.LENGTH_SHORT).show();
+        }
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
@@ -220,13 +201,15 @@ String img_no;
         imageinst_six = findViewById(R.id.imageinst_six);
         imageinst_seven = findViewById(R.id.imageinst_seven);
         imageinst_eight = findViewById(R.id.imageinst_eight);
+        imageinst_nine = findViewById(R.id.imageinst_nine);
+        imageinst_ten = findViewById(R.id.imageinst_ten);
         Fatheri = (TextView) findViewById(R.id.fatheride);
         Contactidi = (TextView) findViewById(R.id.contactide);
         Villageidei = (TextView) findViewById(R.id.villageide);
         Pumpidei = (TextView) findViewById(R.id.benificiaryide);
         Contactidei = (TextView) findViewById(R.id.contactide);
         Blockidi = (TextView) findViewById(R.id.blockide);
-        numberidi=findViewById(R.id.numberid);
+        numberidi = findViewById(R.id.numberid);
         Engineer_contact = SharedPrefManager.getInstance(this).getUserContact();
         Bundle bundleUploadB = getIntent().getExtras();
         fathername = bundleUploadB.getString("fathername");
@@ -243,41 +226,45 @@ String img_no;
         KEYPHOTO6 = bundleUploadB.getString("instimg6");
         KEYPHOTO7 = bundleUploadB.getString("instimg7");
         KEYPHOTO8 = bundleUploadB.getString("fondimg5");
-        if(project.equals("MSEDCL")||project.equals("MEDA")||project.equals("PEDA")){
+        KEYPHOTO9 = sharedPreferences.getString("atr_report", "");
+        KEYPHOT10 = sharedPreferences.getString("jcr_report", "");
+        if (project.equals("MSEDCL") || project.equals("MEDA") || project.equals("PEDA")) {
             pic_date = getDateTime();
-        }else if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2"))
-        {
-           pic_date =  strDate;
-        }
-        else {
+        } else if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE2")) {
+            pic_date = strDate;
+        } else {
             pic_date = bundleUploadB.getString("pic_date");
         }
-        if (!KEYPHOTO1.equals("null")) {
-            imageinst_one.setBackgroundResource(R.mipmap.tickclick);
+        if (!TextUtils.isEmpty(KEYPHOTO1) && !KEYPHOTO1.equals("null") && URLUtil.isValidUrl(KEYPHOTO1)) {
+            load_image(KEYPHOTO1, imageinst_one);
         }
-        if (!KEYPHOTO2.equals("null")) {
-            imageinst_two.setBackgroundResource(R.mipmap.tickclick);
-
+        if (!TextUtils.isEmpty(KEYPHOTO2) && !KEYPHOTO2.equals("null") && URLUtil.isValidUrl(KEYPHOTO2)) {
+            load_image(KEYPHOTO2, imageinst_two);
         }
-        if (!KEYPHOTO3.equals("null")) {
-            imageinst_three.setBackgroundResource(R.mipmap.tickclick);
+        if (!TextUtils.isEmpty(KEYPHOTO3) && !KEYPHOTO3.equals("null") && URLUtil.isValidUrl(KEYPHOTO3)) {
+            load_image(KEYPHOTO3, imageinst_three);
         }
-        if (!KEYPHOTO4.equals("null")) {
-            imageinst_four.setBackgroundResource(R.mipmap.tickclick);
+        if (!TextUtils.isEmpty(KEYPHOTO4) && !KEYPHOTO4.equals("null") && URLUtil.isValidUrl(KEYPHOTO4)) {
+            load_image(KEYPHOTO4, imageinst_four);
         }
-        if (!KEYPHOTO5.equals("null")) {
-            imageinst_five.setBackgroundResource(R.mipmap.tickclick);
+        if (!TextUtils.isEmpty(KEYPHOTO5) && !KEYPHOTO5.equals("null") && URLUtil.isValidUrl(KEYPHOTO5)) {
+            load_image(KEYPHOTO5, imageinst_five);
         }
-        if (!KEYPHOTO6.equals("null")) {
-            imageinst_six.setBackgroundResource(R.mipmap.tickclick);
+        if (!TextUtils.isEmpty(KEYPHOTO6) && !KEYPHOTO6.equals("null") && URLUtil.isValidUrl(KEYPHOTO6)) {
+            load_image(KEYPHOTO6, imageinst_six);
         }
-        if (!KEYPHOTO7.equals("null")) {
-            imageinst_seven.setBackgroundResource(R.mipmap.tickclick);
+        if (!TextUtils.isEmpty(KEYPHOTO7) && !KEYPHOTO7.equals("null") && URLUtil.isValidUrl(KEYPHOTO7)) {
+            load_image(KEYPHOTO7, imageinst_seven);
         }
-        if (!KEYPHOTO8.equals("null")) {
-            imageinst_eight.setBackgroundResource(R.mipmap.tickclick);
+        if (!TextUtils.isEmpty(KEYPHOTO8) && !KEYPHOTO8.equals("null") && URLUtil.isValidUrl(KEYPHOTO8)) {
+            load_image(KEYPHOTO8, imageinst_eight);
         }
-
+        if (!TextUtils.isEmpty(KEYPHOTO9) && !KEYPHOTO9.equals("null") && URLUtil.isValidUrl(KEYPHOTO9)) {
+            load_image(KEYPHOTO9, imageinst_nine);
+        }
+        if (!TextUtils.isEmpty(KEYPHOT10) && !KEYPHOT10.equals("null") && URLUtil.isValidUrl(KEYPHOT10)) {
+            load_image(KEYPHOT10, imageinst_ten);
+        }
 
         Fatheri.setText(fathername);
         Contactidi.setText(contact);
@@ -296,8 +283,10 @@ String img_no;
         photo16 = "noimage";
         photo17 = "noimage";
         photo18 = "noimage";
-lat="0";
-lon="0";
+        photo19 = "noimage";
+        photo20 = "noimage";
+        lat = "0";
+        lon = "0";
 
         imageinst_one.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -308,7 +297,7 @@ lon="0";
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGE);
                 }
-img_no="1";
+                img_no = "1";
             }
         });
         imageinst_two.setOnClickListener(new View.OnClickListener() {
@@ -320,7 +309,7 @@ img_no="1";
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGE);
                 }
-                img_no="2";
+                img_no = "2";
             }
         });
         imageinst_three.setOnClickListener(new View.OnClickListener() {
@@ -332,7 +321,7 @@ img_no="1";
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGE);
                 }
-                img_no="3";
+                img_no = "3";
             }
         });
         imageinst_four.setOnClickListener(new View.OnClickListener() {
@@ -344,7 +333,7 @@ img_no="1";
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGE);
                 }
-                img_no="4";
+                img_no = "4";
             }
         });
 
@@ -357,7 +346,7 @@ img_no="1";
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGE);
                 }
-                img_no="5";
+                img_no = "5";
             }
         });
 
@@ -370,7 +359,7 @@ img_no="1";
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGE);
                 }
-                img_no="6";
+                img_no = "6";
             }
         });
 
@@ -383,7 +372,7 @@ img_no="1";
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGE);
                 }
-                img_no="7";
+                img_no = "7";
             }
         });
         imageinst_eight.setOnClickListener(new View.OnClickListener() {
@@ -395,7 +384,33 @@ img_no="1";
                 } else {
                     requestCameraPermission1(MEDIA_TYPE_IMAGE);
                 }
-                img_no="8";
+                img_no = "8";
+
+            }
+        });
+        imageinst_nine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (CameraUtils.checkPermissions(getApplicationContext())) {
+                    captureImage1();
+                } else {
+                    requestCameraPermission1(MEDIA_TYPE_IMAGE);
+                }
+                img_no = "9";
+
+            }
+        });
+        imageinst_ten.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (CameraUtils.checkPermissions(getApplicationContext())) {
+                    captureImage1();
+                } else {
+                    requestCameraPermission1(MEDIA_TYPE_IMAGE);
+                }
+                img_no = "10";
 
             }
         });
@@ -413,21 +428,22 @@ img_no="1";
                 ConnectivityManager cm = (ConnectivityManager) UploadBenificieryPic.this.getSystemService(Context.CONNECTIVITY_SERVICE);
                 final NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if (activeNetwork != null) {
- if(lat.equals("0")&&lon.equals("0")){
+                    if (lat.equals("0") && lon.equals("0")) {
                         getLocation();
+                    } else {
+                        uploaduserimage11();
                     }
-                  else{  uploaduserimage11();}
 
                 } else {
-                  if(lat.equals("0")&&lon.equals("0")){
+                    if (lat.equals("0") && lon.equals("0")) {
                         getLocation();
-                    }  else{ save_local();}
+                    } else {
+                        save_local();
+                    }
                 }
 
             }
         });
-
-
 
 
     }
@@ -533,6 +549,7 @@ img_no="1";
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE11:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -550,50 +567,45 @@ img_no="1";
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
         if (requestCode == IMAGE_CAPTURE11) {
             if (resultCode == RESULT_OK) {
-                // Refreshing the gallery
-                CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
 
-                // successfully captured the image
-                // display it in image view
-                previewCapturedImage1();
+                CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
+                previewCapturedImage1(true);
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled Image capture
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                                "User cancelled image capture", Toast.LENGTH_SHORT)
                         .show();
             } else {
                 // failed to capture image
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                                "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
                         .show();
             }
-        }else if (requestCode == 2) {
-            try{
-            Uri selectedImage = data.getData();
-            String[] filePath = {MediaStore.Images.Media.DATA};
-            Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
-            c.moveToFirst();
-            int columnIndex = c.getColumnIndex(filePath[0]);
-            String picturePath = c.getString(columnIndex);
-            c.close();
-            Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-            imageStoragePath = picturePath;
-            CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
+        } else if (requestCode == 2) {
+            try {
+                Uri selectedImage = data.getData();
+                String[] filePath = {MediaStore.Images.Media.DATA};
+                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
+                c.moveToFirst();
+                int columnIndex = c.getColumnIndex(filePath[0]);
+                String picturePath = c.getString(columnIndex);
+                c.close();
+                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+                imageStoragePath = picturePath;
+                CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
 
-            // successfully captured the image
-            // display it in image view
-            previewCapturedImage1();
-        }catch (Exception ae){
-            ae.getStackTrace();
-        }
+                // successfully captured the image
+                // display it in image view
+                previewCapturedImage1(false);
+            } catch (Exception ae) {
+                ae.getStackTrace();
+            }
         }
 
         if (requestCode == CAMERA_CAPTURE_VIDEO_REQUEST_CODE) {
@@ -607,12 +619,12 @@ img_no="1";
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled recording
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled video recording", Toast.LENGTH_SHORT)
+                                "User cancelled video recording", Toast.LENGTH_SHORT)
                         .show();
             } else {
                 // failed to record video
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to record video", Toast.LENGTH_SHORT)
+                                "Sorry! Failed to record video", Toast.LENGTH_SHORT)
                         .show();
             }
         }
@@ -625,11 +637,9 @@ img_no="1";
 
 
         } else {
-
-             UploadAll uploadAll = new UploadAll();
-            uploadAll.getInstance().init();
-            double latti=UploadAll.latitude;
-            double longi= UploadAll.longitude;
+            UploadAll.getInstance().init();
+            double latti = UploadAll.latitude;
+            double longi = UploadAll.longitude;
 
             lat = String.valueOf(latti);
             lon = String.valueOf(longi);
@@ -789,6 +799,8 @@ img_no="1";
                 params.put("photo6", photo16);
                 params.put("photo7", photo17);
                 params.put("photo8", photo18);
+                params.put("photo9", photo19);
+                params.put("photo10", photo20);
                 params.put("eng_id", eng_id);
                 params.put("lat", lat);
                 params.put("lon", lon);
@@ -817,8 +829,7 @@ img_no="1";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         byte[] imageBytes = outputStream.toByteArray();
-        String encodeImage1 = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodeImage1;
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
     }
 
@@ -935,43 +946,53 @@ img_no="1";
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void previewCapturedImage1() {
+    private void previewCapturedImage1(boolean print_image) {
         try {
             // hide video preview
-
+            Bitmap result;
             imageinst_one.setVisibility(View.VISIBLE);
 
             bitmap1 = CameraUtils.optimizeBitmap(BITMAP_SAMPLE_SIZE, imageStoragePath);
-           Bitmap result=print_img(bitmap1);
-if(!TextUtils.isEmpty(img_no)&&img_no.equals("1")){
-    photo11=imageTOString(result);
-    imageinst_one.setImageBitmap(result);
-}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("2")){
-    photo12=imageTOString(result);
-    imageinst_two.setImageBitmap(result);
-}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("3")){
-    photo13=imageTOString(result);
-    imageinst_three.setImageBitmap(result);
-}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("4")){
-    photo14=imageTOString(result);
-    imageinst_four.setImageBitmap(result);
-}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("5")){
-    photo15=imageTOString(result);
-    imageinst_five.setImageBitmap(result);
-}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("6")){
-    photo16=imageTOString(result);
-    imageinst_six.setImageBitmap(result);
-}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("7")){
-    photo17=imageTOString(result);
-    imageinst_seven.setImageBitmap(result);
-}else if(!TextUtils.isEmpty(img_no)&&img_no.equals("8")){
-    photo18=imageTOString(result);
-    imageinst_eight.setImageBitmap(result);
-}
 
+            if (print_image) {
+                result = print_img(bitmap1);
+            } else {
+                result = bitmap1;
+            }
 
+            if (!TextUtils.isEmpty(img_no) && img_no.equals("1")) {
+                photo11 = imageTOString(result);
+                imageinst_one.setImageBitmap(result);
+            } else if (!TextUtils.isEmpty(img_no) && img_no.equals("2")) {
+                photo12 = imageTOString(result);
+                imageinst_two.setImageBitmap(result);
+            } else if (!TextUtils.isEmpty(img_no) && img_no.equals("3")) {
+                photo13 = imageTOString(result);
+                imageinst_three.setImageBitmap(result);
+            } else if (!TextUtils.isEmpty(img_no) && img_no.equals("4")) {
+                photo14 = imageTOString(result);
+                imageinst_four.setImageBitmap(result);
+            } else if (!TextUtils.isEmpty(img_no) && img_no.equals("5")) {
+                photo15 = imageTOString(result);
+                imageinst_five.setImageBitmap(result);
+            } else if (!TextUtils.isEmpty(img_no) && img_no.equals("6")) {
+                photo16 = imageTOString(result);
+                imageinst_six.setImageBitmap(result);
+            } else if (!TextUtils.isEmpty(img_no) && img_no.equals("7")) {
+                photo17 = imageTOString(result);
+                imageinst_seven.setImageBitmap(result);
+            } else if (!TextUtils.isEmpty(img_no) && img_no.equals("8")) {
+                photo18 = imageTOString(result);
+                imageinst_eight.setImageBitmap(result);
+            } else if (!TextUtils.isEmpty(img_no) && img_no.equals("9")) {
+                photo19 = imageTOString(result);
+                imageinst_nine.setImageBitmap(result);
+            } else if (!TextUtils.isEmpty(img_no) && img_no.equals("10")) {
+                photo20 = imageTOString(result);
+                imageinst_ten.setImageBitmap(result);
+            }
         } catch (NullPointerException e) {
+            Log.d("imageCatch", "is here");
             e.printStackTrace();
         }
     }
@@ -1036,13 +1057,16 @@ if(!TextUtils.isEmpty(img_no)&&img_no.equals("1")){
         installi.foto6 = String.valueOf(photo16);
         installi.foto7 = String.valueOf(photo17);
         installi.foto8 = String.valueOf(photo18);
+        installi.foto9 = String.valueOf(photo19);
+        installi.foto10 = String.valueOf(photo20);
         installi.eng_id = eng_id;
         installi.Lat = lat;
         installi.Lon = lon;
         installi.Regn = regnnumber;
         installi.Dati = pic_date;
-        try{
-        installi.save();}catch (Exception ae){
+        try {
+            installi.save();
+        } catch (Exception ae) {
 
         }
         Localdialog.findViewById(R.id.clickmedismissf).setOnClickListener(new View.OnClickListener() {
@@ -1061,98 +1085,106 @@ if(!TextUtils.isEmpty(img_no)&&img_no.equals("1")){
         //  Toast.makeText(getApplicationContext(),"Saved inLocal",Toast.LENGTH_SHORT).show();
 
     }
-public Bitmap print_img(Bitmap bitmap){
-    String lat = "0.0",lng="0.0";
-    try {
-         UploadAll uploadAll = new UploadAll();
+
+    public Bitmap print_img(Bitmap bitmap) {
+        String lat = "0.0", lng = "0.0";
+        try {
+            UploadAll uploadAll = new UploadAll();
             uploadAll.getInstance().init();
-        double latti = UploadAll.latitude;
-        double longi = UploadAll.longitude;
-        lat = String.valueOf(latti);
-        lng = String.valueOf(longi);
+            double latti = UploadAll.latitude;
+            double longi = UploadAll.longitude;
+            lat = String.valueOf(latti);
+            lng = String.valueOf(longi);
 
-    }catch (Exception ae){
-       Log.d("lattilongitude",ae.toString());
-    }
+        } catch (Exception ae) {
+            Log.d("lattilongitude", ae.toString());
+        }
 
-    File f = new File(imageStoragePath);
+        File f = new File(imageStoragePath);
 
-    int inWidth = bitmap.getWidth();
-    int inHeight = bitmap.getHeight();
-
-
-    ExifInterface exif = null;
-    try {
-        exif = new ExifInterface(f.getPath());
-    } catch (IOException e) {
-        Toast.makeText(this, "No", Toast.LENGTH_SHORT).show();
-    }
-    int orientation = exif.getAttributeInt(
-            ExifInterface.TAG_ORIENTATION,
-            ExifInterface.ORIENTATION_NORMAL);
-    int angle = 0;
-
-    if (orientation == ExifInterface.ORIENTATION_ROTATE_90) {
-        angle = 90;
-    } else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
-        angle = 180;
-    } else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
-        angle = 270;
-    }
-
-    Matrix mat = new Matrix();
-    mat.postRotate(angle);
-
-    Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, inWidth, inHeight, false);
-
-    Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), mat, true);
-    Bitmap.Config config = rotatedBitmap.getConfig();
+        int inWidth = bitmap.getWidth();
+        int inHeight = bitmap.getHeight();
 
 
-    Bitmap result = Bitmap.createBitmap( rotatedBitmap.getWidth(), rotatedBitmap.getHeight(),config);
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(f.getPath());
+        } catch (IOException e) {
+            Toast.makeText(this, "No", Toast.LENGTH_SHORT).show();
+        }
+        int orientation = exif.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL);
+        int angle = 0;
 
-    Canvas canvas = new Canvas(result);
-    canvas.drawBitmap(rotatedBitmap, 0, 0, null);
-    Paint paint = new Paint();
-    paint.setColor(Color.BLACK);
+        if (orientation == ExifInterface.ORIENTATION_ROTATE_90) {
+            angle = 90;
+        } else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
+            angle = 180;
+        } else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
+            angle = 270;
+        }
+
+        Matrix mat = new Matrix();
+        mat.postRotate(angle);
+
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, inWidth, inHeight, false);
+
+        Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), mat, true);
+        Bitmap.Config config = rotatedBitmap.getConfig();
+
+
+        Bitmap result = Bitmap.createBitmap(rotatedBitmap.getWidth(), rotatedBitmap.getHeight(), config);
+
+        Canvas canvas = new Canvas(result);
+        canvas.drawBitmap(rotatedBitmap, 0, 0, null);
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
 //    paint.setStyle(Paint.Style.STROKE);
-    paint.setTextSize(12);
-    paint.setAntiAlias(false);
+        paint.setTextSize(12);
+        paint.setAntiAlias(false);
 
-    Paint innerPaint = new Paint();
-    innerPaint.setColor(Color.parseColor("#61ECECEC"));
+        Paint innerPaint = new Paint();
+        innerPaint.setColor(Color.parseColor("#61ECECEC"));
 //    innerPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-    innerPaint.setAntiAlias(true);
-    if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE2")||
-            sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE3")||sharedPreferences.getString("lead_phase","").equalsIgnoreCase("HAREDA_PHASE4")||sharedPreferences.getString("lead_phase","").equalsIgnoreCase("GALO_PHASE1")){
-        if(!TextUtils.isEmpty(site_lat_new)&&(site_lat_new.length()>4&&site_long_new.length()>4)) {
+        innerPaint.setAntiAlias(true);
+        if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE2") ||
+                sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4") || sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1")) {
+            if (!TextUtils.isEmpty(site_lat_new) && (site_lat_new.length() > 4 && site_long_new.length() > 4)) {
 
-            canvas.drawRect(180F, result.getHeight(), 0, result.getHeight()-50, innerPaint);
-            canvas.drawText("Lat - " + replaceLastItem(site_lat_new,Integer.parseInt(img_no)), 5, result.getHeight()-40, paint);
-            canvas.drawText("Long - " + replaceLastItem(site_long_new,Integer.parseInt(img_no)), 5, result.getHeight()-25, paint);
-            canvas.drawText("Name - " + benifname, 5, result.getHeight()-10, paint);
-        }
-    }else if(sharedPreferences.getString("lead_phase","").equalsIgnoreCase("PEDA_PHASE1")){
-        if(!TextUtils.isEmpty(site_lat_new)&&(site_lat_new.length()>4&&site_long_new.length()>4)) {
+                canvas.drawRect(180F, result.getHeight(), 0, result.getHeight() - 50, innerPaint);
+                canvas.drawText("Lat - " + replaceLastItem(site_lat_new, Integer.parseInt(img_no)), 5, result.getHeight() - 40, paint);
+                canvas.drawText("Long - " + replaceLastItem(site_long_new, Integer.parseInt(img_no)), 5, result.getHeight() - 25, paint);
+                canvas.drawText("Name - " + benifname, 5, result.getHeight() - 10, paint);
+            }
+        } else if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("PEDA_PHASE1")) {
+            if (!TextUtils.isEmpty(site_lat_new) && (site_lat_new.length() > 4 && site_long_new.length() > 4)) {
+                canvas.drawRect(180F, result.getHeight(), 0, result.getHeight() - 50, innerPaint);
+                canvas.drawText("Lat - " + site_lat_new, 5, result.getHeight() - 40, paint);
+                canvas.drawText("Long - " + site_long_new, 5, result.getHeight() - 25, paint);
+
+            }
+        } else {
             canvas.drawRect(180F, result.getHeight(), 0, result.getHeight() - 50, innerPaint);
-            canvas.drawText("Lat - " + site_lat_new, 5, result.getHeight()-40, paint);
-            canvas.drawText("Long - " + site_long_new, 5, result.getHeight()-25, paint);
-
+            canvas.drawText("Lat - " + lat, 5, result.getHeight() - 40, paint);
+            canvas.drawText("Long - " + lng, 5, result.getHeight() - 25, paint);
+            canvas.drawText("Date - " + pic_date, 5, result.getHeight() - 10, paint);
         }
-    }
-    else {
-        canvas.drawRect(180F, result.getHeight(), 0, result.getHeight()-50, innerPaint);
-        canvas.drawText("Lat - "+lat,5, result.getHeight()-40, paint);
-        canvas.drawText("Long - "+lng,5, result.getHeight()-25, paint);
-        canvas.drawText("Date - "+pic_date,5, result.getHeight()-10, paint);
+
+        return result;
     }
 
-return result;
+    public String replaceLastItem(String value, int increase) {
+        int number = Integer.parseInt(value.substring(value.length() - 1));
+        String substring = value.substring(0, value.length() - 1); // AB
+        String replaced = substring + String.valueOf(number + increase);
+        return replaced;
     }
-public String replaceLastItem(String value , int increase){
-    int number = Integer.parseInt(value.substring(value.length() - 1));
-    String substring = value.substring(0, value.length() - 1); // AB
-    String replaced = substring + String.valueOf(number+increase);
-    return replaced;
-}
+
+    void load_image(String url, ImageView iv) {
+        Glide.with(this)
+                .load(url)
+                .into(iv);
+    }
+
 }

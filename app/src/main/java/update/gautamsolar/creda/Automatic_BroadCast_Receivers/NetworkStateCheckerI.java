@@ -68,7 +68,7 @@ public class NetworkStateCheckerI extends BroadcastReceiver {
                     List<InstalltionTable> instalmodel = getInstall();
                     for (int i = 0; i < instalmodel.size(); i++) {
                         InstalltionTable installi = instalmodel.get(i);
-                        loadNames(installi.foto1, installi.foto2, installi.foto3, installi.foto4, installi.foto5, installi.foto6, installi.foto7, installi.foto8,installi.Lat, installi.Lon, installi.eng_id, installi.Regn, installi.Dati);
+                        loadNames(installi.foto1, installi.foto2, installi.foto3, installi.foto4, installi.foto5, installi.foto6, installi.foto7, installi.foto8,installi.foto9,installi.foto10,installi.Lat, installi.Lon, installi.eng_id, installi.Regn, installi.Dati);
                     }
                 }
             }
@@ -96,7 +96,7 @@ public class NetworkStateCheckerI extends BroadcastReceiver {
     }
 
     private void loadNames(final String photo1, final String photo2, final String photo3, final String photo4, final String photo5, final String photo6, final String photo7,
-                           final String photo8, final String lat, final String lon, final String eng_id, final String reg_no, final String datetime) {
+                           final String photo8,final String photo9,final String photo10, final String lat, final String lon, final String eng_id, final String reg_no, final String datetime) {
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,constants.INSTALLATION_API,
@@ -154,6 +154,8 @@ try{
                 params.put("photo6", photo6);
                 params.put("photo7", photo7);
                 params.put("photo8", photo8);
+                params.put("photo9", photo9);
+                params.put("photo10", photo10);
                 params.put("lat", lat);
                 params.put("lon", lon);
                 params.put("eng_id", eng_id);
