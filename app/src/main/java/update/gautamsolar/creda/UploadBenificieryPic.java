@@ -1149,7 +1149,7 @@ public class UploadBenificieryPic extends AppCompatActivity {
 //    innerPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         innerPaint.setAntiAlias(true);
         if (sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE2") ||
-                sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4") || sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1")) {
+                sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE3") || sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("HAREDA_PHASE4") || sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("GALO_PHASE1") || sharedPreferences.getString("lead_phase", "").equalsIgnoreCase("MSEDCL_PHASE1")) {
             if (!TextUtils.isEmpty(site_lat_new) && (site_lat_new.length() > 4 && site_long_new.length() > 4)) {
 
                 canvas.drawRect(180F, result.getHeight(), 0, result.getHeight() - 50, innerPaint);
